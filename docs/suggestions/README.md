@@ -23,7 +23,10 @@ stages:
 
 ## Stage 2 — VS Code workbench
 
-- [VS Code authoring, runs, and inspection](./stage2_gui_authoring_runs_inspection.md)
+- [VS Code workbench overview](./stage2_gui_authoring_runs_inspection.md)
+- [2a — VS Code extension foundation](./stage2a_vscode_extension_foundation.md)
+- [2b — Compiler-backed language support](./stage2b_compiler_language_support.md)
+- [2c — Run results and inspection](./stage2c_run_results_inspection.md)
 
 ## Stage 3 — GPU
 

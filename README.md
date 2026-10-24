@@ -1,8 +1,21 @@
-# BrainCode
+# BrainCode - From Human for A.I.
 
 > A temporal DSL for synchronous state models, historical queries, and inspectable execution.
 
 BrainCode is a custom language for describing state transitions over discrete ticks. A Python host supplies initial state, parameters, and tick inputs; BrainCode rules calculate the next frame from committed history. Its population and tensor forms express data-parallel work, while the current reference backend executes serially and deterministically.
+
+BrainCode has a deliberately small grammar that should be easy for AI systems
+to read and write. The trade-off is that expressing complex processing
+directly in the language can be challenging.
+
+The goal is to make BrainCode useful for AI-assisted authoring of discrete
+neural networks and similar stateful models. Its synchronous, data-parallel
+semantics are designed to expose computations that can run in parallel. This
+is a design goal, not a current performance claim: today's Python reference
+runtime executes serially.
+
+Daniel Mueller / LA_N19 / https://github.com/0division
+
 
 ## Project status
 
