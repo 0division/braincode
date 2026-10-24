@@ -1,4 +1,4 @@
-# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\game-of-life-large-proposal.bc
+# Compiled BrainCode source expanded from: work_checkout/docs/examples/game-of-life-large-proposal.bc
 # Data-parallel loops are unfolded into indexed assignments.
 population :cells[WIDTH, HEIGHT] of Bool
 boundary :cells = wrap

@@ -1,4 +1,4 @@
-# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\deep-network-inference-proposal.bc
+# Compiled BrainCode source expanded from: work_checkout/docs/examples/deep-network-inference-proposal.bc
 # Data-parallel loops are unfolded into indexed assignments.
 tensor :input[BATCH, INPUT_WIDTH] of Float32
 tensor :weights_1[INPUT_WIDTH, HIDDEN_WIDTH] of Float32

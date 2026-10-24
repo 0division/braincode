@@ -2,7 +2,7 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc",
+  "source_name": "work_checkout/docs/examples/cellular-automaton-3d-life.bc",
   "statements": [
     {
       "dimensions": [
@@ -10,7 +10,7 @@
           "location": {
             "column": 1,
             "line": 11,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
           },
           "source": "WIDTH",
           "tree": {
@@ -25,7 +25,7 @@
           "location": {
             "column": 1,
             "line": 11,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
           },
           "source": "HEIGHT",
           "tree": {
@@ -40,7 +40,7 @@
           "location": {
             "column": 1,
             "line": 11,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
           },
           "source": "DEPTH",
           "tree": {
@@ -56,7 +56,7 @@
       "location": {
         "column": 1,
         "line": 11,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+        "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
       },
       "name": "cells",
       "value_type": "Bool"
@@ -67,7 +67,7 @@
       "location": {
         "column": 1,
         "line": 12,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+        "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
       },
       "name": "cells"
     },
@@ -83,7 +83,7 @@
             "location": {
               "column": 5,
               "line": 15,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
             },
             "source": "neighbor_count( :cells~1, :x, :y, :z, neighborhood=moore_3d, boundary=dead )",
             "tree": {
@@ -211,7 +211,7 @@
           "location": {
             "column": 5,
             "line": 15,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
           },
           "name": "neighbors"
         },
@@ -220,7 +220,7 @@
             "location": {
               "column": 5,
               "line": 19,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
             },
             "source": ":cells[:x, :y, :z]~1",
             "tree": {
@@ -313,7 +313,7 @@
           "location": {
             "column": 5,
             "line": 19,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
           },
           "name": "was_alive"
         },
@@ -322,7 +322,7 @@
             "location": {
               "column": 5,
               "line": 20,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
             },
             "source": "True if neighbors == 6 else True if ( was_alive and ( neighbors == 5 or neighbors == 6 or neighbors == 7 ) ) else False",
             "tree": {
@@ -462,7 +462,7 @@
           "location": {
             "column": 5,
             "line": 20,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
           },
           "name": "cells",
           "target_indices": [
@@ -470,7 +470,7 @@
               "location": {
                 "column": 5,
                 "line": 20,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+                "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
               },
               "source": ":x",
               "tree": {
@@ -496,7 +496,7 @@
               "location": {
                 "column": 5,
                 "line": 20,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+                "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
               },
               "source": ":y",
               "tree": {
@@ -522,7 +522,7 @@
               "location": {
                 "column": 5,
                 "line": 20,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+                "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
               },
               "source": ":z",
               "tree": {
@@ -552,7 +552,7 @@
       "location": {
         "column": 1,
         "line": 14,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+        "source": "work_checkout/docs/examples/cellular-automaton-3d-life.bc"
       }
     }
   ]

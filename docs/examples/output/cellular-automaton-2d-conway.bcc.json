@@ -2,7 +2,7 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc",
+  "source_name": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc",
   "statements": [
     {
       "dimensions": [
@@ -10,7 +10,7 @@
           "location": {
             "column": 1,
             "line": 10,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
           },
           "source": "WIDTH",
           "tree": {
@@ -25,7 +25,7 @@
           "location": {
             "column": 1,
             "line": 10,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
           },
           "source": "HEIGHT",
           "tree": {
@@ -41,7 +41,7 @@
       "location": {
         "column": 1,
         "line": 10,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+        "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
       },
       "name": "cells",
       "value_type": "Bool"
@@ -52,7 +52,7 @@
       "location": {
         "column": 1,
         "line": 11,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+        "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
       },
       "name": "cells"
     },
@@ -67,7 +67,7 @@
             "location": {
               "column": 5,
               "line": 14,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
             },
             "source": "neighbor_count( :cells~1, :x, :y, neighborhood=moore_2d, boundary=dead )",
             "tree": {
@@ -177,7 +177,7 @@
           "location": {
             "column": 5,
             "line": 14,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
           },
           "name": "neighbors"
         },
@@ -186,7 +186,7 @@
             "location": {
               "column": 5,
               "line": 17,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
             },
             "source": ":cells[:x, :y]~1",
             "tree": {
@@ -261,7 +261,7 @@
           "location": {
             "column": 5,
             "line": 17,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
           },
           "name": "was_alive"
         },
@@ -270,7 +270,7 @@
             "location": {
               "column": 5,
               "line": 18,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
             },
             "source": "True if neighbors == 3 else True if (was_alive and neighbors == 2) else False",
             "tree": {
@@ -358,7 +358,7 @@
           "location": {
             "column": 5,
             "line": 18,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
           },
           "name": "cells",
           "target_indices": [
@@ -366,7 +366,7 @@
               "location": {
                 "column": 5,
                 "line": 18,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+                "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
               },
               "source": ":x",
               "tree": {
@@ -392,7 +392,7 @@
               "location": {
                 "column": 5,
                 "line": 18,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+                "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
               },
               "source": ":y",
               "tree": {
@@ -422,7 +422,7 @@
       "location": {
         "column": 1,
         "line": 13,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+        "source": "work_checkout/docs/examples/cellular-automaton-2d-conway.bc"
       }
     }
   ]

@@ -2,7 +2,7 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc",
+  "source_name": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc",
   "statements": [
     {
       "dimensions": [
@@ -10,7 +10,7 @@
           "location": {
             "column": 1,
             "line": 11,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
           },
           "source": "BODY_COUNT",
           "tree": {
@@ -26,7 +26,7 @@
       "location": {
         "column": 1,
         "line": 11,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+        "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
       },
       "name": "bodies",
       "value_type": "Float64"
@@ -37,7 +37,7 @@
           "location": {
             "column": 1,
             "line": 12,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
           },
           "source": "BODY_COUNT",
           "tree": {
@@ -53,7 +53,7 @@
       "location": {
         "column": 1,
         "line": 12,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+        "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
       },
       "name": "mass",
       "value_type": "Float64"
@@ -64,7 +64,7 @@
           "location": {
             "column": 1,
             "line": 13,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
           },
           "source": "BODY_COUNT",
           "tree": {
@@ -79,7 +79,7 @@
           "location": {
             "column": 1,
             "line": 13,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
           },
           "source": "VECTOR_DIM",
           "tree": {
@@ -95,7 +95,7 @@
       "location": {
         "column": 1,
         "line": 13,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+        "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
       },
       "name": "position",
       "value_type": "Float64"
@@ -106,7 +106,7 @@
           "location": {
             "column": 1,
             "line": 14,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
           },
           "source": "BODY_COUNT",
           "tree": {
@@ -121,7 +121,7 @@
           "location": {
             "column": 1,
             "line": 14,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
           },
           "source": "VECTOR_DIM",
           "tree": {
@@ -137,7 +137,7 @@
       "location": {
         "column": 1,
         "line": 14,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+        "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
       },
       "name": "velocity",
       "value_type": "Float64"
@@ -152,7 +152,7 @@
             "location": {
               "column": 5,
               "line": 17,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+              "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
             },
             "source": "sum( :G * :mass[:j] * (:position[:j]~1 - :position[:i]~1) / ( length(:position[:j]~1 - :position[:i]~1) ** 2 + :softening ** 2 ) ** 1.5 for :j in range(:BODY_COUNT) if :j != :i )",
             "tree": {
@@ -626,7 +626,7 @@
           "location": {
             "column": 5,
             "line": 17,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
           },
           "name": "acceleration"
         },
@@ -635,7 +635,7 @@
             "location": {
               "column": 5,
               "line": 27,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+              "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
             },
             "source": ":velocity[:i]~1 + :time_step * acceleration",
             "tree": {
@@ -729,7 +729,7 @@
           "location": {
             "column": 5,
             "line": 27,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
           },
           "name": "velocity",
           "target_indices": [
@@ -737,7 +737,7 @@
               "location": {
                 "column": 5,
                 "line": 27,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+                "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
               },
               "source": ":i",
               "tree": {
@@ -766,7 +766,7 @@
             "location": {
               "column": 5,
               "line": 28,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+              "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
             },
             "source": ":position[:i]~1 + :time_step * :velocity[:i]~1",
             "tree": {
@@ -902,7 +902,7 @@
           "location": {
             "column": 5,
             "line": 28,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
           },
           "name": "position",
           "target_indices": [
@@ -910,7 +910,7 @@
               "location": {
                 "column": 5,
                 "line": 28,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+                "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
               },
               "source": ":i",
               "tree": {
@@ -940,7 +940,7 @@
       "location": {
         "column": 1,
         "line": 16,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+        "source": "work_checkout/docs/examples/nbody-all-pairs-proposal.bc"
       }
     }
   ]

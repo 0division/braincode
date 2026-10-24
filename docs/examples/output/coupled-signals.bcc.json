@@ -2,14 +2,14 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\coupled-signals.bc",
+  "source_name": "work_checkout/docs/examples/coupled-signals.bc",
   "statements": [
     {
       "expression": {
         "location": {
           "column": 1,
           "line": 9,
-          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\coupled-signals.bc"
+          "source": "work_checkout/docs/examples/coupled-signals.bc"
         },
         "source": ":right~1 + 1",
         "tree": {
@@ -58,7 +58,7 @@
       "location": {
         "column": 1,
         "line": 9,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\coupled-signals.bc"
+        "source": "work_checkout/docs/examples/coupled-signals.bc"
       },
       "name": "left"
     },
@@ -67,7 +67,7 @@
         "location": {
           "column": 1,
           "line": 10,
-          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\coupled-signals.bc"
+          "source": "work_checkout/docs/examples/coupled-signals.bc"
         },
         "source": ":left~1 + 1",
         "tree": {
@@ -116,7 +116,7 @@
       "location": {
         "column": 1,
         "line": 10,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\coupled-signals.bc"
+        "source": "work_checkout/docs/examples/coupled-signals.bc"
       },
       "name": "right"
     }

@@ -1,3 +1,3 @@
-# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\counter.bc
+# Compiled BrainCode source expanded from: work_checkout/docs/examples/counter.bc
 # Data-parallel loops are unfolded into indexed assignments.
 :counter = :counter~1 + 1

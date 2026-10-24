@@ -2,14 +2,14 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\fibonacci.bc",
+  "source_name": "work_checkout/docs/examples/fibonacci.bc",
   "statements": [
     {
       "expression": {
         "location": {
           "column": 1,
           "line": 7,
-          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\fibonacci.bc"
+          "source": "work_checkout/docs/examples/fibonacci.bc"
         },
         "source": ":fib~1 + :fib~2",
         "tree": {
@@ -83,7 +83,7 @@
       "location": {
         "column": 1,
         "line": 7,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\fibonacci.bc"
+        "source": "work_checkout/docs/examples/fibonacci.bc"
       },
       "name": "fib"
     }

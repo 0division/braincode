@@ -2,14 +2,14 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc",
+  "source_name": "work_checkout/docs/examples/typed-input-counter.bc",
   "statements": [
     {
       "kind": "input",
       "location": {
         "column": 1,
         "line": 1,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc"
+        "source": "work_checkout/docs/examples/typed-input-counter.bc"
       },
       "name": "increment",
       "value_type": "Int32"
@@ -19,7 +19,7 @@
       "location": {
         "column": 1,
         "line": 2,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc"
+        "source": "work_checkout/docs/examples/typed-input-counter.bc"
       },
       "name": "counter",
       "value_type": "Int32"
@@ -29,7 +29,7 @@
         "location": {
           "column": 1,
           "line": 4,
-          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc"
+          "source": "work_checkout/docs/examples/typed-input-counter.bc"
         },
         "source": ":counter~1 + :increment~1",
         "tree": {
@@ -103,7 +103,7 @@
       "location": {
         "column": 1,
         "line": 4,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc"
+        "source": "work_checkout/docs/examples/typed-input-counter.bc"
       },
       "name": "counter"
     }

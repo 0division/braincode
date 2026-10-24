@@ -2,14 +2,14 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\host-function-max.bc",
+  "source_name": "work_checkout/docs/examples/host-function-max.bc",
   "statements": [
     {
       "expression": {
         "location": {
           "column": 1,
           "line": 5,
-          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\host-function-max.bc"
+          "source": "work_checkout/docs/examples/host-function-max.bc"
         },
         "source": "max(:t~1, :t~2)",
         "tree": {
@@ -90,7 +90,7 @@
       "location": {
         "column": 1,
         "line": 5,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\host-function-max.bc"
+        "source": "work_checkout/docs/examples/host-function-max.bc"
       },
       "name": "t"
     }

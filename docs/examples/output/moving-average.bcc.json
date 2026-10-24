@@ -2,14 +2,14 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\moving-average.bc",
+  "source_name": "work_checkout/docs/examples/moving-average.bc",
   "statements": [
     {
       "expression": {
         "location": {
           "column": 1,
           "line": 6,
-          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\moving-average.bc"
+          "source": "work_checkout/docs/examples/moving-average.bc"
         },
         "source": "(:temperature~1 + :temperature~2 + :temperature~3) / 3",
         "tree": {
@@ -130,7 +130,7 @@
       "location": {
         "column": 1,
         "line": 6,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\moving-average.bc"
+        "source": "work_checkout/docs/examples/moving-average.bc"
       },
       "name": "average"
     }

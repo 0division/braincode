@@ -1,4 +1,4 @@
-# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\cellular-automaton-3d-life.bc
+# Compiled BrainCode source expanded from: work_checkout/docs/examples/cellular-automaton-3d-life.bc
 # Data-parallel loops are unfolded into indexed assignments.
 population :cells[WIDTH, HEIGHT, DEPTH] of Bool
 boundary :cells = dead

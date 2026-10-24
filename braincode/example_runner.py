@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from braincode.compiler import compile_file, load_compiled, save_compiled
+from braincode.compiler import compile_source, load_compiled, save_compiled
 from braincode.expanded import render_expanded
 from braincode.manifest import save_run_manifest
 from braincode.reporting import write_run_markdown
@@ -79,7 +79,14 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
             if log_path is not None:
                 with log_path.open("a", encoding="utf-8") as log:
                     log.write(f"RUNNING {source_path.name} using {input_path.name}\n")
-            program = compile_file(source_path)
+            source_name = (
+                "work_checkout/"
+                f"{source_path.relative_to(ROOT).as_posix()}"
+            )
+            program = compile_source(
+                source_path.read_text(encoding="utf-8"),
+                source_name,
+            )
             expanded_path = destination / f"{stem}.bcc" if destination is not None else None
             ir_path = destination / f"{stem}.bcc.json" if destination is not None else None
             trace_path = destination / f"{stem}.output.json" if destination is not None else None

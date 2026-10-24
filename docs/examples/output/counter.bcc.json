@@ -2,14 +2,14 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\counter.bc",
+  "source_name": "work_checkout/docs/examples/counter.bc",
   "statements": [
     {
       "expression": {
         "location": {
           "column": 1,
           "line": 5,
-          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\counter.bc"
+          "source": "work_checkout/docs/examples/counter.bc"
         },
         "source": ":counter~1 + 1",
         "tree": {
@@ -58,7 +58,7 @@
       "location": {
         "column": 1,
         "line": 5,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\counter.bc"
+        "source": "work_checkout/docs/examples/counter.bc"
       },
       "name": "counter"
     }

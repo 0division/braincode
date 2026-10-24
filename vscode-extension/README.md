@@ -24,12 +24,26 @@ workspace virtual environment's `Scripts\python.exe`.
 
 1. Open the `vscode-extension` folder in VS Code.
 2. Press **F5** to launch an Extension Development Host.
-3. In the new window, open a BrainCode workspace and a `.bc` model.
+3. The new window opens the repository root as a BrainCode workspace. Open a
+   `.bc` model from `docs/examples/`.
 4. Use the Command Palette and search for `BrainCode`.
 
 The extension has no build step or npm dependencies. If BrainCode is installed
 in a virtual environment, set `braincode.pythonPath` to that environment's
 Python executable so the CLI can be imported.
+
+For this checkout, the workspace setting can point to the existing virtual
+environment:
+
+```json
+{
+  "braincode.pythonPath": "<work_checkout>\\.venv\\Scripts\\python.exe"
+}
+```
+
+Alternatively, use **Preferences: Open Workspace Settings (JSON)** in the
+Extension Development Host and replace `<work_checkout>` with the path where
+you cloned the repository.
 
 The commands are:
 

@@ -1,4 +1,4 @@
-# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\unicode-to-utf8-mapper.bc
+# Compiled BrainCode source expanded from: work_checkout/docs/examples/unicode-to-utf8-mapper.bc
 # Data-parallel loops are unfolded into indexed assignments.
 :valid_unicode = ( 0 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF and ( :unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF ) )
 :utf8_out_length = ( 1 if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F else 2 if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF else 3 if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF) else 4 if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF else 0 )

@@ -2,7 +2,7 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc",
+  "source_name": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc",
   "statements": [
     {
       "dimensions": [
@@ -10,7 +10,7 @@
           "location": {
             "column": 1,
             "line": 11,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
           },
           "source": "7",
           "tree": {
@@ -24,7 +24,7 @@
       "location": {
         "column": 1,
         "line": 11,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+        "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
       },
       "name": "cells",
       "value_type": "Bool"
@@ -35,7 +35,7 @@
       "location": {
         "column": 1,
         "line": 12,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+        "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
       },
       "name": "cells"
     },
@@ -49,7 +49,7 @@
             "location": {
               "column": 5,
               "line": 15,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
             },
             "source": ":cells[:i - 1]~1",
             "tree": {
@@ -117,7 +117,7 @@
           "location": {
             "column": 5,
             "line": 15,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
           },
           "name": "left"
         },
@@ -126,7 +126,7 @@
             "location": {
               "column": 5,
               "line": 16,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
             },
             "source": ":cells[:i]~1",
             "tree": {
@@ -183,7 +183,7 @@
           "location": {
             "column": 5,
             "line": 16,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
           },
           "name": "center"
         },
@@ -192,7 +192,7 @@
             "location": {
               "column": 5,
               "line": 17,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
             },
             "source": ":cells[:i + 1]~1",
             "tree": {
@@ -260,7 +260,7 @@
           "location": {
             "column": 5,
             "line": 17,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
           },
           "name": "right"
         },
@@ -269,7 +269,7 @@
             "location": {
               "column": 5,
               "line": 18,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+              "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
             },
             "source": "( (left and center and not right) or (left and not center and right) or (not left and center and right) or (not left and center and not right) or (not left and not center and right) )",
             "tree": {
@@ -472,7 +472,7 @@
           "location": {
             "column": 5,
             "line": 18,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+            "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
           },
           "name": "cells",
           "target_indices": [
@@ -480,7 +480,7 @@
               "location": {
                 "column": 5,
                 "line": 18,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+                "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
               },
               "source": ":i",
               "tree": {
@@ -510,7 +510,7 @@
       "location": {
         "column": 1,
         "line": 14,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
+        "source": "work_checkout/docs/examples/cellular-automaton-1d-rule110.bc"
       }
     }
   ]

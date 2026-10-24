@@ -29,6 +29,10 @@ class VSCodeExtensionTests(unittest.TestCase):
         self.assertTrue((EXTENSION / grammar["path"]).is_file())
         self.assertTrue((EXTENSION / snippets["path"]).is_file())
         self.assertEqual(launch["configurations"][0]["type"], "extensionHost")
+        self.assertEqual(
+            launch["configurations"][0]["args"][1],
+            "${workspaceFolder}/..",
+        )
         json.loads((EXTENSION / language["configuration"]).read_text(encoding="utf-8"))
         json.loads((EXTENSION / grammar["path"]).read_text(encoding="utf-8"))
         json.loads((EXTENSION / snippets["path"]).read_text(encoding="utf-8"))

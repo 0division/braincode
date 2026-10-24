@@ -2,7 +2,7 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc",
+  "source_name": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc",
   "statements": [
     {
       "dimensions": [
@@ -10,7 +10,7 @@
           "location": {
             "column": 1,
             "line": 11,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+            "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
           },
           "source": "WIDTH",
           "tree": {
@@ -25,7 +25,7 @@
           "location": {
             "column": 1,
             "line": 11,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+            "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
           },
           "source": "HEIGHT",
           "tree": {
@@ -40,7 +40,7 @@
           "location": {
             "column": 1,
             "line": 11,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+            "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
           },
           "source": "DEPTH",
           "tree": {
@@ -56,7 +56,7 @@
       "location": {
         "column": 1,
         "line": 11,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+        "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
       },
       "name": "temperature",
       "value_type": "Float32"
@@ -67,7 +67,7 @@
       "location": {
         "column": 1,
         "line": 12,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+        "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
       },
       "name": "temperature"
     },
@@ -83,7 +83,7 @@
             "location": {
               "column": 5,
               "line": 15,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+              "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
             },
             "source": ":temperature[:x, :y, :z]~1 + :alpha * :dt * ( (:temperature[:x - 1, :y, :z]~1 - 2 * :temperature[:x, :y, :z]~1 + :temperature[:x + 1, :y, :z]~1) / :dx ** 2 + (:temperature[:x, :y - 1, :z]~1 - 2 * :temperature[:x, :y, :z]~1 + :temperature[:x, :y + 1, :z]~1) / :dy ** 2 + (:temperature[:x, :y, :z - 1]~1 - 2 * :temperature[:x, :y, :z]~1 + :temperature[:x, :y, :z + 1]~1) / :dz ** 2 )",
             "tree": {
@@ -1247,7 +1247,7 @@
           "location": {
             "column": 5,
             "line": 15,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+            "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
           },
           "name": "temperature",
           "target_indices": [
@@ -1255,7 +1255,7 @@
               "location": {
                 "column": 5,
                 "line": 15,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+                "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
               },
               "source": ":x",
               "tree": {
@@ -1281,7 +1281,7 @@
               "location": {
                 "column": 5,
                 "line": 15,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+                "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
               },
               "source": ":y",
               "tree": {
@@ -1307,7 +1307,7 @@
               "location": {
                 "column": 5,
                 "line": 15,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+                "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
               },
               "source": ":z",
               "tree": {
@@ -1337,7 +1337,7 @@
       "location": {
         "column": 1,
         "line": 14,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
+        "source": "work_checkout/docs/examples/three-dimensional-heat-diffusion-proposal.bc"
       }
     }
   ]

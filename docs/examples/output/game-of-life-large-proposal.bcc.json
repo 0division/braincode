@@ -2,7 +2,7 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc",
+  "source_name": "work_checkout/docs/examples/game-of-life-large-proposal.bc",
   "statements": [
     {
       "dimensions": [
@@ -10,7 +10,7 @@
           "location": {
             "column": 1,
             "line": 12,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+            "source": "work_checkout/docs/examples/game-of-life-large-proposal.bc"
           },
           "source": "WIDTH",
           "tree": {
@@ -25,7 +25,7 @@
           "location": {
             "column": 1,
             "line": 12,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+            "source": "work_checkout/docs/examples/game-of-life-large-proposal.bc"
           },
           "source": "HEIGHT",
           "tree": {
@@ -41,7 +41,7 @@
       "location": {
         "column": 1,
         "line": 12,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+        "source": "work_checkout/docs/examples/game-of-life-large-proposal.bc"
       },
       "name": "cells",
       "value_type": "Bool"
@@ -52,7 +52,7 @@
       "location": {
         "column": 1,
         "line": 13,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+        "source": "work_checkout/docs/examples/game-of-life-large-proposal.bc"
       },
       "name": "cells"
     },
@@ -67,7 +67,7 @@
             "location": {
               "column": 5,
               "line": 16,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+              "source": "work_checkout/docs/examples/game-of-life-large-proposal.bc"
             },
             "source": "life_rule( neighbor_count(:cells~1, :x, :y, radius=1, include_center=False), :cells[:x, :y]~1 )",
             "tree": {
@@ -253,7 +253,7 @@
           "location": {
             "column": 5,
             "line": 16,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+            "source": "work_checkout/docs/examples/game-of-life-large-proposal.bc"
           },
           "name": "cells",
           "target_indices": [
@@ -261,7 +261,7 @@
               "location": {
                 "column": 5,
                 "line": 16,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+                "source": "work_checkout/docs/examples/game-of-life-large-proposal.bc"
               },
               "source": ":x",
               "tree": {
@@ -287,7 +287,7 @@
               "location": {
                 "column": 5,
                 "line": 16,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+                "source": "work_checkout/docs/examples/game-of-life-large-proposal.bc"
               },
               "source": ":y",
               "tree": {
@@ -317,7 +317,7 @@
       "location": {
         "column": 1,
         "line": 15,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+        "source": "work_checkout/docs/examples/game-of-life-large-proposal.bc"
       }
     }
   ]

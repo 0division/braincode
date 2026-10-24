@@ -24,6 +24,8 @@ Implemented:
 
 The Python backend is a correctness-oriented reference implementation. The `parallel` keyword defines the iteration domain and synchronous semantics; it does not launch parallel hardware work.
 
+The Stage 2a VS Code extension prototype is in [`../vscode-extension/`](../vscode-extension/README.md). It registers `.bc` files and invokes the existing CLI for compile, inspect, run, and replay. The extension host has not yet been manually exercised or packaged for distribution.
+
 ## Current limitations
 
 - There is no CUDA, GPU, multiprocessing, or optimized CPU backend.
@@ -54,7 +56,13 @@ python -m pip install -e ".[test]"
 python -m pytest -v
 ```
 
-`compile` writes sibling `.bcc` and `.bcc.json` files by default. `.bcc` remains BrainCode syntax, with every `each ... parallel` population rule unfolded into explicit indexed assignments. `.bcc.json` stores the machine-readable IR. Supply `--parameters` when symbolic population dimensions need values for expansion.
+`compile` writes expanded `.bcc` and structured `.bcc.json` files only when
+`--output` and `--json-output` are provided; without output options, the
+expanded source is written to standard output and no files are created. `.bcc`
+remains BrainCode syntax, with every `each ... parallel` population rule
+unfolded into explicit indexed assignments. `.bcc.json` stores the
+machine-readable IR. Supply `--parameters` when symbolic population
+dimensions need values for expansion.
 
 The Python API is available from `braincode.compile_file`, `braincode.Runtime`, and `braincode.run`. Host-provided initial values belong in `initial_state`; immutable dimensions and constants belong in `parameters`; tick inputs are passed through `input_frames` and can be explicitly declared in BrainCode. Example run configurations are kept in sibling `.bc.in.json` files, outside BrainCode model logic.
 
@@ -73,10 +81,20 @@ staged direction beyond v0.2.
 
 ## Next development milestones
 
-1. **Strengthen validation:** complete static type inference and undeclared-symbol checks.
-2. **Specify numeric and resource behavior:** extend the documented storage and budget contract to compiler/evaluation work limits.
-3. **Improve run artifacts:** add project packaging, migrations, and callback provenance sufficient for portable replay.
-4. **Optimize after conformance:** benchmark the reference interpreter, then add an optimized CPU or GPU backend while retaining the serial runtime as the semantic oracle.
-5. **Evaluate AI authoring:** execute the documented evaluation protocol against a fair host-language baseline.
+1. **Validate Stage 2a:** exercise the extension in a VS Code Extension
+   Development Host, fix workflow issues, and validate packaging before
+   distribution.
+2. **Improve compiler-backed language support:** continue static analysis and
+   diagnostics without duplicating BrainCode parsing in the extension.
+3. **Improve run portability:** add project packaging, migrations, and host
+   capability provenance sufficient for portable replay.
+4. **Optimize after conformance:** benchmark representative workloads, then
+   add an optimized CPU or GPU backend while retaining the serial runtime as
+   the semantic oracle.
+5. **Specify cloud execution:** define the API schemas, threat model, worker
+   isolation, retention, and resource policies before deploying Stage 4.
+6. **Evaluate AI authoring:** execute the documented evaluation protocol
+   against a fair host-language baseline and publish failures as well as
+   successes.
 
 The v0.2 compiler intentionally prioritizes clear semantics and runnable examples over a speed claim. Future changes should extend the documented and tested language subset without changing existing behavior silently.

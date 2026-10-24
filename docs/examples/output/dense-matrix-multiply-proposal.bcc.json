@@ -2,7 +2,7 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc",
+  "source_name": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc",
   "statements": [
     {
       "dimensions": [
@@ -10,7 +10,7 @@
           "location": {
             "column": 1,
             "line": 14,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+            "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
           },
           "source": "N",
           "tree": {
@@ -25,7 +25,7 @@
           "location": {
             "column": 1,
             "line": 14,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+            "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
           },
           "source": "N",
           "tree": {
@@ -41,7 +41,7 @@
       "location": {
         "column": 1,
         "line": 14,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+        "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
       },
       "name": "A",
       "value_type": "Float32"
@@ -52,7 +52,7 @@
           "location": {
             "column": 1,
             "line": 15,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+            "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
           },
           "source": "N",
           "tree": {
@@ -67,7 +67,7 @@
           "location": {
             "column": 1,
             "line": 15,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+            "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
           },
           "source": "N",
           "tree": {
@@ -83,7 +83,7 @@
       "location": {
         "column": 1,
         "line": 15,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+        "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
       },
       "name": "B",
       "value_type": "Float32"
@@ -94,7 +94,7 @@
           "location": {
             "column": 1,
             "line": 16,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+            "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
           },
           "source": "N",
           "tree": {
@@ -109,7 +109,7 @@
           "location": {
             "column": 1,
             "line": 16,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+            "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
           },
           "source": "N",
           "tree": {
@@ -125,7 +125,7 @@
       "location": {
         "column": 1,
         "line": 16,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+        "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
       },
       "name": "C",
       "value_type": "Float32"
@@ -141,7 +141,7 @@
             "location": {
               "column": 5,
               "line": 19,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+              "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
             },
             "source": "sum( :A[:i, :k]~1 * :B[:k, :j]~1 for :k in range(:N) )",
             "tree": {
@@ -350,7 +350,7 @@
           "location": {
             "column": 5,
             "line": 19,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+            "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
           },
           "name": "C",
           "target_indices": [
@@ -358,7 +358,7 @@
               "location": {
                 "column": 5,
                 "line": 19,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+                "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
               },
               "source": ":i",
               "tree": {
@@ -384,7 +384,7 @@
               "location": {
                 "column": 5,
                 "line": 19,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+                "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
               },
               "source": ":j",
               "tree": {
@@ -414,7 +414,7 @@
       "location": {
         "column": 1,
         "line": 18,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+        "source": "work_checkout/docs/examples/dense-matrix-multiply-proposal.bc"
       }
     }
   ]

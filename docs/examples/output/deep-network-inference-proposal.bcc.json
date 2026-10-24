@@ -2,7 +2,7 @@
   "format": "braincode",
   "ir_version": 1,
   "language_version": "0.2",
-  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc",
+  "source_name": "work_checkout/docs/examples/deep-network-inference-proposal.bc",
   "statements": [
     {
       "dimensions": [
@@ -10,7 +10,7 @@
           "location": {
             "column": 1,
             "line": 13,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "BATCH",
           "tree": {
@@ -25,7 +25,7 @@
           "location": {
             "column": 1,
             "line": 13,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "INPUT_WIDTH",
           "tree": {
@@ -41,7 +41,7 @@
       "location": {
         "column": 1,
         "line": 13,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+        "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
       },
       "name": "input",
       "value_type": "Float32"
@@ -52,7 +52,7 @@
           "location": {
             "column": 1,
             "line": 14,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "INPUT_WIDTH",
           "tree": {
@@ -67,7 +67,7 @@
           "location": {
             "column": 1,
             "line": 14,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "HIDDEN_WIDTH",
           "tree": {
@@ -83,7 +83,7 @@
       "location": {
         "column": 1,
         "line": 14,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+        "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
       },
       "name": "weights_1",
       "value_type": "Float32"
@@ -94,7 +94,7 @@
           "location": {
             "column": 1,
             "line": 15,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "HIDDEN_WIDTH",
           "tree": {
@@ -109,7 +109,7 @@
           "location": {
             "column": 1,
             "line": 15,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "OUTPUT_WIDTH",
           "tree": {
@@ -125,7 +125,7 @@
       "location": {
         "column": 1,
         "line": 15,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+        "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
       },
       "name": "weights_2",
       "value_type": "Float32"
@@ -136,7 +136,7 @@
           "location": {
             "column": 1,
             "line": 16,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "BATCH",
           "tree": {
@@ -151,7 +151,7 @@
           "location": {
             "column": 1,
             "line": 16,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "HIDDEN_WIDTH",
           "tree": {
@@ -167,7 +167,7 @@
       "location": {
         "column": 1,
         "line": 16,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+        "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
       },
       "name": "hidden",
       "value_type": "Float32"
@@ -178,7 +178,7 @@
           "location": {
             "column": 1,
             "line": 17,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "BATCH",
           "tree": {
@@ -193,7 +193,7 @@
           "location": {
             "column": 1,
             "line": 17,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "source": "OUTPUT_WIDTH",
           "tree": {
@@ -209,7 +209,7 @@
       "location": {
         "column": 1,
         "line": 17,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+        "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
       },
       "name": "output",
       "value_type": "Float32"
@@ -225,7 +225,7 @@
             "location": {
               "column": 5,
               "line": 20,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+              "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
             },
             "source": "relu(sum( :input[:sample, :i]~1 * :weights_1[:i, :h]~1 for :i in range(:INPUT_WIDTH) ))",
             "tree": {
@@ -447,7 +447,7 @@
           "location": {
             "column": 5,
             "line": 20,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "name": "hidden",
           "target_indices": [
@@ -455,7 +455,7 @@
               "location": {
                 "column": 5,
                 "line": 20,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+                "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
               },
               "source": ":sample",
               "tree": {
@@ -481,7 +481,7 @@
               "location": {
                 "column": 5,
                 "line": 20,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+                "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
               },
               "source": ":h",
               "tree": {
@@ -511,7 +511,7 @@
       "location": {
         "column": 1,
         "line": 19,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+        "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
       }
     },
     {
@@ -525,7 +525,7 @@
             "location": {
               "column": 5,
               "line": 26,
-              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+              "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
             },
             "source": "sum( :hidden[:sample, :h]~1 * :weights_2[:h, :o]~1 for :h in range(:HIDDEN_WIDTH) )",
             "tree": {
@@ -734,7 +734,7 @@
           "location": {
             "column": 5,
             "line": 26,
-            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
           },
           "name": "output",
           "target_indices": [
@@ -742,7 +742,7 @@
               "location": {
                 "column": 5,
                 "line": 26,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+                "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
               },
               "source": ":sample",
               "tree": {
@@ -768,7 +768,7 @@
               "location": {
                 "column": 5,
                 "line": 26,
-                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+                "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
               },
               "source": ":o",
               "tree": {
@@ -798,7 +798,7 @@
       "location": {
         "column": 1,
         "line": 25,
-        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+        "source": "work_checkout/docs/examples/deep-network-inference-proposal.bc"
       }
     }
   ]

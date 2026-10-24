@@ -266,6 +266,18 @@ class CompilerTests(unittest.TestCase):
                     self.assertTrue((output / entry["json_ir"]).is_file())
                     self.assertTrue((output / entry["trace"]).is_file())
                     self.assertTrue((output / entry["manifest"]).is_file())
+                    ir = json.loads(
+                        (output / entry["json_ir"]).read_text(encoding="utf-8")
+                    )
+                    self.assertEqual(
+                        ir["source_name"],
+                        f"work_checkout/docs/examples/{entry['source']}",
+                    )
+                    self.assertNotIn(str(ROOT), ir["source_name"])
+                    self.assertIn(
+                        f"work_checkout/docs/examples/{entry['source']}",
+                        (output / entry["expanded_source"]).read_text(encoding="utf-8"),
+                    )
                     report = output / entry["markdown"]
                     self.assertTrue(report.is_file())
                     report_text = report.read_text(encoding="utf-8")

@@ -48,6 +48,8 @@ when implementing or testing changes.
   The benchmark command defaults to small workloads for a quick smoke run.
 - Example inputs are kept beside their model sources as `*.bc.in.json`; the
   CLI accepts them with `--input-file`.
+- Generated compiled example artifacts use stable `work_checkout/...` source
+  names instead of embedding a machine-specific absolute checkout path.
 - Execution is serial, with optional bounded history. There is no GPU backend,
   standalone GUI, or interactive debugger yet. Stage 1 also does not provide
   full static inference, model-level triggers/actions, or a process-wide
@@ -88,9 +90,14 @@ python -m braincode.benchmark --sizes 32 64 --ticks 3 --repeats 2 --output docs/
    broad GPU coverage.
 6. Evaluate AI-assisted modeling against a pre-registered host-language
    baseline and publish failures as well as successes.
+7. Explore one paired Python reference example to compare expression and
+   semantics, without treating it as a performance test.
+8. Refine the existing Python embedding API and assess optional NumPy array
+   interchange separately from any future accelerated backend.
 
 For the product vision and sequencing, see
 [`long-term-improvement-plan.md`](./long-term-improvement-plan.md). For
 language/runtime facts, see [`stage1-contract.md`](./stage1-contract.md),
 [`02-execution-model.md`](./02-execution-model.md), and
-[`implementation-plan.md`](./implementation-plan.md).
+[`implementation-plan.md`](./implementation-plan.md). Cross-cutting Python
+proposals are listed in [`suggestions/README.md`](./suggestions/README.md).

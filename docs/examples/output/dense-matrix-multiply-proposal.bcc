@@ -1,4 +1,4 @@
-# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\dense-matrix-multiply-proposal.bc
+# Compiled BrainCode source expanded from: work_checkout/docs/examples/dense-matrix-multiply-proposal.bc
 # Data-parallel loops are unfolded into indexed assignments.
 tensor :A[N, N] of Float32
 tensor :B[N, N] of Float32
