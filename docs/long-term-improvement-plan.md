@@ -114,6 +114,8 @@ state.
 
 - Package the compiler, runtimes, and VS Code extension for supported
   platforms; package a standalone GUI only if later user needs justify it.
+- Refine the existing Python embedding API and consider optional NumPy
+  interoperation without making NumPy a required dependency.
 - Provide a documented extension interface for approved host functions,
   visualization components, and future execution backends.
 - Include an example gallery and templates organized by model type and
@@ -172,6 +174,11 @@ metadata with clear resource and backend guarantees.
 These stages are directional rather than calendar commitments. A stage should
 advance only when the previous capabilities work end to end for representative
 models and are validated with real users.
+
+Paired Python reference examples and Python/NumPy interoperability are
+cross-cutting proposals, not new numbered stages. Array interoperability must
+not be confused with an accelerated NumPy backend or a performance claim. See
+the [cross-cutting suggestions](./suggestions/README.md).
 
 ## Foundational work that enables the product
 

@@ -38,6 +38,11 @@ stages:
 
 - [Hosted BrainCode API](./stage4_cloud_api_service.md)
 
+## Cross-cutting proposals (not assigned to a stage)
+
+- [Paired Python reference implementations](./python_reference_implementations.md)
+- [Python API and NumPy interoperability](./python_numpy_interoperability.md)
+
 The Stage 1 work deliberately prepares for later capabilities without
 presenting them as already implemented. See the
 [stage overview and priority index](../05-concept-improvements.md) and the
