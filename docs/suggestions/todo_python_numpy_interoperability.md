@@ -1,4 +1,4 @@
-# Cross-cutting suggestion: Python API and NumPy interoperability
+# TODO — Cross-cutting: Python API and NumPy interoperability
 
 Make BrainCode easier to use from Python programs and define a deliberate,
 optional interchange path for NumPy arrays. This proposal builds on the

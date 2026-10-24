@@ -1,4 +1,4 @@
-# Stage 3 suggestion: GPU backend, conformance, and performance
+# TODO — Stage 3: GPU backend, conformance, and performance
 
 Stage 3 implements GPU execution for useful workloads. The serial Python
 runtime remains the semantic reference.

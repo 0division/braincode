@@ -48,10 +48,10 @@ the hosted MVP.
 
 ## Cross-cutting proposals (not assigned to a stage)
 
-- Add [paired Python reference implementations](docs/suggestions/python_reference_implementations.md)
+- Add [paired Python reference implementations](docs/suggestions/todo_python_reference_implementations.md)
   beside selected BrainCode examples to compare expression and semantics, not
   runtime speed.
-- Refine the [Python API and NumPy interoperability](docs/suggestions/python_numpy_interoperability.md)
+- Refine the [Python API and NumPy interoperability](docs/suggestions/todo_python_numpy_interoperability.md)
   while treating array interchange as distinct from a future accelerated
   NumPy backend.
 

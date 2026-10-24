@@ -1,4 +1,4 @@
-# Stage 2 overview: VS Code workbench
+# TODO — Stage 2 overview: VS Code workbench
 
 Use a VS Code extension as BrainCode's first integrated authoring and run
 environment instead of starting with a standalone GUI. VS Code provides the
@@ -14,12 +14,12 @@ there is a demonstrated need.
 Stage 2 is best treated as several related but separately deliverable
 suggestions:
 
-- **2a — [VS Code extension foundation](./stage2a_vscode_extension_foundation.md):**
+- **2a — [VS Code extension foundation](./work_stage2a_vscode_extension_foundation.md):**
   register `.bc` files and invoke the existing CLI from editor commands.
-- **2b — [Compiler-backed language support](./stage2b_compiler_language_support.md):**
+- **2b — [Compiler-backed language support](./todo_stage2b_compiler_language_support.md):**
   add diagnostics and editor intelligence without duplicating BrainCode
   parsing or semantics in the extension.
-- **2c — [Run results and inspection](./stage2c_run_results_inspection.md):**
+- **2c — [Run results and inspection](./todo_stage2c_run_results_inspection.md):**
   organize run configurations and artifacts first; add richer inspection
   only when supported by runtime capabilities.
 

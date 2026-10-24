@@ -1,4 +1,4 @@
-# Stage 2a suggestion: VS Code extension foundation
+# Stage 2a work in progress: VS Code extension foundation
 
 An initial extension prototype is implemented in the
 [VS Code extension folder](../../vscode-extension/README.md). This suggestion

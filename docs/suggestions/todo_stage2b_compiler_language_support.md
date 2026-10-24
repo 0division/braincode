@@ -1,4 +1,4 @@
-# Stage 2b suggestion: compiler-backed language support
+# TODO — Stage 2b: compiler-backed language support
 
 Add editor intelligence by reusing the BrainCode compiler's language
 knowledge. The extension should not grow an independent parser whose behavior

@@ -77,8 +77,8 @@ python -m braincode.benchmark --sizes 32 64 --ticks 3 --repeats 2 --output docs/
 
 ## Suggested next engineering steps
 
-1. Exercise the Stage 2a extension in an Extension Development Host, fix
-   workflow issues, and validate packaging before distribution.
+1. Continue Stage 2a work: exercise the extension in an Extension Development
+   Host, fix workflow issues, and validate packaging before distribution.
 2. Add source-linked debugging and inspection when runtime execution details
    can support them reliably.
 3. Continue static analysis and portability work, including clearer inference

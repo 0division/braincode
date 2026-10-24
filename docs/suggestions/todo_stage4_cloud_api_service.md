@@ -1,4 +1,4 @@
-# Stage 4 suggestion: hosted BrainCode API
+# TODO — Stage 4: hosted BrainCode API
 
 Make BrainCode models runnable through a hosted API. A client should be able
 to submit BrainCode source and a run configuration, start a run, check its

@@ -1,4 +1,4 @@
-# Stage 2c suggestion: run results and inspection
+# TODO — Stage 2c: run results and inspection
 
 Make saved BrainCode runs easy to find and understand in the VS Code
 workbench. Start with the existing CLI, run configurations, traces, Markdown

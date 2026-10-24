@@ -1,4 +1,4 @@
-# Cross-cutting suggestion: paired Python reference implementations
+# TODO — Cross-cutting: paired Python reference implementations
 
 Add selected Python implementations alongside BrainCode examples to make the
 same model's expression and execution structure easier to compare. This is an

@@ -25,23 +25,23 @@ stages:
 
 ## Stage 2 — VS Code workbench
 
-- [VS Code workbench overview](./stage2_gui_authoring_runs_inspection.md)
-- [2a — VS Code extension foundation](./stage2a_vscode_extension_foundation.md)
-- [2b — Compiler-backed language support](./stage2b_compiler_language_support.md)
-- [2c — Run results and inspection](./stage2c_run_results_inspection.md)
+- [TODO — VS Code workbench overview](./todo_stage2_gui_authoring_runs_inspection.md)
+- [2a — VS Code extension foundation (work in progress)](./work_stage2a_vscode_extension_foundation.md)
+- [TODO — 2b compiler-backed language support](./todo_stage2b_compiler_language_support.md)
+- [TODO — 2c run results and inspection](./todo_stage2c_run_results_inspection.md)
 
 ## Stage 3 — GPU
 
-- [GPU backend, conformance, and performance](./stage3_gpu_backend_conformance_performance.md)
+- [TODO — GPU backend, conformance, and performance](./todo_stage3_gpu_backend_conformance_performance.md)
 
 ## Stage 4 — Cloud API
 
-- [Hosted BrainCode API](./stage4_cloud_api_service.md)
+- [TODO — Hosted BrainCode API](./todo_stage4_cloud_api_service.md)
 
 ## Cross-cutting proposals (not assigned to a stage)
 
-- [Paired Python reference implementations](./python_reference_implementations.md)
-- [Python API and NumPy interoperability](./python_numpy_interoperability.md)
+- [TODO — Paired Python reference implementations](./todo_python_reference_implementations.md)
+- [TODO — Python API and NumPy interoperability](./todo_python_numpy_interoperability.md)
 
 The Stage 1 work deliberately prepares for later capabilities without
 presenting them as already implemented. See the
