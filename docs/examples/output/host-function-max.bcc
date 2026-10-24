@@ -1,0 +1,3 @@
+# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\host-function-max.bc
+# Data-parallel loops are unfolded into indexed assignments.
+:t = max(:t~1, :t~2)

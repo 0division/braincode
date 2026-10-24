@@ -1,0 +1,22 @@
+# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\game-of-life-large-proposal.bc
+# Data-parallel loops are unfolded into indexed assignments.
+population :cells[WIDTH, HEIGHT] of Bool
+boundary :cells = wrap
+# instance (:x=0, :y=0)
+:cells[0, 0] = life_rule( neighbor_count(:cells~1, 0, 0, radius=1, include_center=False), :cells[0, 0]~1 )
+# instance (:x=0, :y=1)
+:cells[0, 1] = life_rule( neighbor_count(:cells~1, 0, 1, radius=1, include_center=False), :cells[0, 1]~1 )
+# instance (:x=0, :y=2)
+:cells[0, 2] = life_rule( neighbor_count(:cells~1, 0, 2, radius=1, include_center=False), :cells[0, 2]~1 )
+# instance (:x=1, :y=0)
+:cells[1, 0] = life_rule( neighbor_count(:cells~1, 1, 0, radius=1, include_center=False), :cells[1, 0]~1 )
+# instance (:x=1, :y=1)
+:cells[1, 1] = life_rule( neighbor_count(:cells~1, 1, 1, radius=1, include_center=False), :cells[1, 1]~1 )
+# instance (:x=1, :y=2)
+:cells[1, 2] = life_rule( neighbor_count(:cells~1, 1, 2, radius=1, include_center=False), :cells[1, 2]~1 )
+# instance (:x=2, :y=0)
+:cells[2, 0] = life_rule( neighbor_count(:cells~1, 2, 0, radius=1, include_center=False), :cells[2, 0]~1 )
+# instance (:x=2, :y=1)
+:cells[2, 1] = life_rule( neighbor_count(:cells~1, 2, 1, radius=1, include_center=False), :cells[2, 1]~1 )
+# instance (:x=2, :y=2)
+:cells[2, 2] = life_rule( neighbor_count(:cells~1, 2, 2, radius=1, include_center=False), :cells[2, 2]~1 )

@@ -29,7 +29,7 @@ The compiler output for Rule 110 is checked in as both [cellular-automaton-1d-ru
 
 The former `ascii-to-utf8-mapper.bc` name was inaccurate: this is a Unicode scalar-value mapper, not an ASCII-only mapper. It computes each output byte position with conditional BrainCode rules, reports the encoded length, and collects only the non-null bytes in `utf8_out_bytes`. It handles the 1-, 2-, 3-, and 4-byte ranges and rejects out-of-range values and UTF-16 surrogate code points. It is a scalar code-point mapper, not a bit-vector or one-hot representation.
 
-The example input code point is `128512` (`U+1F600`, 😀), configured in [unicode-to-utf8-mapper.bc.in.json](./unicode-to-utf8-mapper.bc.in.json). Its checked execution trace is [unicode-to-utf8-mapper.output.json](./unicode-to-utf8-mapper.output.json). Run it with:
+The example input code point is `128512` (`U+1F600`, 😀), configured in [unicode-to-utf8-mapper.bc.in.json](./unicode-to-utf8-mapper.bc.in.json). The example runner writes its execution trace and detailed Markdown report under [output/](./output/). Run it with:
 
 ```powershell
 python -m braincode run docs/examples/unicode-to-utf8-mapper.bc --input-file docs/examples/unicode-to-utf8-mapper.bc.in.json
@@ -51,4 +51,4 @@ The scalar syntax is `:signal = expression`; `:signal~1` reads the committed val
 
 The standard-library test suite compiles all examples and runs them at small representative dimensions. It is a correctness/conformance check, not a performance benchmark.
 
-To compile and execute every example, including both `.bcc` artifact forms, run `bash run_examples.sh` from the project root. All generated files go under `output/`: expanded BrainCode source, structured JSON IR, per-example execution traces, a JSON summary, a chronological `run.log`, and a Markdown `run-summary.md`.
+To compile and execute every example, including both `.bcc` artifact forms, run `bash run_examples.sh` from the project root. All generated files go under `docs/examples/output/`: expanded BrainCode source, structured JSON IR, per-example execution traces and `.run.md` reports, a JSON summary, a chronological `run.log`, and a Markdown `run-summary.md`. Each per-run report contains the input data, BrainCode source, and output trace. The CLI `run` command also supports `--markdown-output PATH` or `"md_output": true` in its input configuration.

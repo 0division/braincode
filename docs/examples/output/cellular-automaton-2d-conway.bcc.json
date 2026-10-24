@@ -1,0 +1,429 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc",
+  "statements": [
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 10,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+          },
+          "source": "WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "WIDTH",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 10,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+          },
+          "source": "HEIGHT",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "HEIGHT",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "population",
+      "location": {
+        "column": 1,
+        "line": 10,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+      },
+      "name": "cells",
+      "value_type": "Bool"
+    },
+    {
+      "boundary": "dead",
+      "kind": "boundary",
+      "location": {
+        "column": 1,
+        "line": 11,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+      },
+      "name": "cells"
+    },
+    {
+      "bindings": [
+        "x",
+        "y"
+      ],
+      "body": [
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 14,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+            },
+            "source": "neighbor_count( :cells~1, :x, :y, neighborhood=moore_2d, boundary=dead )",
+            "tree": {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "cells"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "x"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_symbol__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "y"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_symbol__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "neighbor_count",
+                "node": "Name"
+              },
+              "keywords": [
+                {
+                  "arg": "neighborhood",
+                  "node": "keyword",
+                  "value": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "moore_2d",
+                    "node": "Name"
+                  }
+                },
+                {
+                  "arg": "boundary",
+                  "node": "keyword",
+                  "value": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "dead",
+                    "node": "Name"
+                  }
+                }
+              ],
+              "node": "Call"
+            }
+          },
+          "kind": "let",
+          "location": {
+            "column": 1,
+            "line": 14,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+          },
+          "name": "neighbors"
+        },
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 17,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+            },
+            "source": ":cells[:x, :y]~1",
+            "tree": {
+              "args": [
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": "cells"
+                },
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 1
+                },
+                {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "x"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_symbol__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "y"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_symbol__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  ],
+                  "node": "Tuple"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "__bc_history__",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "let",
+          "location": {
+            "column": 1,
+            "line": 17,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+          },
+          "name": "was_alive"
+        },
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 18,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+            },
+            "source": "True if neighbors == 3 else True if (was_alive and neighbors == 2) else False",
+            "tree": {
+              "body": {
+                "kind": null,
+                "node": "Constant",
+                "value": true
+              },
+              "node": "IfExp",
+              "orelse": {
+                "body": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": true
+                },
+                "node": "IfExp",
+                "orelse": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": false
+                },
+                "test": {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "was_alive",
+                      "node": "Name"
+                    },
+                    {
+                      "comparators": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 2
+                        }
+                      ],
+                      "left": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "neighbors",
+                        "node": "Name"
+                      },
+                      "node": "Compare",
+                      "ops": [
+                        {
+                          "node": "Eq"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "test": {
+                "comparators": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 3
+                  }
+                ],
+                "left": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "neighbors",
+                  "node": "Name"
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "Eq"
+                  }
+                ]
+              }
+            }
+          },
+          "kind": "assignment",
+          "location": {
+            "column": 1,
+            "line": 18,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+          },
+          "name": "cells",
+          "target_indices": [
+            {
+              "location": {
+                "column": 1,
+                "line": 18,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+              },
+              "source": ":x",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "x"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            },
+            {
+              "location": {
+                "column": 1,
+                "line": 18,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+              },
+              "source": ":y",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "y"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            }
+          ]
+        }
+      ],
+      "collection": "cells",
+      "kind": "each",
+      "location": {
+        "column": 1,
+        "line": 13,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
+      }
+    }
+  ]
+}

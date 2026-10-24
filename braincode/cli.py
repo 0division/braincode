@@ -10,6 +10,7 @@ from typing import Any
 
 from braincode.compiler import CompiledProgram, compile_file, load_compiled
 from braincode.expanded import render_expanded
+from braincode.reporting import write_run_markdown
 from braincode.runtime import BrainCodeRuntimeError, Runtime
 
 
@@ -19,36 +20,6 @@ def _read_json(path: str | None, default: Any) -> Any:
     candidate = Path(path)
     text = candidate.read_text(encoding="utf-8") if candidate.is_file() else path
     return json.loads(text)
-
-
-def _write_markdown_summary(
-    path: str | Path,
-    *,
-    source_name: str,
-    frames: list[dict[str, Any]],
-    ticks: int,
-    initial_state: Any = None,
-    parameters: Any = None,
-) -> None:
-    summary = [
-        "# BrainCode run summary",
-        "",
-        f"- Source: `{source_name}`",
-        f"- Ticks: {ticks}",
-    ]
-    if initial_state is not None:
-        summary.append(f"- Initial state: `{json.dumps(initial_state, sort_keys=True)}`")
-    if parameters not in (None, {}):
-        summary.append(f"- Parameters: `{json.dumps(parameters, sort_keys=True)}`")
-    summary.append("")
-    if not frames:
-        summary.append("No frames were produced.")
-    else:
-        summary.append("| Tick | Frame |")
-        summary.append("|---:|---|")
-        for index, frame in enumerate(frames):
-            summary.append(f"| {index} | `{json.dumps(frame, sort_keys=True)}` |")
-    Path(path).write_text("\n".join(summary) + "\n", encoding="utf-8")
 
 
 def _load_program(path: str) -> CompiledProgram:
@@ -145,6 +116,7 @@ def main(argv: list[str] | None = None) -> int:
             "initial_history",
             "inputs",
             "ticks",
+            "md_output",
         }
         if unknown_config_keys:
             raise ValueError(
@@ -179,6 +151,11 @@ def main(argv: list[str] | None = None) -> int:
             raise ValueError("each item in initial_history must be a JSON object")
         if isinstance(ticks, bool) or not isinstance(ticks, int):
             raise ValueError("ticks must be an integer")
+        md_output = run_config.get("md_output", False)
+        if not isinstance(md_output, (bool, str)):
+            raise ValueError("md_output must be a boolean or output path")
+        if isinstance(md_output, str) and not md_output:
+            raise ValueError("md_output path must not be empty")
         runtime = Runtime(
             program,
             initial_state=initial_state,
@@ -189,16 +166,27 @@ def main(argv: list[str] | None = None) -> int:
         result = json.dumps(frames, indent=2, sort_keys=True) + "\n"
         if arguments.output:
             Path(arguments.output).write_text(result, encoding="utf-8")
-        if arguments.markdown_output:
-            _write_markdown_summary(
-                arguments.markdown_output,
+        markdown_output = arguments.markdown_output
+        if markdown_output is None and md_output:
+            markdown_output = (
+                md_output if isinstance(md_output, str) else
+                str(Path(arguments.source).parent / "output" /
+                    f"{Path(arguments.source).stem}.run.md")
+            )
+        if markdown_output:
+            source_path = Path(arguments.source)
+            write_run_markdown(
+                markdown_output,
                 source_name=str(Path(arguments.source)),
-                frames=frames,
-                ticks=ticks,
+                source_code=source_path.read_text(encoding="utf-8"),
                 initial_state=initial_state,
                 parameters=parameters,
+                initial_history=initial_history,
+                inputs=inputs,
+                frames=frames,
+                ticks=ticks,
             )
-        if not arguments.output and not arguments.markdown_output:
+        if not arguments.output and not markdown_output:
             sys.stdout.write(result)
         return 0
     except (OSError, ValueError, TypeError, BrainCodeRuntimeError) as error:

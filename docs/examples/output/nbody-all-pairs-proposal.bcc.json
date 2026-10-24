@@ -1,0 +1,947 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc",
+  "statements": [
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 11,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+          },
+          "source": "BODY_COUNT",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "BODY_COUNT",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "population",
+      "location": {
+        "column": 1,
+        "line": 11,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+      },
+      "name": "bodies",
+      "value_type": "Float64"
+    },
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 12,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+          },
+          "source": "BODY_COUNT",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "BODY_COUNT",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "population",
+      "location": {
+        "column": 1,
+        "line": 12,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+      },
+      "name": "mass",
+      "value_type": "Float64"
+    },
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 13,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+          },
+          "source": "BODY_COUNT",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "BODY_COUNT",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 13,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+          },
+          "source": "VECTOR_DIM",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "VECTOR_DIM",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "population",
+      "location": {
+        "column": 1,
+        "line": 13,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+      },
+      "name": "position",
+      "value_type": "Float64"
+    },
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 14,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+          },
+          "source": "BODY_COUNT",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "BODY_COUNT",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 14,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+          },
+          "source": "VECTOR_DIM",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "VECTOR_DIM",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "population",
+      "location": {
+        "column": 1,
+        "line": 14,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+      },
+      "name": "velocity",
+      "value_type": "Float64"
+    },
+    {
+      "bindings": [
+        "i"
+      ],
+      "body": [
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 17,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            },
+            "source": "sum( :G * :mass[:j] * (:position[:j]~1 - :position[:i]~1) / ( length(:position[:j]~1 - :position[:i]~1) ** 2 + :softening ** 2 ) ** 1.5 for :j in range(:BODY_COUNT) if :j != :i )",
+            "tree": {
+              "args": [
+                {
+                  "elt": {
+                    "left": {
+                      "left": {
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "G"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_symbol__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "BinOp",
+                        "op": {
+                          "node": "Mult"
+                        },
+                        "right": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "mass"
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [
+                                {
+                                  "args": [
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": "j"
+                                    }
+                                  ],
+                                  "func": {
+                                    "ctx": {
+                                      "node": "Load"
+                                    },
+                                    "id": "__bc_symbol__",
+                                    "node": "Name"
+                                  },
+                                  "keywords": [],
+                                  "node": "Call"
+                                }
+                              ],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_index__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        }
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Mult"
+                      },
+                      "right": {
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "position"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [
+                                {
+                                  "args": [
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": "j"
+                                    }
+                                  ],
+                                  "func": {
+                                    "ctx": {
+                                      "node": "Load"
+                                    },
+                                    "id": "__bc_symbol__",
+                                    "node": "Name"
+                                  },
+                                  "keywords": [],
+                                  "node": "Call"
+                                }
+                              ],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "BinOp",
+                        "op": {
+                          "node": "Sub"
+                        },
+                        "right": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "position"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [
+                                {
+                                  "args": [
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": "i"
+                                    }
+                                  ],
+                                  "func": {
+                                    "ctx": {
+                                      "node": "Load"
+                                    },
+                                    "id": "__bc_symbol__",
+                                    "node": "Name"
+                                  },
+                                  "keywords": [],
+                                  "node": "Call"
+                                }
+                              ],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        }
+                      }
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "Div"
+                    },
+                    "right": {
+                      "left": {
+                        "left": {
+                          "left": {
+                            "args": [
+                              {
+                                "left": {
+                                  "args": [
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": "position"
+                                    },
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": 1
+                                    },
+                                    {
+                                      "ctx": {
+                                        "node": "Load"
+                                      },
+                                      "elts": [
+                                        {
+                                          "args": [
+                                            {
+                                              "kind": null,
+                                              "node": "Constant",
+                                              "value": "j"
+                                            }
+                                          ],
+                                          "func": {
+                                            "ctx": {
+                                              "node": "Load"
+                                            },
+                                            "id": "__bc_symbol__",
+                                            "node": "Name"
+                                          },
+                                          "keywords": [],
+                                          "node": "Call"
+                                        }
+                                      ],
+                                      "node": "Tuple"
+                                    }
+                                  ],
+                                  "func": {
+                                    "ctx": {
+                                      "node": "Load"
+                                    },
+                                    "id": "__bc_history__",
+                                    "node": "Name"
+                                  },
+                                  "keywords": [],
+                                  "node": "Call"
+                                },
+                                "node": "BinOp",
+                                "op": {
+                                  "node": "Sub"
+                                },
+                                "right": {
+                                  "args": [
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": "position"
+                                    },
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": 1
+                                    },
+                                    {
+                                      "ctx": {
+                                        "node": "Load"
+                                      },
+                                      "elts": [
+                                        {
+                                          "args": [
+                                            {
+                                              "kind": null,
+                                              "node": "Constant",
+                                              "value": "i"
+                                            }
+                                          ],
+                                          "func": {
+                                            "ctx": {
+                                              "node": "Load"
+                                            },
+                                            "id": "__bc_symbol__",
+                                            "node": "Name"
+                                          },
+                                          "keywords": [],
+                                          "node": "Call"
+                                        }
+                                      ],
+                                      "node": "Tuple"
+                                    }
+                                  ],
+                                  "func": {
+                                    "ctx": {
+                                      "node": "Load"
+                                    },
+                                    "id": "__bc_history__",
+                                    "node": "Name"
+                                  },
+                                  "keywords": [],
+                                  "node": "Call"
+                                }
+                              }
+                            ],
+                            "func": {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "id": "length",
+                              "node": "Name"
+                            },
+                            "keywords": [],
+                            "node": "Call"
+                          },
+                          "node": "BinOp",
+                          "op": {
+                            "node": "Pow"
+                          },
+                          "right": {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 2
+                          }
+                        },
+                        "node": "BinOp",
+                        "op": {
+                          "node": "Add"
+                        },
+                        "right": {
+                          "left": {
+                            "args": [
+                              {
+                                "kind": null,
+                                "node": "Constant",
+                                "value": "softening"
+                              }
+                            ],
+                            "func": {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "id": "__bc_symbol__",
+                              "node": "Name"
+                            },
+                            "keywords": [],
+                            "node": "Call"
+                          },
+                          "node": "BinOp",
+                          "op": {
+                            "node": "Pow"
+                          },
+                          "right": {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 2
+                          }
+                        }
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Pow"
+                      },
+                      "right": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1.5
+                      }
+                    }
+                  },
+                  "generators": [
+                    {
+                      "ifs": [
+                        {
+                          "comparators": [
+                            {
+                              "args": [
+                                {
+                                  "kind": null,
+                                  "node": "Constant",
+                                  "value": "i"
+                                }
+                              ],
+                              "func": {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "id": "__bc_symbol__",
+                                "node": "Name"
+                              },
+                              "keywords": [],
+                              "node": "Call"
+                            }
+                          ],
+                          "left": {
+                            "args": [
+                              {
+                                "kind": null,
+                                "node": "Constant",
+                                "value": "j"
+                              }
+                            ],
+                            "func": {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "id": "__bc_symbol__",
+                              "node": "Name"
+                            },
+                            "keywords": [],
+                            "node": "Call"
+                          },
+                          "node": "Compare",
+                          "ops": [
+                            {
+                              "node": "NotEq"
+                            }
+                          ]
+                        }
+                      ],
+                      "is_async": 0,
+                      "iter": {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "kind": null,
+                                "node": "Constant",
+                                "value": "BODY_COUNT"
+                              }
+                            ],
+                            "func": {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "id": "__bc_symbol__",
+                              "node": "Name"
+                            },
+                            "keywords": [],
+                            "node": "Call"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "range",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "comprehension",
+                      "target": {
+                        "ctx": {
+                          "node": "Store"
+                        },
+                        "id": "__bc_j",
+                        "node": "Name"
+                      }
+                    }
+                  ],
+                  "node": "GeneratorExp"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "sum",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "let",
+          "location": {
+            "column": 1,
+            "line": 17,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+          },
+          "name": "acceleration"
+        },
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 27,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            },
+            "source": ":velocity[:i]~1 + :time_step * acceleration",
+            "tree": {
+              "left": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "velocity"
+                  },
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 1
+                  },
+                  {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "elts": [
+                      {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "i"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_symbol__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      }
+                    ],
+                    "node": "Tuple"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_history__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              },
+              "node": "BinOp",
+              "op": {
+                "node": "Add"
+              },
+              "right": {
+                "left": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "time_step"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_symbol__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                "node": "BinOp",
+                "op": {
+                  "node": "Mult"
+                },
+                "right": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "acceleration",
+                  "node": "Name"
+                }
+              }
+            }
+          },
+          "kind": "assignment",
+          "location": {
+            "column": 1,
+            "line": 27,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+          },
+          "name": "velocity",
+          "target_indices": [
+            {
+              "location": {
+                "column": 1,
+                "line": 27,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+              },
+              "source": ":i",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "i"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            }
+          ]
+        },
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 28,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+            },
+            "source": ":position[:i]~1 + :time_step * :velocity[:i]~1",
+            "tree": {
+              "left": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "position"
+                  },
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 1
+                  },
+                  {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "elts": [
+                      {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "i"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_symbol__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      }
+                    ],
+                    "node": "Tuple"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_history__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              },
+              "node": "BinOp",
+              "op": {
+                "node": "Add"
+              },
+              "right": {
+                "left": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "time_step"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_symbol__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                "node": "BinOp",
+                "op": {
+                  "node": "Mult"
+                },
+                "right": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "velocity"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [
+                        {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "i"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_symbol__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        }
+                      ],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                }
+              }
+            }
+          },
+          "kind": "assignment",
+          "location": {
+            "column": 1,
+            "line": 28,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+          },
+          "name": "position",
+          "target_indices": [
+            {
+              "location": {
+                "column": 1,
+                "line": 28,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+              },
+              "source": ":i",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "i"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            }
+          ]
+        }
+      ],
+      "collection": "bodies",
+      "kind": "each",
+      "location": {
+        "column": 1,
+        "line": 16,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
+      }
+    }
+  ]
+}

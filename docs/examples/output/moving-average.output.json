@@ -1,0 +1,15 @@
+[
+  {
+    "temperature": 1
+  },
+  {
+    "temperature": 2
+  },
+  {
+    "temperature": 3
+  },
+  {
+    "average": 2.0,
+    "temperature": 3
+  }
+]

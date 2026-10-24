@@ -29,8 +29,9 @@ handoff.
    writes commit atomically, and validation failures must not publish partial
    frames.
 4. Update directly related documentation and examples.
-5. Keep generated example artifacts under `output/`; the folder is ignored by
-   Git and should not be staged by default.
+5. Keep generated example artifacts under `docs/examples/output/`. These
+   reproducible example artifacts are version-controlled and should be
+   regenerated after behavior changes.
 
 ## Verification
 
@@ -44,7 +45,8 @@ python -m braincode.example_runner --output output
 ```
 
 After example execution, verify all 15 configured examples have traces and
-that `output/run.log` and `output/run-summary.md` were written. Run
+Markdown reports, and that `docs/examples/output/run.log` and
+`docs/examples/output/run-summary.md` were written. Run
 `git diff --check` and inspect `git status` before finishing.
 
 ## Handoff and Git

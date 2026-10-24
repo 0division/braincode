@@ -1,0 +1,66 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\counter.bc",
+  "statements": [
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 5,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\counter.bc"
+        },
+        "source": ":counter~1 + 1",
+        "tree": {
+          "left": {
+            "args": [
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": "counter"
+              },
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": 1
+              },
+              {
+                "ctx": {
+                  "node": "Load"
+                },
+                "elts": [],
+                "node": "Tuple"
+              }
+            ],
+            "func": {
+              "ctx": {
+                "node": "Load"
+              },
+              "id": "__bc_history__",
+              "node": "Name"
+            },
+            "keywords": [],
+            "node": "Call"
+          },
+          "node": "BinOp",
+          "op": {
+            "node": "Add"
+          },
+          "right": {
+            "kind": null,
+            "node": "Constant",
+            "value": 1
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 5,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\counter.bc"
+      },
+      "name": "counter"
+    }
+  ]
+}

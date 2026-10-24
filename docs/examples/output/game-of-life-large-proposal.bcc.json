@@ -1,0 +1,324 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc",
+  "statements": [
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 12,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+          },
+          "source": "WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "WIDTH",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 12,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+          },
+          "source": "HEIGHT",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "HEIGHT",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "population",
+      "location": {
+        "column": 1,
+        "line": 12,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+      },
+      "name": "cells",
+      "value_type": "Bool"
+    },
+    {
+      "boundary": "wrap",
+      "kind": "boundary",
+      "location": {
+        "column": 1,
+        "line": 13,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+      },
+      "name": "cells"
+    },
+    {
+      "bindings": [
+        "x",
+        "y"
+      ],
+      "body": [
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 16,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+            },
+            "source": "life_rule( neighbor_count(:cells~1, :x, :y, radius=1, include_center=False), :cells[:x, :y]~1 )",
+            "tree": {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "cells"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "x"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_symbol__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "y"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_symbol__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "neighbor_count",
+                    "node": "Name"
+                  },
+                  "keywords": [
+                    {
+                      "arg": "radius",
+                      "node": "keyword",
+                      "value": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      }
+                    },
+                    {
+                      "arg": "include_center",
+                      "node": "keyword",
+                      "value": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": false
+                      }
+                    }
+                  ],
+                  "node": "Call"
+                },
+                {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "cells"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [
+                        {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "x"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_symbol__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "y"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_symbol__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        }
+                      ],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "life_rule",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "assignment",
+          "location": {
+            "column": 1,
+            "line": 16,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+          },
+          "name": "cells",
+          "target_indices": [
+            {
+              "location": {
+                "column": 1,
+                "line": 16,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+              },
+              "source": ":x",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "x"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            },
+            {
+              "location": {
+                "column": 1,
+                "line": 16,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+              },
+              "source": ":y",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "y"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            }
+          ]
+        }
+      ],
+      "collection": "cells",
+      "kind": "each",
+      "location": {
+        "column": 1,
+        "line": 15,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
+      }
+    }
+  ]
+}

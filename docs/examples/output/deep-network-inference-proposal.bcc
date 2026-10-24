@@ -1,0 +1,13 @@
+# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\deep-network-inference-proposal.bc
+# Data-parallel loops are unfolded into indexed assignments.
+tensor :input[BATCH, INPUT_WIDTH] of Float32
+tensor :weights_1[INPUT_WIDTH, HIDDEN_WIDTH] of Float32
+tensor :weights_2[HIDDEN_WIDTH, OUTPUT_WIDTH] of Float32
+tensor :hidden[BATCH, HIDDEN_WIDTH] of Float32
+tensor :output[BATCH, OUTPUT_WIDTH] of Float32
+# instance (:sample=0, :h=0)
+:hidden[0, 0] = relu(sum( :input[0, :i]~1 * :weights_1[:i, 0]~1 for :i in range(:INPUT_WIDTH) ))
+# instance (:sample=0, :h=1)
+:hidden[0, 1] = relu(sum( :input[0, :i]~1 * :weights_1[:i, 1]~1 for :i in range(:INPUT_WIDTH) ))
+# instance (:sample=0, :o=0)
+:output[0, 0] = sum( :hidden[0, :h]~1 * :weights_2[:h, 0]~1 for :h in range(:HIDDEN_WIDTH) )

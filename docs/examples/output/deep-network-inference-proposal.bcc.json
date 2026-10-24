@@ -1,0 +1,805 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc",
+  "statements": [
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 13,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "BATCH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "BATCH",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 13,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "INPUT_WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "INPUT_WIDTH",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "tensor",
+      "location": {
+        "column": 1,
+        "line": 13,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+      },
+      "name": "input",
+      "value_type": "Float32"
+    },
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 14,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "INPUT_WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "INPUT_WIDTH",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 14,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "HIDDEN_WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "HIDDEN_WIDTH",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "tensor",
+      "location": {
+        "column": 1,
+        "line": 14,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+      },
+      "name": "weights_1",
+      "value_type": "Float32"
+    },
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 15,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "HIDDEN_WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "HIDDEN_WIDTH",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 15,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "OUTPUT_WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "OUTPUT_WIDTH",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "tensor",
+      "location": {
+        "column": 1,
+        "line": 15,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+      },
+      "name": "weights_2",
+      "value_type": "Float32"
+    },
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 16,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "BATCH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "BATCH",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 16,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "HIDDEN_WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "HIDDEN_WIDTH",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "tensor",
+      "location": {
+        "column": 1,
+        "line": 16,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+      },
+      "name": "hidden",
+      "value_type": "Float32"
+    },
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 17,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "BATCH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "BATCH",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 17,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "source": "OUTPUT_WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "OUTPUT_WIDTH",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "tensor",
+      "location": {
+        "column": 1,
+        "line": 17,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+      },
+      "name": "output",
+      "value_type": "Float32"
+    },
+    {
+      "bindings": [
+        "sample",
+        "h"
+      ],
+      "body": [
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 20,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            },
+            "source": "relu(sum( :input[:sample, :i]~1 * :weights_1[:i, :h]~1 for :i in range(:INPUT_WIDTH) ))",
+            "tree": {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "elt": {
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "input"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [
+                                {
+                                  "args": [
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": "sample"
+                                    }
+                                  ],
+                                  "func": {
+                                    "ctx": {
+                                      "node": "Load"
+                                    },
+                                    "id": "__bc_symbol__",
+                                    "node": "Name"
+                                  },
+                                  "keywords": [],
+                                  "node": "Call"
+                                },
+                                {
+                                  "args": [
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": "i"
+                                    }
+                                  ],
+                                  "func": {
+                                    "ctx": {
+                                      "node": "Load"
+                                    },
+                                    "id": "__bc_symbol__",
+                                    "node": "Name"
+                                  },
+                                  "keywords": [],
+                                  "node": "Call"
+                                }
+                              ],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "BinOp",
+                        "op": {
+                          "node": "Mult"
+                        },
+                        "right": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "weights_1"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [
+                                {
+                                  "args": [
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": "i"
+                                    }
+                                  ],
+                                  "func": {
+                                    "ctx": {
+                                      "node": "Load"
+                                    },
+                                    "id": "__bc_symbol__",
+                                    "node": "Name"
+                                  },
+                                  "keywords": [],
+                                  "node": "Call"
+                                },
+                                {
+                                  "args": [
+                                    {
+                                      "kind": null,
+                                      "node": "Constant",
+                                      "value": "h"
+                                    }
+                                  ],
+                                  "func": {
+                                    "ctx": {
+                                      "node": "Load"
+                                    },
+                                    "id": "__bc_symbol__",
+                                    "node": "Name"
+                                  },
+                                  "keywords": [],
+                                  "node": "Call"
+                                }
+                              ],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        }
+                      },
+                      "generators": [
+                        {
+                          "ifs": [],
+                          "is_async": 0,
+                          "iter": {
+                            "args": [
+                              {
+                                "args": [
+                                  {
+                                    "kind": null,
+                                    "node": "Constant",
+                                    "value": "INPUT_WIDTH"
+                                  }
+                                ],
+                                "func": {
+                                  "ctx": {
+                                    "node": "Load"
+                                  },
+                                  "id": "__bc_symbol__",
+                                  "node": "Name"
+                                },
+                                "keywords": [],
+                                "node": "Call"
+                              }
+                            ],
+                            "func": {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "id": "range",
+                              "node": "Name"
+                            },
+                            "keywords": [],
+                            "node": "Call"
+                          },
+                          "node": "comprehension",
+                          "target": {
+                            "ctx": {
+                              "node": "Store"
+                            },
+                            "id": "__bc_i",
+                            "node": "Name"
+                          }
+                        }
+                      ],
+                      "node": "GeneratorExp"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "sum",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "relu",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "assignment",
+          "location": {
+            "column": 1,
+            "line": 20,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "name": "hidden",
+          "target_indices": [
+            {
+              "location": {
+                "column": 1,
+                "line": 20,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+              },
+              "source": ":sample",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "sample"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            },
+            {
+              "location": {
+                "column": 1,
+                "line": 20,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+              },
+              "source": ":h",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "h"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            }
+          ]
+        }
+      ],
+      "collection": "hidden",
+      "kind": "each",
+      "location": {
+        "column": 1,
+        "line": 19,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+      }
+    },
+    {
+      "bindings": [
+        "sample",
+        "o"
+      ],
+      "body": [
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 26,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+            },
+            "source": "sum( :hidden[:sample, :h]~1 * :weights_2[:h, :o]~1 for :h in range(:HIDDEN_WIDTH) )",
+            "tree": {
+              "args": [
+                {
+                  "elt": {
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "hidden"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [
+                            {
+                              "args": [
+                                {
+                                  "kind": null,
+                                  "node": "Constant",
+                                  "value": "sample"
+                                }
+                              ],
+                              "func": {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "id": "__bc_symbol__",
+                                "node": "Name"
+                              },
+                              "keywords": [],
+                              "node": "Call"
+                            },
+                            {
+                              "args": [
+                                {
+                                  "kind": null,
+                                  "node": "Constant",
+                                  "value": "h"
+                                }
+                              ],
+                              "func": {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "id": "__bc_symbol__",
+                                "node": "Name"
+                              },
+                              "keywords": [],
+                              "node": "Call"
+                            }
+                          ],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "Mult"
+                    },
+                    "right": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "weights_2"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [
+                            {
+                              "args": [
+                                {
+                                  "kind": null,
+                                  "node": "Constant",
+                                  "value": "h"
+                                }
+                              ],
+                              "func": {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "id": "__bc_symbol__",
+                                "node": "Name"
+                              },
+                              "keywords": [],
+                              "node": "Call"
+                            },
+                            {
+                              "args": [
+                                {
+                                  "kind": null,
+                                  "node": "Constant",
+                                  "value": "o"
+                                }
+                              ],
+                              "func": {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "id": "__bc_symbol__",
+                                "node": "Name"
+                              },
+                              "keywords": [],
+                              "node": "Call"
+                            }
+                          ],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  },
+                  "generators": [
+                    {
+                      "ifs": [],
+                      "is_async": 0,
+                      "iter": {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "kind": null,
+                                "node": "Constant",
+                                "value": "HIDDEN_WIDTH"
+                              }
+                            ],
+                            "func": {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "id": "__bc_symbol__",
+                              "node": "Name"
+                            },
+                            "keywords": [],
+                            "node": "Call"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "range",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "comprehension",
+                      "target": {
+                        "ctx": {
+                          "node": "Store"
+                        },
+                        "id": "__bc_h",
+                        "node": "Name"
+                      }
+                    }
+                  ],
+                  "node": "GeneratorExp"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "sum",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "assignment",
+          "location": {
+            "column": 1,
+            "line": 26,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+          },
+          "name": "output",
+          "target_indices": [
+            {
+              "location": {
+                "column": 1,
+                "line": 26,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+              },
+              "source": ":sample",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "sample"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            },
+            {
+              "location": {
+                "column": 1,
+                "line": 26,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+              },
+              "source": ":o",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "o"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            }
+          ]
+        }
+      ],
+      "collection": "output",
+      "kind": "each",
+      "location": {
+        "column": 1,
+        "line": 25,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
+      }
+    }
+  ]
+}

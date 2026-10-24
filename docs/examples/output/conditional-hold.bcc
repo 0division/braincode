@@ -1,0 +1,4 @@
+# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\conditional-hold.bc
+# Data-parallel loops are unfolded into indexed assignments.
+?(:trigger~1):
+    :alarm = True

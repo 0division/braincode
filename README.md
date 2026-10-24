@@ -45,13 +45,15 @@ python -m pytest -v
 
 `compile` writes `counter.bcc` and `counter.bcc.json` by default. The `.bcc` file is BrainCode source with data-parallel loops unfolded into indexed rules; the `.bcc.json` file is the structured IR representation. The `run` command prints the full state history as JSON. The library API is also available:
 
-To execute every checked-in example and save each compiled artifact and trace under `output/`, run the Bash script (Git Bash, WSL, or another Bash environment):
+To execute every checked-in example and save each compiled artifact, trace, and per-run Markdown report under `docs/examples/output/`, run the Bash script (Git Bash, WSL, or another Bash environment):
 
 ```bash
 bash run_examples.sh
 ```
 
-Each `.bc` example has a companion `.bc.in.json` file containing host-provided initial state, parameters, optional prior history, and the number of ticks to run. This keeps runtime data separate from model logic. The output folder contains an expanded `.bcc` and structured `.bcc.json` for every example, a `.output.json` execution trace for each, `summary.json`, a chronological `run.log`, and a readable `run-summary.md`. Examples use small inputs suitable for the serial Python reference runtime.
+Each `.bc` example has a companion `.bc.in.json` file containing host-provided initial state, parameters, optional prior history, and the number of ticks to run. This keeps runtime data separate from model logic. The output folder contains an expanded `.bcc`, structured `.bcc.json`, `.output.json` execution trace, and `.run.md` report for every example, plus `summary.json`, a chronological `run.log`, and a readable `run-summary.md`. Each `.run.md` records the resolved input data, BrainCode source, and full output trace. Examples use small inputs suitable for the serial Python reference runtime.
+
+For a single CLI run, `--markdown-output PATH` writes the same detailed report. A run configuration may instead set `"md_output": true` to write it to `output/<source-name>.run.md` beside the source directory, or set `"md_output"` to an explicit output path.
 
 The test suite combines pytest parameterized checks with standard-library
 `unittest` cases. It covers compiler/runtime round trips, UTF-8 boundary values,

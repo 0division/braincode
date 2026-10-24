@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-OUTPUT_DIR="${1:-${PROJECT_ROOT}/output}"
+OUTPUT_DIR="${1:-${PROJECT_ROOT}/docs/examples/output}"
 
 if [[ -n "${PYTHON:-}" ]]; then
     PYTHON_BIN="${PYTHON}"

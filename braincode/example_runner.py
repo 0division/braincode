@@ -11,11 +11,13 @@ from typing import Any
 
 from braincode.compiler import compile_file, load_compiled, save_compiled
 from braincode.expanded import render_expanded
+from braincode.reporting import write_run_markdown
 from braincode.runtime import Runtime
 
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES_DIR = ROOT / "docs" / "examples"
+DEFAULT_OUTPUT_DIR = EXAMPLES_DIR / "output"
 
 
 @dataclass(frozen=True)
@@ -23,6 +25,7 @@ class ExampleConfig:
     initial_state: dict[str, Any]
     parameters: dict[str, Any]
     initial_history: tuple[dict[str, Any], ...] = ()
+    inputs: tuple[dict[str, Any], ...] = ()
     ticks: int = 1
 
 
@@ -37,6 +40,7 @@ def example_configs() -> dict[str, ExampleConfig]:
             initial_state=payload["initial_state"],
             parameters=payload["parameters"],
             initial_history=tuple(payload.get("initial_history", [])),
+            inputs=tuple(payload.get("inputs", [])),
             ticks=payload.get("ticks", 1),
         )
     return configs
@@ -78,6 +82,7 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
             expanded_path = destination / f"{stem}.bcc" if destination is not None else None
             ir_path = destination / f"{stem}.bcc.json" if destination is not None else None
             trace_path = destination / f"{stem}.output.json" if destination is not None else None
+            markdown_path = destination / f"{stem}.run.md" if destination is not None else None
 
             if destination is not None:
                 expanded_path.write_text(
@@ -91,7 +96,7 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
                 parameters=config.parameters,
                 initial_history=config.initial_history,
             )
-            frames = runtime.run(config.ticks)
+            frames = runtime.run(config.ticks, input_frames=config.inputs)
             if destination is not None:
                 for artifact_path in (expanded_path, ir_path):
                     artifact_program = load_compiled(artifact_path)
@@ -100,7 +105,7 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
                         initial_state=config.initial_state,
                         parameters=config.parameters,
                         initial_history=config.initial_history,
-                    ).run(config.ticks)
+                    ).run(config.ticks, input_frames=config.inputs)
                     if artifact_frames != frames:
                         raise RuntimeError(
                             f"{artifact_path.name} produced a different trace from "
@@ -110,6 +115,17 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
                     json.dumps(frames, indent=2, sort_keys=True) + "\n",
                     encoding="utf-8",
                 )
+                write_run_markdown(
+                    markdown_path,
+                    source_name=source_path.name,
+                    source_code=source_path.read_text(encoding="utf-8"),
+                    initial_state=config.initial_state,
+                    parameters=config.parameters,
+                    initial_history=list(config.initial_history),
+                    inputs=list(config.inputs),
+                    ticks=config.ticks,
+                    frames=frames,
+                )
                 summary.append({
                     "source": source_path.name,
                     "input": input_path.name,
@@ -118,6 +134,7 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
                     "expanded_source": expanded_path.name,
                     "json_ir": ir_path.name,
                     "trace": trace_path.name,
+                    "markdown": markdown_path.name,
                 })
             else:
                 summary.append({
@@ -128,6 +145,7 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
                     "expanded_source": None,
                     "json_ir": None,
                     "trace": None,
+                    "markdown": None,
                 })
             if log_path is not None:
                 with log_path.open("a", encoding="utf-8") as log:
@@ -172,7 +190,7 @@ def _write_markdown_summary(
 ) -> None:
     rows = [
         f"| `{item['source']}` | `{item['input']}` | {item['ticks']} | "
-        f"`{item['trace']}` |"
+        f"`{item['trace']}` | `{item['markdown']}` |"
         for item in examples
     ]
     content = [
@@ -182,8 +200,8 @@ def _write_markdown_summary(
         f"- Completed: {completed_at}",
         f"- Result: passed ({len(examples)} examples)",
         "",
-        "| Example | Input | Ticks | Trace |",
-        "|---|---|---:|---|",
+        "| Example | Input | Ticks | Trace | Run report |",
+        "|---|---|---:|---|---|",
         *rows,
         "",
         "See `run.log` for the chronological execution log and `summary.json` "
@@ -199,8 +217,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output",
-        default=None,
-        help="directory for expanded source, JSON IR, traces, and summary; omit to keep runs in-memory",
+        default=str(DEFAULT_OUTPUT_DIR),
+        help="directory for expanded source, JSON IR, traces, and run reports",
     )
     arguments = parser.parse_args(argv)
     run_all_examples(arguments.output)

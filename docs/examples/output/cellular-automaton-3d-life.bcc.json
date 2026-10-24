@@ -1,0 +1,559 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc",
+  "statements": [
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 11,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+          },
+          "source": "WIDTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "WIDTH",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 11,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+          },
+          "source": "HEIGHT",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "HEIGHT",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 11,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+          },
+          "source": "DEPTH",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "DEPTH",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "population",
+      "location": {
+        "column": 1,
+        "line": 11,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+      },
+      "name": "cells",
+      "value_type": "Bool"
+    },
+    {
+      "boundary": "dead",
+      "kind": "boundary",
+      "location": {
+        "column": 1,
+        "line": 12,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+      },
+      "name": "cells"
+    },
+    {
+      "bindings": [
+        "x",
+        "y",
+        "z"
+      ],
+      "body": [
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 15,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+            },
+            "source": "neighbor_count( :cells~1, :x, :y, :z, neighborhood=moore_3d, boundary=dead )",
+            "tree": {
+              "args": [
+                {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "cells"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "x"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_symbol__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "y"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_symbol__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "z"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_symbol__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "neighbor_count",
+                "node": "Name"
+              },
+              "keywords": [
+                {
+                  "arg": "neighborhood",
+                  "node": "keyword",
+                  "value": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "moore_3d",
+                    "node": "Name"
+                  }
+                },
+                {
+                  "arg": "boundary",
+                  "node": "keyword",
+                  "value": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "dead",
+                    "node": "Name"
+                  }
+                }
+              ],
+              "node": "Call"
+            }
+          },
+          "kind": "let",
+          "location": {
+            "column": 1,
+            "line": 15,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+          },
+          "name": "neighbors"
+        },
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 19,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+            },
+            "source": ":cells[:x, :y, :z]~1",
+            "tree": {
+              "args": [
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": "cells"
+                },
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 1
+                },
+                {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "x"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_symbol__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "y"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_symbol__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "z"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_symbol__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  ],
+                  "node": "Tuple"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "__bc_history__",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "let",
+          "location": {
+            "column": 1,
+            "line": 19,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+          },
+          "name": "was_alive"
+        },
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 20,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+            },
+            "source": "True if neighbors == 6 else True if ( was_alive and ( neighbors == 5 or neighbors == 6 or neighbors == 7 ) ) else False",
+            "tree": {
+              "body": {
+                "kind": null,
+                "node": "Constant",
+                "value": true
+              },
+              "node": "IfExp",
+              "orelse": {
+                "body": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": true
+                },
+                "node": "IfExp",
+                "orelse": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": false
+                },
+                "test": {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "was_alive",
+                      "node": "Name"
+                    },
+                    {
+                      "node": "BoolOp",
+                      "op": {
+                        "node": "Or"
+                      },
+                      "values": [
+                        {
+                          "comparators": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 5
+                            }
+                          ],
+                          "left": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "neighbors",
+                            "node": "Name"
+                          },
+                          "node": "Compare",
+                          "ops": [
+                            {
+                              "node": "Eq"
+                            }
+                          ]
+                        },
+                        {
+                          "comparators": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 6
+                            }
+                          ],
+                          "left": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "neighbors",
+                            "node": "Name"
+                          },
+                          "node": "Compare",
+                          "ops": [
+                            {
+                              "node": "Eq"
+                            }
+                          ]
+                        },
+                        {
+                          "comparators": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 7
+                            }
+                          ],
+                          "left": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "neighbors",
+                            "node": "Name"
+                          },
+                          "node": "Compare",
+                          "ops": [
+                            {
+                              "node": "Eq"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "test": {
+                "comparators": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 6
+                  }
+                ],
+                "left": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "neighbors",
+                  "node": "Name"
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "Eq"
+                  }
+                ]
+              }
+            }
+          },
+          "kind": "assignment",
+          "location": {
+            "column": 1,
+            "line": 20,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+          },
+          "name": "cells",
+          "target_indices": [
+            {
+              "location": {
+                "column": 1,
+                "line": 20,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+              },
+              "source": ":x",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "x"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            },
+            {
+              "location": {
+                "column": 1,
+                "line": 20,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+              },
+              "source": ":y",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "y"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            },
+            {
+              "location": {
+                "column": 1,
+                "line": 20,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+              },
+              "source": ":z",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "z"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            }
+          ]
+        }
+      ],
+      "collection": "cells",
+      "kind": "each",
+      "location": {
+        "column": 1,
+        "line": 14,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
+      }
+    }
+  ]
+}

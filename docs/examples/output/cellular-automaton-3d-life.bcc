@@ -1,0 +1,112 @@
+# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\cellular-automaton-3d-life.bc
+# Data-parallel loops are unfolded into indexed assignments.
+population :cells[WIDTH, HEIGHT, DEPTH] of Bool
+boundary :cells = dead
+# instance (:x=0, :y=0, :z=0)
+let neighbors_x0_y0_z0 = neighbor_count( :cells~1, 0, 0, 0, neighborhood=moore_3d, boundary=dead )
+let was_alive_x0_y0_z0 = :cells[0, 0, 0]~1
+:cells[0, 0, 0] = True if neighbors_x0_y0_z0 == 6 else True if ( was_alive_x0_y0_z0 and ( neighbors_x0_y0_z0 == 5 or neighbors_x0_y0_z0 == 6 or neighbors_x0_y0_z0 == 7 ) ) else False
+# instance (:x=0, :y=0, :z=1)
+let neighbors_x0_y0_z1 = neighbor_count( :cells~1, 0, 0, 1, neighborhood=moore_3d, boundary=dead )
+let was_alive_x0_y0_z1 = :cells[0, 0, 1]~1
+:cells[0, 0, 1] = True if neighbors_x0_y0_z1 == 6 else True if ( was_alive_x0_y0_z1 and ( neighbors_x0_y0_z1 == 5 or neighbors_x0_y0_z1 == 6 or neighbors_x0_y0_z1 == 7 ) ) else False
+# instance (:x=0, :y=0, :z=2)
+let neighbors_x0_y0_z2 = neighbor_count( :cells~1, 0, 0, 2, neighborhood=moore_3d, boundary=dead )
+let was_alive_x0_y0_z2 = :cells[0, 0, 2]~1
+:cells[0, 0, 2] = True if neighbors_x0_y0_z2 == 6 else True if ( was_alive_x0_y0_z2 and ( neighbors_x0_y0_z2 == 5 or neighbors_x0_y0_z2 == 6 or neighbors_x0_y0_z2 == 7 ) ) else False
+# instance (:x=0, :y=1, :z=0)
+let neighbors_x0_y1_z0 = neighbor_count( :cells~1, 0, 1, 0, neighborhood=moore_3d, boundary=dead )
+let was_alive_x0_y1_z0 = :cells[0, 1, 0]~1
+:cells[0, 1, 0] = True if neighbors_x0_y1_z0 == 6 else True if ( was_alive_x0_y1_z0 and ( neighbors_x0_y1_z0 == 5 or neighbors_x0_y1_z0 == 6 or neighbors_x0_y1_z0 == 7 ) ) else False
+# instance (:x=0, :y=1, :z=1)
+let neighbors_x0_y1_z1 = neighbor_count( :cells~1, 0, 1, 1, neighborhood=moore_3d, boundary=dead )
+let was_alive_x0_y1_z1 = :cells[0, 1, 1]~1
+:cells[0, 1, 1] = True if neighbors_x0_y1_z1 == 6 else True if ( was_alive_x0_y1_z1 and ( neighbors_x0_y1_z1 == 5 or neighbors_x0_y1_z1 == 6 or neighbors_x0_y1_z1 == 7 ) ) else False
+# instance (:x=0, :y=1, :z=2)
+let neighbors_x0_y1_z2 = neighbor_count( :cells~1, 0, 1, 2, neighborhood=moore_3d, boundary=dead )
+let was_alive_x0_y1_z2 = :cells[0, 1, 2]~1
+:cells[0, 1, 2] = True if neighbors_x0_y1_z2 == 6 else True if ( was_alive_x0_y1_z2 and ( neighbors_x0_y1_z2 == 5 or neighbors_x0_y1_z2 == 6 or neighbors_x0_y1_z2 == 7 ) ) else False
+# instance (:x=0, :y=2, :z=0)
+let neighbors_x0_y2_z0 = neighbor_count( :cells~1, 0, 2, 0, neighborhood=moore_3d, boundary=dead )
+let was_alive_x0_y2_z0 = :cells[0, 2, 0]~1
+:cells[0, 2, 0] = True if neighbors_x0_y2_z0 == 6 else True if ( was_alive_x0_y2_z0 and ( neighbors_x0_y2_z0 == 5 or neighbors_x0_y2_z0 == 6 or neighbors_x0_y2_z0 == 7 ) ) else False
+# instance (:x=0, :y=2, :z=1)
+let neighbors_x0_y2_z1 = neighbor_count( :cells~1, 0, 2, 1, neighborhood=moore_3d, boundary=dead )
+let was_alive_x0_y2_z1 = :cells[0, 2, 1]~1
+:cells[0, 2, 1] = True if neighbors_x0_y2_z1 == 6 else True if ( was_alive_x0_y2_z1 and ( neighbors_x0_y2_z1 == 5 or neighbors_x0_y2_z1 == 6 or neighbors_x0_y2_z1 == 7 ) ) else False
+# instance (:x=0, :y=2, :z=2)
+let neighbors_x0_y2_z2 = neighbor_count( :cells~1, 0, 2, 2, neighborhood=moore_3d, boundary=dead )
+let was_alive_x0_y2_z2 = :cells[0, 2, 2]~1
+:cells[0, 2, 2] = True if neighbors_x0_y2_z2 == 6 else True if ( was_alive_x0_y2_z2 and ( neighbors_x0_y2_z2 == 5 or neighbors_x0_y2_z2 == 6 or neighbors_x0_y2_z2 == 7 ) ) else False
+# instance (:x=1, :y=0, :z=0)
+let neighbors_x1_y0_z0 = neighbor_count( :cells~1, 1, 0, 0, neighborhood=moore_3d, boundary=dead )
+let was_alive_x1_y0_z0 = :cells[1, 0, 0]~1
+:cells[1, 0, 0] = True if neighbors_x1_y0_z0 == 6 else True if ( was_alive_x1_y0_z0 and ( neighbors_x1_y0_z0 == 5 or neighbors_x1_y0_z0 == 6 or neighbors_x1_y0_z0 == 7 ) ) else False
+# instance (:x=1, :y=0, :z=1)
+let neighbors_x1_y0_z1 = neighbor_count( :cells~1, 1, 0, 1, neighborhood=moore_3d, boundary=dead )
+let was_alive_x1_y0_z1 = :cells[1, 0, 1]~1
+:cells[1, 0, 1] = True if neighbors_x1_y0_z1 == 6 else True if ( was_alive_x1_y0_z1 and ( neighbors_x1_y0_z1 == 5 or neighbors_x1_y0_z1 == 6 or neighbors_x1_y0_z1 == 7 ) ) else False
+# instance (:x=1, :y=0, :z=2)
+let neighbors_x1_y0_z2 = neighbor_count( :cells~1, 1, 0, 2, neighborhood=moore_3d, boundary=dead )
+let was_alive_x1_y0_z2 = :cells[1, 0, 2]~1
+:cells[1, 0, 2] = True if neighbors_x1_y0_z2 == 6 else True if ( was_alive_x1_y0_z2 and ( neighbors_x1_y0_z2 == 5 or neighbors_x1_y0_z2 == 6 or neighbors_x1_y0_z2 == 7 ) ) else False
+# instance (:x=1, :y=1, :z=0)
+let neighbors_x1_y1_z0 = neighbor_count( :cells~1, 1, 1, 0, neighborhood=moore_3d, boundary=dead )
+let was_alive_x1_y1_z0 = :cells[1, 1, 0]~1
+:cells[1, 1, 0] = True if neighbors_x1_y1_z0 == 6 else True if ( was_alive_x1_y1_z0 and ( neighbors_x1_y1_z0 == 5 or neighbors_x1_y1_z0 == 6 or neighbors_x1_y1_z0 == 7 ) ) else False
+# instance (:x=1, :y=1, :z=1)
+let neighbors_x1_y1_z1 = neighbor_count( :cells~1, 1, 1, 1, neighborhood=moore_3d, boundary=dead )
+let was_alive_x1_y1_z1 = :cells[1, 1, 1]~1
+:cells[1, 1, 1] = True if neighbors_x1_y1_z1 == 6 else True if ( was_alive_x1_y1_z1 and ( neighbors_x1_y1_z1 == 5 or neighbors_x1_y1_z1 == 6 or neighbors_x1_y1_z1 == 7 ) ) else False
+# instance (:x=1, :y=1, :z=2)
+let neighbors_x1_y1_z2 = neighbor_count( :cells~1, 1, 1, 2, neighborhood=moore_3d, boundary=dead )
+let was_alive_x1_y1_z2 = :cells[1, 1, 2]~1
+:cells[1, 1, 2] = True if neighbors_x1_y1_z2 == 6 else True if ( was_alive_x1_y1_z2 and ( neighbors_x1_y1_z2 == 5 or neighbors_x1_y1_z2 == 6 or neighbors_x1_y1_z2 == 7 ) ) else False
+# instance (:x=1, :y=2, :z=0)
+let neighbors_x1_y2_z0 = neighbor_count( :cells~1, 1, 2, 0, neighborhood=moore_3d, boundary=dead )
+let was_alive_x1_y2_z0 = :cells[1, 2, 0]~1
+:cells[1, 2, 0] = True if neighbors_x1_y2_z0 == 6 else True if ( was_alive_x1_y2_z0 and ( neighbors_x1_y2_z0 == 5 or neighbors_x1_y2_z0 == 6 or neighbors_x1_y2_z0 == 7 ) ) else False
+# instance (:x=1, :y=2, :z=1)
+let neighbors_x1_y2_z1 = neighbor_count( :cells~1, 1, 2, 1, neighborhood=moore_3d, boundary=dead )
+let was_alive_x1_y2_z1 = :cells[1, 2, 1]~1
+:cells[1, 2, 1] = True if neighbors_x1_y2_z1 == 6 else True if ( was_alive_x1_y2_z1 and ( neighbors_x1_y2_z1 == 5 or neighbors_x1_y2_z1 == 6 or neighbors_x1_y2_z1 == 7 ) ) else False
+# instance (:x=1, :y=2, :z=2)
+let neighbors_x1_y2_z2 = neighbor_count( :cells~1, 1, 2, 2, neighborhood=moore_3d, boundary=dead )
+let was_alive_x1_y2_z2 = :cells[1, 2, 2]~1
+:cells[1, 2, 2] = True if neighbors_x1_y2_z2 == 6 else True if ( was_alive_x1_y2_z2 and ( neighbors_x1_y2_z2 == 5 or neighbors_x1_y2_z2 == 6 or neighbors_x1_y2_z2 == 7 ) ) else False
+# instance (:x=2, :y=0, :z=0)
+let neighbors_x2_y0_z0 = neighbor_count( :cells~1, 2, 0, 0, neighborhood=moore_3d, boundary=dead )
+let was_alive_x2_y0_z0 = :cells[2, 0, 0]~1
+:cells[2, 0, 0] = True if neighbors_x2_y0_z0 == 6 else True if ( was_alive_x2_y0_z0 and ( neighbors_x2_y0_z0 == 5 or neighbors_x2_y0_z0 == 6 or neighbors_x2_y0_z0 == 7 ) ) else False
+# instance (:x=2, :y=0, :z=1)
+let neighbors_x2_y0_z1 = neighbor_count( :cells~1, 2, 0, 1, neighborhood=moore_3d, boundary=dead )
+let was_alive_x2_y0_z1 = :cells[2, 0, 1]~1
+:cells[2, 0, 1] = True if neighbors_x2_y0_z1 == 6 else True if ( was_alive_x2_y0_z1 and ( neighbors_x2_y0_z1 == 5 or neighbors_x2_y0_z1 == 6 or neighbors_x2_y0_z1 == 7 ) ) else False
+# instance (:x=2, :y=0, :z=2)
+let neighbors_x2_y0_z2 = neighbor_count( :cells~1, 2, 0, 2, neighborhood=moore_3d, boundary=dead )
+let was_alive_x2_y0_z2 = :cells[2, 0, 2]~1
+:cells[2, 0, 2] = True if neighbors_x2_y0_z2 == 6 else True if ( was_alive_x2_y0_z2 and ( neighbors_x2_y0_z2 == 5 or neighbors_x2_y0_z2 == 6 or neighbors_x2_y0_z2 == 7 ) ) else False
+# instance (:x=2, :y=1, :z=0)
+let neighbors_x2_y1_z0 = neighbor_count( :cells~1, 2, 1, 0, neighborhood=moore_3d, boundary=dead )
+let was_alive_x2_y1_z0 = :cells[2, 1, 0]~1
+:cells[2, 1, 0] = True if neighbors_x2_y1_z0 == 6 else True if ( was_alive_x2_y1_z0 and ( neighbors_x2_y1_z0 == 5 or neighbors_x2_y1_z0 == 6 or neighbors_x2_y1_z0 == 7 ) ) else False
+# instance (:x=2, :y=1, :z=1)
+let neighbors_x2_y1_z1 = neighbor_count( :cells~1, 2, 1, 1, neighborhood=moore_3d, boundary=dead )
+let was_alive_x2_y1_z1 = :cells[2, 1, 1]~1
+:cells[2, 1, 1] = True if neighbors_x2_y1_z1 == 6 else True if ( was_alive_x2_y1_z1 and ( neighbors_x2_y1_z1 == 5 or neighbors_x2_y1_z1 == 6 or neighbors_x2_y1_z1 == 7 ) ) else False
+# instance (:x=2, :y=1, :z=2)
+let neighbors_x2_y1_z2 = neighbor_count( :cells~1, 2, 1, 2, neighborhood=moore_3d, boundary=dead )
+let was_alive_x2_y1_z2 = :cells[2, 1, 2]~1
+:cells[2, 1, 2] = True if neighbors_x2_y1_z2 == 6 else True if ( was_alive_x2_y1_z2 and ( neighbors_x2_y1_z2 == 5 or neighbors_x2_y1_z2 == 6 or neighbors_x2_y1_z2 == 7 ) ) else False
+# instance (:x=2, :y=2, :z=0)
+let neighbors_x2_y2_z0 = neighbor_count( :cells~1, 2, 2, 0, neighborhood=moore_3d, boundary=dead )
+let was_alive_x2_y2_z0 = :cells[2, 2, 0]~1
+:cells[2, 2, 0] = True if neighbors_x2_y2_z0 == 6 else True if ( was_alive_x2_y2_z0 and ( neighbors_x2_y2_z0 == 5 or neighbors_x2_y2_z0 == 6 or neighbors_x2_y2_z0 == 7 ) ) else False
+# instance (:x=2, :y=2, :z=1)
+let neighbors_x2_y2_z1 = neighbor_count( :cells~1, 2, 2, 1, neighborhood=moore_3d, boundary=dead )
+let was_alive_x2_y2_z1 = :cells[2, 2, 1]~1
+:cells[2, 2, 1] = True if neighbors_x2_y2_z1 == 6 else True if ( was_alive_x2_y2_z1 and ( neighbors_x2_y2_z1 == 5 or neighbors_x2_y2_z1 == 6 or neighbors_x2_y2_z1 == 7 ) ) else False
+# instance (:x=2, :y=2, :z=2)
+let neighbors_x2_y2_z2 = neighbor_count( :cells~1, 2, 2, 2, neighborhood=moore_3d, boundary=dead )
+let was_alive_x2_y2_z2 = :cells[2, 2, 2]~1
+:cells[2, 2, 2] = True if neighbors_x2_y2_z2 == 6 else True if ( was_alive_x2_y2_z2 and ( neighbors_x2_y2_z2 == 5 or neighbors_x2_y2_z2 == 6 or neighbors_x2_y2_z2 == 7 ) ) else False

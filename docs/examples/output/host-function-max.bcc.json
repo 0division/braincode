@@ -1,0 +1,98 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\host-function-max.bc",
+  "statements": [
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 5,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\host-function-max.bc"
+        },
+        "source": "max(:t~1, :t~2)",
+        "tree": {
+          "args": [
+            {
+              "args": [
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": "t"
+                },
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 1
+                },
+                {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [],
+                  "node": "Tuple"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "__bc_history__",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            },
+            {
+              "args": [
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": "t"
+                },
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 2
+                },
+                {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [],
+                  "node": "Tuple"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "__bc_history__",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          ],
+          "func": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "max",
+            "node": "Name"
+          },
+          "keywords": [],
+          "node": "Call"
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 5,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\host-function-max.bc"
+      },
+      "name": "t"
+    }
+  ]
+}

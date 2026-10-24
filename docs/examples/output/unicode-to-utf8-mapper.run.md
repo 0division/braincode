@@ -1,0 +1,139 @@
+# BrainCode run: unicode-to-utf8-mapper.bc
+
+## Input data
+
+```json
+{
+  "initial_history": [],
+  "initial_state": {
+    "unicode_in": 128512
+  },
+  "inputs": [],
+  "parameters": {},
+  "ticks": 1
+}
+```
+
+## BrainCode source
+
+```braincode
+# Encode one Unicode scalar value as UTF-8 bytes.
+#
+# The host supplies :unicode_in as an integer code point. The four output
+# byte signals contain the encoded bytes by position, or None when that byte
+# position is unused. :utf8_out_bytes collects only the bytes for the
+# selected UTF-8 length.
+#
+# UTF-8 encoding ranges:
+#   U+0000..U+007F:       1 byte
+#   U+0080..U+07FF:       2 bytes
+#   U+0800..U+FFFF:       3 bytes, excluding surrogate code points
+#   U+10000..U+10FFFF:    4 bytes
+
+:valid_unicode = (
+    0 <= :unicode_in~1
+    and :unicode_in~1 <= 0x10FFFF
+    and (
+        :unicode_in~1 < 0xD800
+        or :unicode_in~1 > 0xDFFF
+    )
+)
+
+:utf8_out_length = (
+    1 if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F
+    else 2 if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF
+    else 3 if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF
+        and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)
+    else 4 if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF
+    else 0
+)
+
+:utf8_out_char0 = (
+    :unicode_in~1 if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F
+    else 0xC0 + :unicode_in~1 // 64
+        if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF
+    else 0xE0 + :unicode_in~1 // 4096
+        if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF
+            and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)
+    else 0xF0 + :unicode_in~1 // 262144
+        if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF
+    else None
+)
+
+:utf8_out_char1 = (
+    0x80 + :unicode_in~1 % 64
+        if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF
+    else 0x80 + (:unicode_in~1 // 64) % 64
+        if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF
+            and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)
+    else 0x80 + (:unicode_in~1 // 4096) % 64
+        if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF
+    else None
+)
+
+:utf8_out_char2 = (
+    0x80 + :unicode_in~1 % 64
+        if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF
+            and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)
+    else 0x80 + (:unicode_in~1 // 64) % 64
+        if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF
+    else None
+)
+
+:utf8_out_char3 = (
+    0x80 + :unicode_in~1 % 64
+        if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF
+    else None
+)
+
+:utf8_out_bytes = (
+    [:unicode_in~1]
+        if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F
+    else [
+        0xC0 + :unicode_in~1 // 64,
+        0x80 + :unicode_in~1 % 64
+    ] if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF
+    else [
+        0xE0 + :unicode_in~1 // 4096,
+        0x80 + (:unicode_in~1 // 64) % 64,
+        0x80 + :unicode_in~1 % 64
+    ] if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF
+        and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)
+    else [
+        0xF0 + :unicode_in~1 // 262144,
+        0x80 + (:unicode_in~1 // 4096) % 64,
+        0x80 + (:unicode_in~1 // 64) % 64,
+        0x80 + :unicode_in~1 % 64
+    ] if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF
+    else []
+)
+
+# The output is an array of UTF-8 byte values, not a bit vector. For example,
+# U+1F600 produces [240, 159, 152, 128]. Invalid code points produce length
+# 0, None in all four byte slots, and an empty output byte array.
+```
+
+## Output
+
+```json
+[
+  {
+    "unicode_in": 128512
+  },
+  {
+    "unicode_in": 128512,
+    "utf8_out_bytes": [
+      240,
+      159,
+      152,
+      128
+    ],
+    "utf8_out_char0": 240,
+    "utf8_out_char1": 159,
+    "utf8_out_char2": 152,
+    "utf8_out_char3": 128,
+    "utf8_out_length": 4,
+    "valid_unicode": true
+  }
+]
+```

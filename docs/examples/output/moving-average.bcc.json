@@ -1,0 +1,138 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\moving-average.bc",
+  "statements": [
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 6,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\moving-average.bc"
+        },
+        "source": "(:temperature~1 + :temperature~2 + :temperature~3) / 3",
+        "tree": {
+          "left": {
+            "left": {
+              "left": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "temperature"
+                  },
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 1
+                  },
+                  {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "elts": [],
+                    "node": "Tuple"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_history__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              },
+              "node": "BinOp",
+              "op": {
+                "node": "Add"
+              },
+              "right": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "temperature"
+                  },
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 2
+                  },
+                  {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "elts": [],
+                    "node": "Tuple"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_history__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            },
+            "node": "BinOp",
+            "op": {
+              "node": "Add"
+            },
+            "right": {
+              "args": [
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": "temperature"
+                },
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 3
+                },
+                {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [],
+                  "node": "Tuple"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "__bc_history__",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "node": "BinOp",
+          "op": {
+            "node": "Div"
+          },
+          "right": {
+            "kind": null,
+            "node": "Constant",
+            "value": 3
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 6,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\moving-average.bc"
+      },
+      "name": "average"
+    }
+  ]
+}

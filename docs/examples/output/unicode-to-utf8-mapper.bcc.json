@@ -1,0 +1,3777 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc",
+  "statements": [
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 14,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+        },
+        "source": "( 0 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF and ( :unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF ) )",
+        "tree": {
+          "node": "BoolOp",
+          "op": {
+            "node": "And"
+          },
+          "values": [
+            {
+              "comparators": [
+                {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "unicode_in"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                }
+              ],
+              "left": {
+                "kind": null,
+                "node": "Constant",
+                "value": 0
+              },
+              "node": "Compare",
+              "ops": [
+                {
+                  "node": "LtE"
+                }
+              ]
+            },
+            {
+              "comparators": [
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 1114111
+                }
+              ],
+              "left": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "unicode_in"
+                  },
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 1
+                  },
+                  {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "elts": [],
+                    "node": "Tuple"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_history__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              },
+              "node": "Compare",
+              "ops": [
+                {
+                  "node": "LtE"
+                }
+              ]
+            },
+            {
+              "node": "BoolOp",
+              "op": {
+                "node": "Or"
+              },
+              "values": [
+                {
+                  "comparators": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 55296
+                    }
+                  ],
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "Lt"
+                    }
+                  ]
+                },
+                {
+                  "comparators": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 57343
+                    }
+                  ],
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "Gt"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 14,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+      },
+      "name": "valid_unicode"
+    },
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 23,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+        },
+        "source": "( 1 if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F else 2 if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF else 3 if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF) else 4 if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF else 0 )",
+        "tree": {
+          "body": {
+            "kind": null,
+            "node": "Constant",
+            "value": 1
+          },
+          "node": "IfExp",
+          "orelse": {
+            "body": {
+              "kind": null,
+              "node": "Constant",
+              "value": 2
+            },
+            "node": "IfExp",
+            "orelse": {
+              "body": {
+                "kind": null,
+                "node": "Constant",
+                "value": 3
+              },
+              "node": "IfExp",
+              "orelse": {
+                "body": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 4
+                },
+                "node": "IfExp",
+                "orelse": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 0
+                },
+                "test": {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "comparators": [
+                        {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        }
+                      ],
+                      "left": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 65536
+                      },
+                      "node": "Compare",
+                      "ops": [
+                        {
+                          "node": "LtE"
+                        }
+                      ]
+                    },
+                    {
+                      "comparators": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1114111
+                        }
+                      ],
+                      "left": {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "Compare",
+                      "ops": [
+                        {
+                          "node": "LtE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "test": {
+                "node": "BoolOp",
+                "op": {
+                  "node": "And"
+                },
+                "values": [
+                  {
+                    "comparators": [
+                      {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      }
+                    ],
+                    "left": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 2048
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "LtE"
+                      }
+                    ]
+                  },
+                  {
+                    "comparators": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 65535
+                      }
+                    ],
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "LtE"
+                      }
+                    ]
+                  },
+                  {
+                    "node": "BoolOp",
+                    "op": {
+                      "node": "Or"
+                    },
+                    "values": [
+                      {
+                        "comparators": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 55296
+                          }
+                        ],
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "Compare",
+                        "ops": [
+                          {
+                            "node": "Lt"
+                          }
+                        ]
+                      },
+                      {
+                        "comparators": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 57343
+                          }
+                        ],
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "Compare",
+                        "ops": [
+                          {
+                            "node": "Gt"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "test": {
+              "node": "BoolOp",
+              "op": {
+                "node": "And"
+              },
+              "values": [
+                {
+                  "comparators": [
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  ],
+                  "left": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 128
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                },
+                {
+                  "comparators": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 2047
+                    }
+                  ],
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "test": {
+            "node": "BoolOp",
+            "op": {
+              "node": "And"
+            },
+            "values": [
+              {
+                "comparators": [
+                  {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  }
+                ],
+                "left": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 0
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              },
+              {
+                "comparators": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 127
+                  }
+                ],
+                "left": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "unicode_in"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 23,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+      },
+      "name": "utf8_out_length"
+    },
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 32,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+        },
+        "source": "( :unicode_in~1 if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F else 0xC0 + :unicode_in~1 // 64 if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF else 0xE0 + :unicode_in~1 // 4096 if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF) else 0xF0 + :unicode_in~1 // 262144 if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF else None )",
+        "tree": {
+          "body": {
+            "args": [
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": "unicode_in"
+              },
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": 1
+              },
+              {
+                "ctx": {
+                  "node": "Load"
+                },
+                "elts": [],
+                "node": "Tuple"
+              }
+            ],
+            "func": {
+              "ctx": {
+                "node": "Load"
+              },
+              "id": "__bc_history__",
+              "node": "Name"
+            },
+            "keywords": [],
+            "node": "Call"
+          },
+          "node": "IfExp",
+          "orelse": {
+            "body": {
+              "left": {
+                "kind": null,
+                "node": "Constant",
+                "value": 192
+              },
+              "node": "BinOp",
+              "op": {
+                "node": "Add"
+              },
+              "right": {
+                "left": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "unicode_in"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                "node": "BinOp",
+                "op": {
+                  "node": "FloorDiv"
+                },
+                "right": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 64
+                }
+              }
+            },
+            "node": "IfExp",
+            "orelse": {
+              "body": {
+                "left": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 224
+                },
+                "node": "BinOp",
+                "op": {
+                  "node": "Add"
+                },
+                "right": {
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "BinOp",
+                  "op": {
+                    "node": "FloorDiv"
+                  },
+                  "right": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 4096
+                  }
+                }
+              },
+              "node": "IfExp",
+              "orelse": {
+                "body": {
+                  "left": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 240
+                  },
+                  "node": "BinOp",
+                  "op": {
+                    "node": "Add"
+                  },
+                  "right": {
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "FloorDiv"
+                    },
+                    "right": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 262144
+                    }
+                  }
+                },
+                "node": "IfExp",
+                "orelse": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": null
+                },
+                "test": {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "comparators": [
+                        {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        }
+                      ],
+                      "left": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 65536
+                      },
+                      "node": "Compare",
+                      "ops": [
+                        {
+                          "node": "LtE"
+                        }
+                      ]
+                    },
+                    {
+                      "comparators": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1114111
+                        }
+                      ],
+                      "left": {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "Compare",
+                      "ops": [
+                        {
+                          "node": "LtE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "test": {
+                "node": "BoolOp",
+                "op": {
+                  "node": "And"
+                },
+                "values": [
+                  {
+                    "comparators": [
+                      {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      }
+                    ],
+                    "left": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 2048
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "LtE"
+                      }
+                    ]
+                  },
+                  {
+                    "comparators": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 65535
+                      }
+                    ],
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "LtE"
+                      }
+                    ]
+                  },
+                  {
+                    "node": "BoolOp",
+                    "op": {
+                      "node": "Or"
+                    },
+                    "values": [
+                      {
+                        "comparators": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 55296
+                          }
+                        ],
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "Compare",
+                        "ops": [
+                          {
+                            "node": "Lt"
+                          }
+                        ]
+                      },
+                      {
+                        "comparators": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 57343
+                          }
+                        ],
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "Compare",
+                        "ops": [
+                          {
+                            "node": "Gt"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "test": {
+              "node": "BoolOp",
+              "op": {
+                "node": "And"
+              },
+              "values": [
+                {
+                  "comparators": [
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  ],
+                  "left": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 128
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                },
+                {
+                  "comparators": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 2047
+                    }
+                  ],
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "test": {
+            "node": "BoolOp",
+            "op": {
+              "node": "And"
+            },
+            "values": [
+              {
+                "comparators": [
+                  {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  }
+                ],
+                "left": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 0
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              },
+              {
+                "comparators": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 127
+                  }
+                ],
+                "left": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "unicode_in"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 32,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+      },
+      "name": "utf8_out_char0"
+    },
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 44,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+        },
+        "source": "( 0x80 + :unicode_in~1 % 64 if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF else 0x80 + (:unicode_in~1 // 64) % 64 if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF) else 0x80 + (:unicode_in~1 // 4096) % 64 if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF else None )",
+        "tree": {
+          "body": {
+            "left": {
+              "kind": null,
+              "node": "Constant",
+              "value": 128
+            },
+            "node": "BinOp",
+            "op": {
+              "node": "Add"
+            },
+            "right": {
+              "left": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "unicode_in"
+                  },
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 1
+                  },
+                  {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "elts": [],
+                    "node": "Tuple"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_history__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              },
+              "node": "BinOp",
+              "op": {
+                "node": "Mod"
+              },
+              "right": {
+                "kind": null,
+                "node": "Constant",
+                "value": 64
+              }
+            }
+          },
+          "node": "IfExp",
+          "orelse": {
+            "body": {
+              "left": {
+                "kind": null,
+                "node": "Constant",
+                "value": 128
+              },
+              "node": "BinOp",
+              "op": {
+                "node": "Add"
+              },
+              "right": {
+                "left": {
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "BinOp",
+                  "op": {
+                    "node": "FloorDiv"
+                  },
+                  "right": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 64
+                  }
+                },
+                "node": "BinOp",
+                "op": {
+                  "node": "Mod"
+                },
+                "right": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 64
+                }
+              }
+            },
+            "node": "IfExp",
+            "orelse": {
+              "body": {
+                "left": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 128
+                },
+                "node": "BinOp",
+                "op": {
+                  "node": "Add"
+                },
+                "right": {
+                  "left": {
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "FloorDiv"
+                    },
+                    "right": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 4096
+                    }
+                  },
+                  "node": "BinOp",
+                  "op": {
+                    "node": "Mod"
+                  },
+                  "right": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 64
+                  }
+                }
+              },
+              "node": "IfExp",
+              "orelse": {
+                "kind": null,
+                "node": "Constant",
+                "value": null
+              },
+              "test": {
+                "node": "BoolOp",
+                "op": {
+                  "node": "And"
+                },
+                "values": [
+                  {
+                    "comparators": [
+                      {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      }
+                    ],
+                    "left": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 65536
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "LtE"
+                      }
+                    ]
+                  },
+                  {
+                    "comparators": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1114111
+                      }
+                    ],
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "LtE"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "test": {
+              "node": "BoolOp",
+              "op": {
+                "node": "And"
+              },
+              "values": [
+                {
+                  "comparators": [
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  ],
+                  "left": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 2048
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                },
+                {
+                  "comparators": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 65535
+                    }
+                  ],
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                },
+                {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "Or"
+                  },
+                  "values": [
+                    {
+                      "comparators": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 55296
+                        }
+                      ],
+                      "left": {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "Compare",
+                      "ops": [
+                        {
+                          "node": "Lt"
+                        }
+                      ]
+                    },
+                    {
+                      "comparators": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 57343
+                        }
+                      ],
+                      "left": {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "Compare",
+                      "ops": [
+                        {
+                          "node": "Gt"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "test": {
+            "node": "BoolOp",
+            "op": {
+              "node": "And"
+            },
+            "values": [
+              {
+                "comparators": [
+                  {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  }
+                ],
+                "left": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 128
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              },
+              {
+                "comparators": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 2047
+                  }
+                ],
+                "left": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "unicode_in"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 44,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+      },
+      "name": "utf8_out_char1"
+    },
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 55,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+        },
+        "source": "( 0x80 + :unicode_in~1 % 64 if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF) else 0x80 + (:unicode_in~1 // 64) % 64 if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF else None )",
+        "tree": {
+          "body": {
+            "left": {
+              "kind": null,
+              "node": "Constant",
+              "value": 128
+            },
+            "node": "BinOp",
+            "op": {
+              "node": "Add"
+            },
+            "right": {
+              "left": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "unicode_in"
+                  },
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 1
+                  },
+                  {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "elts": [],
+                    "node": "Tuple"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_history__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              },
+              "node": "BinOp",
+              "op": {
+                "node": "Mod"
+              },
+              "right": {
+                "kind": null,
+                "node": "Constant",
+                "value": 64
+              }
+            }
+          },
+          "node": "IfExp",
+          "orelse": {
+            "body": {
+              "left": {
+                "kind": null,
+                "node": "Constant",
+                "value": 128
+              },
+              "node": "BinOp",
+              "op": {
+                "node": "Add"
+              },
+              "right": {
+                "left": {
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "BinOp",
+                  "op": {
+                    "node": "FloorDiv"
+                  },
+                  "right": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 64
+                  }
+                },
+                "node": "BinOp",
+                "op": {
+                  "node": "Mod"
+                },
+                "right": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 64
+                }
+              }
+            },
+            "node": "IfExp",
+            "orelse": {
+              "kind": null,
+              "node": "Constant",
+              "value": null
+            },
+            "test": {
+              "node": "BoolOp",
+              "op": {
+                "node": "And"
+              },
+              "values": [
+                {
+                  "comparators": [
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  ],
+                  "left": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 65536
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                },
+                {
+                  "comparators": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1114111
+                    }
+                  ],
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "test": {
+            "node": "BoolOp",
+            "op": {
+              "node": "And"
+            },
+            "values": [
+              {
+                "comparators": [
+                  {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  }
+                ],
+                "left": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 2048
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              },
+              {
+                "comparators": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 65535
+                  }
+                ],
+                "left": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "unicode_in"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              },
+              {
+                "node": "BoolOp",
+                "op": {
+                  "node": "Or"
+                },
+                "values": [
+                  {
+                    "comparators": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 55296
+                      }
+                    ],
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "Lt"
+                      }
+                    ]
+                  },
+                  {
+                    "comparators": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 57343
+                      }
+                    ],
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "Gt"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 55,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+      },
+      "name": "utf8_out_char2"
+    },
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 64,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+        },
+        "source": "( 0x80 + :unicode_in~1 % 64 if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF else None )",
+        "tree": {
+          "body": {
+            "left": {
+              "kind": null,
+              "node": "Constant",
+              "value": 128
+            },
+            "node": "BinOp",
+            "op": {
+              "node": "Add"
+            },
+            "right": {
+              "left": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "unicode_in"
+                  },
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 1
+                  },
+                  {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "elts": [],
+                    "node": "Tuple"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_history__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              },
+              "node": "BinOp",
+              "op": {
+                "node": "Mod"
+              },
+              "right": {
+                "kind": null,
+                "node": "Constant",
+                "value": 64
+              }
+            }
+          },
+          "node": "IfExp",
+          "orelse": {
+            "kind": null,
+            "node": "Constant",
+            "value": null
+          },
+          "test": {
+            "node": "BoolOp",
+            "op": {
+              "node": "And"
+            },
+            "values": [
+              {
+                "comparators": [
+                  {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  }
+                ],
+                "left": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 65536
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              },
+              {
+                "comparators": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 1114111
+                  }
+                ],
+                "left": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "unicode_in"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 64,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+      },
+      "name": "utf8_out_char3"
+    },
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 70,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+        },
+        "source": "( [:unicode_in~1] if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F else [ 0xC0 + :unicode_in~1 // 64, 0x80 + :unicode_in~1 % 64 ] if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF else [ 0xE0 + :unicode_in~1 // 4096, 0x80 + (:unicode_in~1 // 64) % 64, 0x80 + :unicode_in~1 % 64 ] if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF) else [ 0xF0 + :unicode_in~1 // 262144, 0x80 + (:unicode_in~1 // 4096) % 64, 0x80 + (:unicode_in~1 // 64) % 64, 0x80 + :unicode_in~1 % 64 ] if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF else [] )",
+        "tree": {
+          "body": {
+            "ctx": {
+              "node": "Load"
+            },
+            "elts": [
+              {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "unicode_in"
+                  },
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 1
+                  },
+                  {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "elts": [],
+                    "node": "Tuple"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_history__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            ],
+            "node": "List"
+          },
+          "node": "IfExp",
+          "orelse": {
+            "body": {
+              "ctx": {
+                "node": "Load"
+              },
+              "elts": [
+                {
+                  "left": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 192
+                  },
+                  "node": "BinOp",
+                  "op": {
+                    "node": "Add"
+                  },
+                  "right": {
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "FloorDiv"
+                    },
+                    "right": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 64
+                    }
+                  }
+                },
+                {
+                  "left": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 128
+                  },
+                  "node": "BinOp",
+                  "op": {
+                    "node": "Add"
+                  },
+                  "right": {
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "Mod"
+                    },
+                    "right": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 64
+                    }
+                  }
+                }
+              ],
+              "node": "List"
+            },
+            "node": "IfExp",
+            "orelse": {
+              "body": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "elts": [
+                  {
+                    "left": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 224
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "Add"
+                    },
+                    "right": {
+                      "left": {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "FloorDiv"
+                      },
+                      "right": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 4096
+                      }
+                    }
+                  },
+                  {
+                    "left": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 128
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "Add"
+                    },
+                    "right": {
+                      "left": {
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "BinOp",
+                        "op": {
+                          "node": "FloorDiv"
+                        },
+                        "right": {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 64
+                        }
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Mod"
+                      },
+                      "right": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 64
+                      }
+                    }
+                  },
+                  {
+                    "left": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 128
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "Add"
+                    },
+                    "right": {
+                      "left": {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Mod"
+                      },
+                      "right": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 64
+                      }
+                    }
+                  }
+                ],
+                "node": "List"
+              },
+              "node": "IfExp",
+              "orelse": {
+                "body": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [
+                    {
+                      "left": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 240
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Add"
+                      },
+                      "right": {
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "BinOp",
+                        "op": {
+                          "node": "FloorDiv"
+                        },
+                        "right": {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 262144
+                        }
+                      }
+                    },
+                    {
+                      "left": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 128
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Add"
+                      },
+                      "right": {
+                        "left": {
+                          "left": {
+                            "args": [
+                              {
+                                "kind": null,
+                                "node": "Constant",
+                                "value": "unicode_in"
+                              },
+                              {
+                                "kind": null,
+                                "node": "Constant",
+                                "value": 1
+                              },
+                              {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "elts": [],
+                                "node": "Tuple"
+                              }
+                            ],
+                            "func": {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "id": "__bc_history__",
+                              "node": "Name"
+                            },
+                            "keywords": [],
+                            "node": "Call"
+                          },
+                          "node": "BinOp",
+                          "op": {
+                            "node": "FloorDiv"
+                          },
+                          "right": {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 4096
+                          }
+                        },
+                        "node": "BinOp",
+                        "op": {
+                          "node": "Mod"
+                        },
+                        "right": {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 64
+                        }
+                      }
+                    },
+                    {
+                      "left": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 128
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Add"
+                      },
+                      "right": {
+                        "left": {
+                          "left": {
+                            "args": [
+                              {
+                                "kind": null,
+                                "node": "Constant",
+                                "value": "unicode_in"
+                              },
+                              {
+                                "kind": null,
+                                "node": "Constant",
+                                "value": 1
+                              },
+                              {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "elts": [],
+                                "node": "Tuple"
+                              }
+                            ],
+                            "func": {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "id": "__bc_history__",
+                              "node": "Name"
+                            },
+                            "keywords": [],
+                            "node": "Call"
+                          },
+                          "node": "BinOp",
+                          "op": {
+                            "node": "FloorDiv"
+                          },
+                          "right": {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 64
+                          }
+                        },
+                        "node": "BinOp",
+                        "op": {
+                          "node": "Mod"
+                        },
+                        "right": {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 64
+                        }
+                      }
+                    },
+                    {
+                      "left": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 128
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Add"
+                      },
+                      "right": {
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "BinOp",
+                        "op": {
+                          "node": "Mod"
+                        },
+                        "right": {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 64
+                        }
+                      }
+                    }
+                  ],
+                  "node": "List"
+                },
+                "node": "IfExp",
+                "orelse": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [],
+                  "node": "List"
+                },
+                "test": {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "comparators": [
+                        {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        }
+                      ],
+                      "left": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 65536
+                      },
+                      "node": "Compare",
+                      "ops": [
+                        {
+                          "node": "LtE"
+                        }
+                      ]
+                    },
+                    {
+                      "comparators": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1114111
+                        }
+                      ],
+                      "left": {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "Compare",
+                      "ops": [
+                        {
+                          "node": "LtE"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "test": {
+                "node": "BoolOp",
+                "op": {
+                  "node": "And"
+                },
+                "values": [
+                  {
+                    "comparators": [
+                      {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "unicode_in"
+                          },
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 1
+                          },
+                          {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "elts": [],
+                            "node": "Tuple"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_history__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      }
+                    ],
+                    "left": {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 2048
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "LtE"
+                      }
+                    ]
+                  },
+                  {
+                    "comparators": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 65535
+                      }
+                    ],
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "Compare",
+                    "ops": [
+                      {
+                        "node": "LtE"
+                      }
+                    ]
+                  },
+                  {
+                    "node": "BoolOp",
+                    "op": {
+                      "node": "Or"
+                    },
+                    "values": [
+                      {
+                        "comparators": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 55296
+                          }
+                        ],
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "Compare",
+                        "ops": [
+                          {
+                            "node": "Lt"
+                          }
+                        ]
+                      },
+                      {
+                        "comparators": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": 57343
+                          }
+                        ],
+                        "left": {
+                          "args": [
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": "unicode_in"
+                            },
+                            {
+                              "kind": null,
+                              "node": "Constant",
+                              "value": 1
+                            },
+                            {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "elts": [],
+                              "node": "Tuple"
+                            }
+                          ],
+                          "func": {
+                            "ctx": {
+                              "node": "Load"
+                            },
+                            "id": "__bc_history__",
+                            "node": "Name"
+                          },
+                          "keywords": [],
+                          "node": "Call"
+                        },
+                        "node": "Compare",
+                        "ops": [
+                          {
+                            "node": "Gt"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "test": {
+              "node": "BoolOp",
+              "op": {
+                "node": "And"
+              },
+              "values": [
+                {
+                  "comparators": [
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "unicode_in"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  ],
+                  "left": {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 128
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                },
+                {
+                  "comparators": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 2047
+                    }
+                  ],
+                  "left": {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  },
+                  "node": "Compare",
+                  "ops": [
+                    {
+                      "node": "LtE"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "test": {
+            "node": "BoolOp",
+            "op": {
+              "node": "And"
+            },
+            "values": [
+              {
+                "comparators": [
+                  {
+                    "args": [
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": "unicode_in"
+                      },
+                      {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      },
+                      {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "elts": [],
+                        "node": "Tuple"
+                      }
+                    ],
+                    "func": {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "__bc_history__",
+                      "node": "Name"
+                    },
+                    "keywords": [],
+                    "node": "Call"
+                  }
+                ],
+                "left": {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 0
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              },
+              {
+                "comparators": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": 127
+                  }
+                ],
+                "left": {
+                  "args": [
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": "unicode_in"
+                    },
+                    {
+                      "kind": null,
+                      "node": "Constant",
+                      "value": 1
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "elts": [],
+                      "node": "Tuple"
+                    }
+                  ],
+                  "func": {
+                    "ctx": {
+                      "node": "Load"
+                    },
+                    "id": "__bc_history__",
+                    "node": "Name"
+                  },
+                  "keywords": [],
+                  "node": "Call"
+                },
+                "node": "Compare",
+                "ops": [
+                  {
+                    "node": "LtE"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 70,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\unicode-to-utf8-mapper.bc"
+      },
+      "name": "utf8_out_bytes"
+    }
+  ]
+}

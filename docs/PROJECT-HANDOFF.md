@@ -42,10 +42,11 @@ Latest uncommitted changes cover:
 ## Verified current behavior
 
 - All 15 checked-in examples run with small inputs. Their traces, expanded
-  `.bcc`, `.bcc.json` IR, `summary.json`, `run.log`, and `run-summary.md` are
-  generated under the ignored `output/` directory.
-- `python -m pytest -q` passed: **37 tests, 75 subtests**.
-- `python -m unittest discover -s tests -v` passed: **14 tests**.
+  `.bcc`, `.bcc.json` IR, per-example `.run.md` reports, `summary.json`,
+  `run.log`, and `run-summary.md` are generated and kept under the
+  `docs/examples/output/` directory.
+- `python -m pytest -q` passed: **40 tests, 75 subtests**.
+- `python -m unittest discover -s tests -v` passed: **17 tests**.
 - Pylance workspace diagnostics were empty.
 - All example input files are kept beside their model sources as
   `*.bc.in.json`; the CLI accepts them with `--input-file`.
@@ -58,12 +59,12 @@ Latest uncommitted changes cover:
 python -m pip install -e ".[test]"
 python -m pytest -q
 python -m unittest discover -s tests -v
-python -m braincode.example_runner --output output
+python -m braincode.example_runner --output docs/examples/output
 ```
 
 Run every example before making wider changes and regenerate outputs again
-after behavior changes. Confirm the final `output/summary.json` lists 15
-examples and check the generated log and Markdown report.
+after behavior changes. Confirm the final `docs/examples/output/summary.json`
+lists 15 examples and check the generated log and Markdown reports.
 
 ## Suggested next engineering steps
 

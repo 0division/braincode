@@ -241,6 +241,12 @@ class CompilerTests(unittest.TestCase):
                     self.assertTrue((output / entry["expanded_source"]).is_file())
                     self.assertTrue((output / entry["json_ir"]).is_file())
                     self.assertTrue((output / entry["trace"]).is_file())
+                    report = output / entry["markdown"]
+                    self.assertTrue(report.is_file())
+                    report_text = report.read_text(encoding="utf-8")
+                    self.assertIn("## Input data", report_text)
+                    self.assertIn("## BrainCode source", report_text)
+                    self.assertIn("## Output", report_text)
                     self.assertTrue((EXAMPLES / entry["input"]).is_file())
 
     def test_example_runner_runs_without_writing_files_when_output_is_omitted(self) -> None:
@@ -249,6 +255,7 @@ class CompilerTests(unittest.TestCase):
         self.assertTrue(all(entry["expanded_source"] is None for entry in summary))
         self.assertTrue(all(entry["json_ir"] is None for entry in summary))
         self.assertTrue(all(entry["trace"] is None for entry in summary))
+        self.assertTrue(all(entry["markdown"] is None for entry in summary))
 
     def test_expanded_view_shows_scalar_utf8_mapping(self) -> None:
         listing = render_expanded(
@@ -277,7 +284,38 @@ class CompilerTests(unittest.TestCase):
             frames = json.loads(output_path.read_text(encoding="utf-8"))
             self.assertEqual(len(frames), 6)
             self.assertEqual(frames[-1]["counter"], 5)
-            self.assertIn("# BrainCode run summary", summary_path.read_text(encoding="utf-8"))
+            report = summary_path.read_text(encoding="utf-8")
+            self.assertIn("# BrainCode run: ", report)
+            self.assertIn(":counter = :counter~1 + 1", report)
+            self.assertIn('"counter": 5', report)
+
+    def test_cli_writes_detailed_markdown_when_md_output_is_set(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            source_path = Path(directory) / "counter.bc"
+            source_path.write_text(":counter = :counter~1 + 1\n", encoding="utf-8")
+            config_path = Path(directory) / "counter.in.json"
+            config_path.write_text(
+                json.dumps({
+                    "initial_state": {"counter": 2},
+                    "parameters": {},
+                    "ticks": 2,
+                    "md_output": True,
+                }),
+                encoding="utf-8",
+            )
+            result = cli_main([
+                "run",
+                str(source_path),
+                "--input-file",
+                str(config_path),
+            ])
+            self.assertEqual(result, 0)
+            report_path = Path(directory) / "output" / "counter.run.md"
+            self.assertTrue(report_path.is_file())
+            report = report_path.read_text(encoding="utf-8")
+            self.assertIn('"counter": 2', report)
+            self.assertIn(":counter = :counter~1 + 1", report)
+            self.assertIn('"counter": 4', report)
 
     def test_failed_tick_does_not_commit_partial_frame(self) -> None:
         program = compile_source(":a = 10\n:b = :missing~1\n")

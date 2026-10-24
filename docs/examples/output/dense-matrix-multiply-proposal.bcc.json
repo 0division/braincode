@@ -1,0 +1,421 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc",
+  "statements": [
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 14,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+          },
+          "source": "N",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "N",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 14,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+          },
+          "source": "N",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "N",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "tensor",
+      "location": {
+        "column": 1,
+        "line": 14,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+      },
+      "name": "A",
+      "value_type": "Float32"
+    },
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 15,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+          },
+          "source": "N",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "N",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 15,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+          },
+          "source": "N",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "N",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "tensor",
+      "location": {
+        "column": 1,
+        "line": 15,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+      },
+      "name": "B",
+      "value_type": "Float32"
+    },
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 16,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+          },
+          "source": "N",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "N",
+            "node": "Name"
+          }
+        },
+        {
+          "location": {
+            "column": 1,
+            "line": 16,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+          },
+          "source": "N",
+          "tree": {
+            "ctx": {
+              "node": "Load"
+            },
+            "id": "N",
+            "node": "Name"
+          }
+        }
+      ],
+      "kind": "tensor",
+      "location": {
+        "column": 1,
+        "line": 16,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+      },
+      "name": "C",
+      "value_type": "Float32"
+    },
+    {
+      "bindings": [
+        "i",
+        "j"
+      ],
+      "body": [
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 19,
+              "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+            },
+            "source": "sum( :A[:i, :k]~1 * :B[:k, :j]~1 for :k in range(:N) )",
+            "tree": {
+              "args": [
+                {
+                  "elt": {
+                    "left": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "A"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [
+                            {
+                              "args": [
+                                {
+                                  "kind": null,
+                                  "node": "Constant",
+                                  "value": "i"
+                                }
+                              ],
+                              "func": {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "id": "__bc_symbol__",
+                                "node": "Name"
+                              },
+                              "keywords": [],
+                              "node": "Call"
+                            },
+                            {
+                              "args": [
+                                {
+                                  "kind": null,
+                                  "node": "Constant",
+                                  "value": "k"
+                                }
+                              ],
+                              "func": {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "id": "__bc_symbol__",
+                                "node": "Name"
+                              },
+                              "keywords": [],
+                              "node": "Call"
+                            }
+                          ],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    },
+                    "node": "BinOp",
+                    "op": {
+                      "node": "Mult"
+                    },
+                    "right": {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "B"
+                        },
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": 1
+                        },
+                        {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "elts": [
+                            {
+                              "args": [
+                                {
+                                  "kind": null,
+                                  "node": "Constant",
+                                  "value": "k"
+                                }
+                              ],
+                              "func": {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "id": "__bc_symbol__",
+                                "node": "Name"
+                              },
+                              "keywords": [],
+                              "node": "Call"
+                            },
+                            {
+                              "args": [
+                                {
+                                  "kind": null,
+                                  "node": "Constant",
+                                  "value": "j"
+                                }
+                              ],
+                              "func": {
+                                "ctx": {
+                                  "node": "Load"
+                                },
+                                "id": "__bc_symbol__",
+                                "node": "Name"
+                              },
+                              "keywords": [],
+                              "node": "Call"
+                            }
+                          ],
+                          "node": "Tuple"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_history__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  },
+                  "generators": [
+                    {
+                      "ifs": [],
+                      "is_async": 0,
+                      "iter": {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "kind": null,
+                                "node": "Constant",
+                                "value": "N"
+                              }
+                            ],
+                            "func": {
+                              "ctx": {
+                                "node": "Load"
+                              },
+                              "id": "__bc_symbol__",
+                              "node": "Name"
+                            },
+                            "keywords": [],
+                            "node": "Call"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "range",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "comprehension",
+                      "target": {
+                        "ctx": {
+                          "node": "Store"
+                        },
+                        "id": "__bc_k",
+                        "node": "Name"
+                      }
+                    }
+                  ],
+                  "node": "GeneratorExp"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "sum",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "assignment",
+          "location": {
+            "column": 1,
+            "line": 19,
+            "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+          },
+          "name": "C",
+          "target_indices": [
+            {
+              "location": {
+                "column": 1,
+                "line": 19,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+              },
+              "source": ":i",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "i"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            },
+            {
+              "location": {
+                "column": 1,
+                "line": 19,
+                "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+              },
+              "source": ":j",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "j"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            }
+          ]
+        }
+      ],
+      "collection": "C",
+      "kind": "each",
+      "location": {
+        "column": 1,
+        "line": 18,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
+      }
+    }
+  ]
+}

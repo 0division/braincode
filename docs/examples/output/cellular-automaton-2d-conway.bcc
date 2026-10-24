@@ -1,0 +1,40 @@
+# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\cellular-automaton-2d-conway.bc
+# Data-parallel loops are unfolded into indexed assignments.
+population :cells[WIDTH, HEIGHT] of Bool
+boundary :cells = dead
+# instance (:x=0, :y=0)
+let neighbors_x0_y0 = neighbor_count( :cells~1, 0, 0, neighborhood=moore_2d, boundary=dead )
+let was_alive_x0_y0 = :cells[0, 0]~1
+:cells[0, 0] = True if neighbors_x0_y0 == 3 else True if (was_alive_x0_y0 and neighbors_x0_y0 == 2) else False
+# instance (:x=0, :y=1)
+let neighbors_x0_y1 = neighbor_count( :cells~1, 0, 1, neighborhood=moore_2d, boundary=dead )
+let was_alive_x0_y1 = :cells[0, 1]~1
+:cells[0, 1] = True if neighbors_x0_y1 == 3 else True if (was_alive_x0_y1 and neighbors_x0_y1 == 2) else False
+# instance (:x=0, :y=2)
+let neighbors_x0_y2 = neighbor_count( :cells~1, 0, 2, neighborhood=moore_2d, boundary=dead )
+let was_alive_x0_y2 = :cells[0, 2]~1
+:cells[0, 2] = True if neighbors_x0_y2 == 3 else True if (was_alive_x0_y2 and neighbors_x0_y2 == 2) else False
+# instance (:x=1, :y=0)
+let neighbors_x1_y0 = neighbor_count( :cells~1, 1, 0, neighborhood=moore_2d, boundary=dead )
+let was_alive_x1_y0 = :cells[1, 0]~1
+:cells[1, 0] = True if neighbors_x1_y0 == 3 else True if (was_alive_x1_y0 and neighbors_x1_y0 == 2) else False
+# instance (:x=1, :y=1)
+let neighbors_x1_y1 = neighbor_count( :cells~1, 1, 1, neighborhood=moore_2d, boundary=dead )
+let was_alive_x1_y1 = :cells[1, 1]~1
+:cells[1, 1] = True if neighbors_x1_y1 == 3 else True if (was_alive_x1_y1 and neighbors_x1_y1 == 2) else False
+# instance (:x=1, :y=2)
+let neighbors_x1_y2 = neighbor_count( :cells~1, 1, 2, neighborhood=moore_2d, boundary=dead )
+let was_alive_x1_y2 = :cells[1, 2]~1
+:cells[1, 2] = True if neighbors_x1_y2 == 3 else True if (was_alive_x1_y2 and neighbors_x1_y2 == 2) else False
+# instance (:x=2, :y=0)
+let neighbors_x2_y0 = neighbor_count( :cells~1, 2, 0, neighborhood=moore_2d, boundary=dead )
+let was_alive_x2_y0 = :cells[2, 0]~1
+:cells[2, 0] = True if neighbors_x2_y0 == 3 else True if (was_alive_x2_y0 and neighbors_x2_y0 == 2) else False
+# instance (:x=2, :y=1)
+let neighbors_x2_y1 = neighbor_count( :cells~1, 2, 1, neighborhood=moore_2d, boundary=dead )
+let was_alive_x2_y1 = :cells[2, 1]~1
+:cells[2, 1] = True if neighbors_x2_y1 == 3 else True if (was_alive_x2_y1 and neighbors_x2_y1 == 2) else False
+# instance (:x=2, :y=2)
+let neighbors_x2_y2 = neighbor_count( :cells~1, 2, 2, neighborhood=moore_2d, boundary=dead )
+let was_alive_x2_y2 = :cells[2, 2]~1
+:cells[2, 2] = True if neighbors_x2_y2 == 3 else True if (was_alive_x2_y2 and neighbors_x2_y2 == 2) else False

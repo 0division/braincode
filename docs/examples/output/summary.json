@@ -1,0 +1,155 @@
+{
+  "example_count": 15,
+  "examples": [
+    {
+      "expanded_source": "cellular-automaton-1d-rule110.bcc",
+      "frames": 2,
+      "input": "cellular-automaton-1d-rule110.bc.in.json",
+      "json_ir": "cellular-automaton-1d-rule110.bcc.json",
+      "markdown": "cellular-automaton-1d-rule110.run.md",
+      "source": "cellular-automaton-1d-rule110.bc",
+      "ticks": 1,
+      "trace": "cellular-automaton-1d-rule110.output.json"
+    },
+    {
+      "expanded_source": "cellular-automaton-2d-conway.bcc",
+      "frames": 2,
+      "input": "cellular-automaton-2d-conway.bc.in.json",
+      "json_ir": "cellular-automaton-2d-conway.bcc.json",
+      "markdown": "cellular-automaton-2d-conway.run.md",
+      "source": "cellular-automaton-2d-conway.bc",
+      "ticks": 1,
+      "trace": "cellular-automaton-2d-conway.output.json"
+    },
+    {
+      "expanded_source": "cellular-automaton-3d-life.bcc",
+      "frames": 2,
+      "input": "cellular-automaton-3d-life.bc.in.json",
+      "json_ir": "cellular-automaton-3d-life.bcc.json",
+      "markdown": "cellular-automaton-3d-life.run.md",
+      "source": "cellular-automaton-3d-life.bc",
+      "ticks": 1,
+      "trace": "cellular-automaton-3d-life.output.json"
+    },
+    {
+      "expanded_source": "conditional-hold.bcc",
+      "frames": 2,
+      "input": "conditional-hold.bc.in.json",
+      "json_ir": "conditional-hold.bcc.json",
+      "markdown": "conditional-hold.run.md",
+      "source": "conditional-hold.bc",
+      "ticks": 1,
+      "trace": "conditional-hold.output.json"
+    },
+    {
+      "expanded_source": "counter.bcc",
+      "frames": 6,
+      "input": "counter.bc.in.json",
+      "json_ir": "counter.bcc.json",
+      "markdown": "counter.run.md",
+      "source": "counter.bc",
+      "ticks": 5,
+      "trace": "counter.output.json"
+    },
+    {
+      "expanded_source": "coupled-signals.bcc",
+      "frames": 2,
+      "input": "coupled-signals.bc.in.json",
+      "json_ir": "coupled-signals.bcc.json",
+      "markdown": "coupled-signals.run.md",
+      "source": "coupled-signals.bc",
+      "ticks": 1,
+      "trace": "coupled-signals.output.json"
+    },
+    {
+      "expanded_source": "deep-network-inference-proposal.bcc",
+      "frames": 2,
+      "input": "deep-network-inference-proposal.bc.in.json",
+      "json_ir": "deep-network-inference-proposal.bcc.json",
+      "markdown": "deep-network-inference-proposal.run.md",
+      "source": "deep-network-inference-proposal.bc",
+      "ticks": 1,
+      "trace": "deep-network-inference-proposal.output.json"
+    },
+    {
+      "expanded_source": "dense-matrix-multiply-proposal.bcc",
+      "frames": 2,
+      "input": "dense-matrix-multiply-proposal.bc.in.json",
+      "json_ir": "dense-matrix-multiply-proposal.bcc.json",
+      "markdown": "dense-matrix-multiply-proposal.run.md",
+      "source": "dense-matrix-multiply-proposal.bc",
+      "ticks": 1,
+      "trace": "dense-matrix-multiply-proposal.output.json"
+    },
+    {
+      "expanded_source": "fibonacci.bcc",
+      "frames": 7,
+      "input": "fibonacci.bc.in.json",
+      "json_ir": "fibonacci.bcc.json",
+      "markdown": "fibonacci.run.md",
+      "source": "fibonacci.bc",
+      "ticks": 5,
+      "trace": "fibonacci.output.json"
+    },
+    {
+      "expanded_source": "game-of-life-large-proposal.bcc",
+      "frames": 2,
+      "input": "game-of-life-large-proposal.bc.in.json",
+      "json_ir": "game-of-life-large-proposal.bcc.json",
+      "markdown": "game-of-life-large-proposal.run.md",
+      "source": "game-of-life-large-proposal.bc",
+      "ticks": 1,
+      "trace": "game-of-life-large-proposal.output.json"
+    },
+    {
+      "expanded_source": "host-function-max.bcc",
+      "frames": 3,
+      "input": "host-function-max.bc.in.json",
+      "json_ir": "host-function-max.bcc.json",
+      "markdown": "host-function-max.run.md",
+      "source": "host-function-max.bc",
+      "ticks": 1,
+      "trace": "host-function-max.output.json"
+    },
+    {
+      "expanded_source": "moving-average.bcc",
+      "frames": 4,
+      "input": "moving-average.bc.in.json",
+      "json_ir": "moving-average.bcc.json",
+      "markdown": "moving-average.run.md",
+      "source": "moving-average.bc",
+      "ticks": 1,
+      "trace": "moving-average.output.json"
+    },
+    {
+      "expanded_source": "nbody-all-pairs-proposal.bcc",
+      "frames": 2,
+      "input": "nbody-all-pairs-proposal.bc.in.json",
+      "json_ir": "nbody-all-pairs-proposal.bcc.json",
+      "markdown": "nbody-all-pairs-proposal.run.md",
+      "source": "nbody-all-pairs-proposal.bc",
+      "ticks": 1,
+      "trace": "nbody-all-pairs-proposal.output.json"
+    },
+    {
+      "expanded_source": "three-dimensional-heat-diffusion-proposal.bcc",
+      "frames": 2,
+      "input": "three-dimensional-heat-diffusion-proposal.bc.in.json",
+      "json_ir": "three-dimensional-heat-diffusion-proposal.bcc.json",
+      "markdown": "three-dimensional-heat-diffusion-proposal.run.md",
+      "source": "three-dimensional-heat-diffusion-proposal.bc",
+      "ticks": 1,
+      "trace": "three-dimensional-heat-diffusion-proposal.output.json"
+    },
+    {
+      "expanded_source": "unicode-to-utf8-mapper.bcc",
+      "frames": 2,
+      "input": "unicode-to-utf8-mapper.bc.in.json",
+      "json_ir": "unicode-to-utf8-mapper.bcc.json",
+      "markdown": "unicode-to-utf8-mapper.run.md",
+      "source": "unicode-to-utf8-mapper.bc",
+      "ticks": 1,
+      "trace": "unicode-to-utf8-mapper.output.json"
+    }
+  ]
+}

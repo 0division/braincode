@@ -1,0 +1,91 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\fibonacci.bc",
+  "statements": [
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 7,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\fibonacci.bc"
+        },
+        "source": ":fib~1 + :fib~2",
+        "tree": {
+          "left": {
+            "args": [
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": "fib"
+              },
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": 1
+              },
+              {
+                "ctx": {
+                  "node": "Load"
+                },
+                "elts": [],
+                "node": "Tuple"
+              }
+            ],
+            "func": {
+              "ctx": {
+                "node": "Load"
+              },
+              "id": "__bc_history__",
+              "node": "Name"
+            },
+            "keywords": [],
+            "node": "Call"
+          },
+          "node": "BinOp",
+          "op": {
+            "node": "Add"
+          },
+          "right": {
+            "args": [
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": "fib"
+              },
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": 2
+              },
+              {
+                "ctx": {
+                  "node": "Load"
+                },
+                "elts": [],
+                "node": "Tuple"
+              }
+            ],
+            "func": {
+              "ctx": {
+                "node": "Load"
+              },
+              "id": "__bc_history__",
+              "node": "Name"
+            },
+            "keywords": [],
+            "node": "Call"
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 7,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\fibonacci.bc"
+      },
+      "name": "fib"
+    }
+  ]
+}

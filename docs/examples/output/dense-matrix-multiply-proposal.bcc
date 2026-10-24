@@ -1,0 +1,13 @@
+# Compiled BrainCode source expanded from: C:\GDrive\Proj\2026_braincode\docs\examples\dense-matrix-multiply-proposal.bc
+# Data-parallel loops are unfolded into indexed assignments.
+tensor :A[N, N] of Float32
+tensor :B[N, N] of Float32
+tensor :C[N, N] of Float32
+# instance (:i=0, :j=0)
+:C[0, 0] = sum( :A[0, :k]~1 * :B[:k, 0]~1 for :k in range(:N) )
+# instance (:i=0, :j=1)
+:C[0, 1] = sum( :A[0, :k]~1 * :B[:k, 1]~1 for :k in range(:N) )
+# instance (:i=1, :j=0)
+:C[1, 0] = sum( :A[1, :k]~1 * :B[:k, 0]~1 for :k in range(:N) )
+# instance (:i=1, :j=1)
+:C[1, 1] = sum( :A[1, :k]~1 * :B[:k, 1]~1 for :k in range(:N) )

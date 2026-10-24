@@ -55,9 +55,13 @@ The Python API is available from `braincode.compile_file`, `braincode.Runtime`, 
 
 The `run` command accepts `--input-file` with a JSON object containing
 `initial_state`, `parameters`, optional `initial_history` and `inputs`, and
-`ticks`. Explicit CLI options can override the corresponding configuration
-values. See the [long-term improvement plan](./long-term-improvement-plan.md)
-for the staged direction beyond v0.2.
+`ticks`. Set optional `md_output` to `true` or a path, or pass
+`--markdown-output PATH`, to write a Markdown run artifact containing the
+resolved input data, source code, and output frames. The all-examples runner
+writes per-run Markdown artifacts and other generated files under
+`docs/examples/output/`. Explicit CLI options can override the corresponding
+configuration values. See the [long-term improvement
+plan](./long-term-improvement-plan.md) for the staged direction beyond v0.2.
 
 ## Next development milestones
 
