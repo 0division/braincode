@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import json
 from dataclasses import asdict
 from pathlib import Path
@@ -14,6 +15,7 @@ from braincode.parser import parse_source
 
 IR_VERSION = 1
 LANGUAGE_VERSION = "0.2"
+VALUE_TYPES = {"Bool", "Int32", "Int64", "Float32", "Float64"}
 
 
 class BrainCodeCompileError(ValueError):
@@ -177,7 +179,52 @@ def load_compiled(path: str | Path) -> CompiledProgram:
 
 def _validate_program(program: Program) -> None:
     declarations = program.declarations
+    strict_signal_declarations = any(
+        item.kind in {"state", "input"} for item in program.statements
+    )
+    declared_signal_names = set(declarations)
+    declared_signal_names.update(
+        statement.name
+        for statement in _walk(program.statements)
+        if statement.kind == "assignment" and statement.name is not None
+    )
     for statement in _walk(program.statements):
+        if statement.kind in {"state", "input", "population", "tensor"}:
+            if statement.value_type not in VALUE_TYPES:
+                _error(
+                    statement,
+                    f"unsupported declared value type {statement.value_type!r}; "
+                    f"expected one of {sorted(VALUE_TYPES)}",
+                )
+        if statement.kind in {"population", "tensor"} and not statement.dimensions:
+            _error(statement, f"{statement.kind} :{statement.name} needs at least one dimension")
+        if statement.kind == "boundary":
+            if statement.name not in declarations:
+                _error(statement, f"boundary target :{statement.name} is undeclared")
+            if declarations[statement.name or ""].kind not in {"population", "tensor"}:
+                _error(
+                    statement,
+                    f"boundary target :{statement.name} must be a population or tensor",
+                )
+            if statement.boundary not in {
+                "dead", "wrap", "insulated", "clamp", "False", "false"
+            }:
+                _error(
+                    statement,
+                    f"unsupported boundary policy {statement.boundary!r}",
+                )
+        if statement.kind == "assignment" and statement.name in declarations:
+            declaration = declarations[statement.name or ""]
+            if declaration.kind == "input":
+                _error(statement, f"input :{statement.name} is read-only")
+        if strict_signal_declarations:
+            for expression in _statement_expressions(statement):
+                for name in _braincode_references(expression):
+                    if name not in declared_signal_names:
+                        _error(
+                            statement,
+                            f"undeclared signal :{name}; declare it as state or input",
+                        )
         if statement.kind == "each":
             if statement.collection not in declarations:
                 _error(statement, f"unknown population :{statement.collection}")
@@ -273,7 +320,35 @@ def _walk(statements: tuple[Statement, ...]) -> list[Statement]:
     return result
 
 
+def _statement_expressions(statement: Statement) -> list[Expression]:
+    result = [*statement.target_indices, *statement.dimensions]
+    if statement.expression is not None:
+        result.append(statement.expression)
+    if statement.condition is not None:
+        result.append(statement.condition)
+    return result
+
+
+def _braincode_references(expression: Expression) -> set[str]:
+    tree = parse_expression(expression)
+    names: set[str] = set()
+    for node in ast.walk(tree):
+        if (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id in {
+                "__bc_symbol__", "__bc_index__", "__bc_history__"
+            }
+            and node.args
+            and isinstance(node.args[0], ast.Constant)
+            and isinstance(node.args[0].value, str)
+        ):
+            names.add(node.args[0].value)
+    return names
+
+
 def _error(statement: Statement, message: str) -> None:
     raise BrainCodeCompileError(
-        f"{statement.location.source}:{statement.location.line}: {message}"
+        f"{statement.location.source}:{statement.location.line}:"
+        f"{statement.location.column}: {message}"
     )

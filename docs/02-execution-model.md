@@ -1,6 +1,6 @@
 # BrainCode: Execution Model
 
-> The core semantics below are implemented by the v0.2 serial reference runtime. Numeric portability, bounded history, and side-effecting actions remain future work.
+> The core semantics below are implemented by the serial reference runtime. Declared-value numeric behavior and optional bounded history are available; model-level side-effecting actions remain future work.
 
 ## Terms
 
@@ -36,7 +36,7 @@ Historical frames before the supplied run history do not exist automatically. Th
 - Array indices must be integers. Boundary policies affect out-of-range reads; writes must remain within the declared population bounds and cannot change the population's shape.
 - For a run of `N` ticks, an input-frame sequence may contain at most `N+1` frames. Frame zero initializes the starting committed state; later frames provide inputs at each following committed tick. Every input frame must be a mapping.
 
-The type-based population initialization is a convenience of the prototype and may be tightened in a later language version.
+The type-based population initialization is a convenience; declared state values, by contrast, must be present in the host's initial state.
 
 ## Assignments and conflicts
 
@@ -101,13 +101,12 @@ A failure before commit must not publish a partial frame. An action failure afte
 
 A run is reproducible when the language version, runtime version, program, initial state, tick inputs, and random seeds are identical, and all allowed host functions are deterministic.
 
-Remaining specification work includes:
-
-- numeric behavior and overflow;
-- action ordering and failure behavior;
-- declaration and validation of input/parameter values;
-- type checking and shape errors;
-- serialization of values and run state.
+Declared `Bool`, `Int32`, `Int64`, `Float32`, and `Float64` values are validated
+at storage boundaries. Integer ranges are checked without wrapping, Float32
+values round to binary32 on storage, and non-finite declared floats are
+rejected. See the [Stage 1 contract](./stage1-contract.md) for exact behavior,
+runtime budgets, and replay-manifest rules. Model-level action ordering and
+failure behavior remain unspecified because actions are not implemented.
 
 ## Syntax and frontend note
 

@@ -13,6 +13,7 @@ from braincode.compiler import BrainCodeCompileError
 from braincode.runtime import BrainCodeRuntimeError, Runtime
 from braincode.cli import main as cli_main
 from braincode.example_runner import example_configs, run_all_examples
+from braincode.manifest import replay_run_manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,7 +23,7 @@ EXAMPLES = ROOT / "docs" / "examples"
 class CompilerTests(unittest.TestCase):
     def test_every_example_compiles(self) -> None:
         examples = sorted(EXAMPLES.glob("*.bc"))
-        self.assertEqual(len(examples), 15)
+        self.assertEqual(len(examples), 16)
         for example in examples:
             with self.subTest(example=example.name):
                 compile_file(example)
@@ -41,8 +42,31 @@ class CompilerTests(unittest.TestCase):
                 )
                 initial_frames = len(runtime.frames)
                 self.assertEqual(
-                    len(runtime.run(config.ticks)),
+                    len(runtime.run(config.ticks, input_frames=config.inputs)),
                     initial_frames + config.ticks,
+                )
+
+    def test_committed_example_traces_and_manifests_are_conformant(self) -> None:
+        output_dir = EXAMPLES / "output"
+        for filename, config in example_configs().items():
+            with self.subTest(example=filename):
+                expected = json.loads(
+                    (output_dir / f"{Path(filename).stem}.output.json")
+                    .read_text(encoding="utf-8")
+                )
+                program = compile_file(EXAMPLES / filename)
+                frames = Runtime(
+                    program,
+                    initial_state=config.initial_state,
+                    parameters=config.parameters,
+                    initial_history=config.initial_history,
+                ).run(config.ticks, input_frames=config.inputs)
+                self.assertEqual(frames, expected)
+                self.assertEqual(
+                    replay_run_manifest(
+                        output_dir / f"{Path(filename).stem}.run.json"
+                    ),
+                    expected,
                 )
 
     def test_utf8_mapper_encodes_every_length(self) -> None:
@@ -230,7 +254,7 @@ class CompilerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             summary = run_all_examples(directory)
             output = Path(directory)
-            self.assertEqual(len(summary), 15)
+            self.assertEqual(len(summary), 16)
             self.assertTrue((output / "summary.json").is_file())
             self.assertTrue((output / "run.log").is_file())
             self.assertTrue((output / "run-summary.md").is_file())
@@ -241,6 +265,7 @@ class CompilerTests(unittest.TestCase):
                     self.assertTrue((output / entry["expanded_source"]).is_file())
                     self.assertTrue((output / entry["json_ir"]).is_file())
                     self.assertTrue((output / entry["trace"]).is_file())
+                    self.assertTrue((output / entry["manifest"]).is_file())
                     report = output / entry["markdown"]
                     self.assertTrue(report.is_file())
                     report_text = report.read_text(encoding="utf-8")
@@ -251,11 +276,12 @@ class CompilerTests(unittest.TestCase):
 
     def test_example_runner_runs_without_writing_files_when_output_is_omitted(self) -> None:
         summary = run_all_examples(None)
-        self.assertEqual(len(summary), 15)
+        self.assertEqual(len(summary), 16)
         self.assertTrue(all(entry["expanded_source"] is None for entry in summary))
         self.assertTrue(all(entry["json_ir"] is None for entry in summary))
         self.assertTrue(all(entry["trace"] is None for entry in summary))
         self.assertTrue(all(entry["markdown"] is None for entry in summary))
+        self.assertTrue(all(entry["manifest"] is None for entry in summary))
 
     def test_expanded_view_shows_scalar_utf8_mapping(self) -> None:
         listing = render_expanded(

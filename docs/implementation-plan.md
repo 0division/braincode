@@ -2,7 +2,7 @@
 
 ## Current status
 
-The workspace now contains a v0.2 compiler and a deterministic Python reference runtime. The compiler uses a BrainCode statement parser and a restricted, validated expression evaluator; it does not execute source through Python `eval`.
+The workspace contains the BrainCode compiler and a deterministic Python reference runtime. The compiler uses a BrainCode statement parser and a restricted, validated expression evaluator; it does not execute source through Python `eval`.
 
 Implemented:
 
@@ -13,7 +13,12 @@ Implemented:
 - deterministic tick execution with reads from committed history, atomic frame commits, and hold-by-copy behavior for untouched state;
 - serial population/tensor execution, indexed reads/writes, boundary handling, neighbor counts, vector arithmetic, and reductions used by the examples;
 - validation for non-negative integer dimensions, integer indexing, rectangular population values, shape-preserving writes, and tick input schedules;
+- declared `Bool`, `Int32`, `Int64`, `Float32`, and `Float64` state/input values with checked storage, including read-only input declarations;
 - built-in pure functions and caller-provided named function registration;
+- ordered host input adapters and post-commit output adapters with explicit adapter-failure semantics;
+- versioned source-hashed run manifests with replay and trace verification;
+- optional delay-aware history windows, tick, declared-population-size, and per-frame-size budgets;
+- a `RuntimeSession`/`ExecutionBackend` interface and a serial-backend baseline benchmark;
 - CLI operations for compile, inspect, expanded listing, and run, including JSON run configurations;
 - pytest and standard-library tests for all examples, compiler artifacts, UTF-8 boundary cases, 1D/2D/3D automata, input schedules, validation failures, and atomic ticks.
 
@@ -22,11 +27,11 @@ The Python backend is a correctness-oriented reference implementation. The `para
 ## Current limitations
 
 - There is no CUDA, GPU, multiprocessing, or optimized CPU backend.
-- Static type checking is incomplete; many state/input names and shapes are checked when a model runs.
-- Scalar inputs and immutable parameters are supplied by the host rather than declared with dedicated `.bc` statements.
-- Full frame history is retained in memory; long runs over large populations can consume substantial memory.
+- Full static type inference and undeclared-symbol diagnostics are incomplete; host-dependent state/input values are checked during execution.
+- Immutable parameters are supplied by the host; there is no separate `.bc` parameter declaration.
+- Full frame history remains the default; bounded windows are opt-in. Frame-size limits measure compact JSON size, not total Python process memory.
 - Host-supplied functions are trusted capabilities. Callers must register only functions appropriate for their model and ensure state-rule functions are deterministic and side-effect-free.
-- Actions, external side effects, checkpointing, replay packages, and bounded history are not implemented.
+- BrainCode actions, automatic callback persistence, and general checkpoints are not implemented. Run manifests capture inputs and outputs; replay requires the caller to resupply host callback implementations.
 - Large workload values in example comments are complexity illustrations, not practical defaults for the serial backend.
 
 ## Core execution contract
@@ -51,24 +56,27 @@ python -m pytest -v
 
 `compile` writes sibling `.bcc` and `.bcc.json` files by default. `.bcc` remains BrainCode syntax, with every `each ... parallel` population rule unfolded into explicit indexed assignments. `.bcc.json` stores the machine-readable IR. Supply `--parameters` when symbolic population dimensions need values for expansion.
 
-The Python API is available from `braincode.compile_file`, `braincode.Runtime`, and `braincode.run`. Host-provided arrays and scalars belong in `initial_state`; immutable dimensions and constants belong in `parameters`; future tick inputs can be passed through `input_frames`. Example run configurations are kept in sibling `.bc.in.json` files, outside BrainCode model logic.
+The Python API is available from `braincode.compile_file`, `braincode.Runtime`, and `braincode.run`. Host-provided initial values belong in `initial_state`; immutable dimensions and constants belong in `parameters`; tick inputs are passed through `input_frames` and can be explicitly declared in BrainCode. Example run configurations are kept in sibling `.bc.in.json` files, outside BrainCode model logic.
 
 The `run` command accepts `--input-file` with a JSON object containing
 `initial_state`, `parameters`, optional `initial_history` and `inputs`, and
-`ticks`. Set optional `md_output` to `true` or a path, or pass
-`--markdown-output PATH`, to write a Markdown run artifact containing the
+`ticks`. Set optional `md_output` to `true` or a path, `manifest_output` to
+`true` or a path, or pass
+`--markdown-output PATH` to write a Markdown run artifact containing the
 resolved input data, source code, and output frames. The all-examples runner
 writes per-run Markdown artifacts and other generated files under
 `docs/examples/output/`. Explicit CLI options can override the corresponding
-configuration values. See the [long-term improvement
-plan](./long-term-improvement-plan.md) for the staged direction beyond v0.2.
+configuration values. Replay a run with `python -m braincode replay run.json`.
+The [Stage 1 contract](./stage1-contract.md) defines the exact runtime behavior.
+See the [long-term improvement plan](./long-term-improvement-plan.md) for the
+staged direction beyond v0.2.
 
 ## Next development milestones
 
-1. **Strengthen validation:** complete type checking, declared input/parameter support, and more precise diagnostics for shape and history errors.
-2. **Specify numeric and resource behavior:** define integer overflow, float policy, history budgets, and limits for reductions and population sizes.
-3. **Improve run artifacts:** add serializable input logs, run metadata, and deterministic replay without repeating external effects.
+1. **Strengthen validation:** complete static type inference and undeclared-symbol checks.
+2. **Specify numeric and resource behavior:** extend the documented storage and budget contract to compiler/evaluation work limits.
+3. **Improve run artifacts:** add project packaging, migrations, and callback provenance sufficient for portable replay.
 4. **Optimize after conformance:** benchmark the reference interpreter, then add an optimized CPU or GPU backend while retaining the serial runtime as the semantic oracle.
-5. **Evaluate AI authoring:** measure generated-program correctness and repair effort against fair host-language baselines.
+5. **Evaluate AI authoring:** execute the documented evaluation protocol against a fair host-language baseline.
 
 The v0.2 compiler intentionally prioritizes clear semantics and runnable examples over a speed claim. Future changes should extend the documented and tested language subset without changing existing behavior silently.

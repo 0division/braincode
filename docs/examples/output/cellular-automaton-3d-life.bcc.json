@@ -81,7 +81,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 15,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
             },
@@ -209,7 +209,7 @@
           },
           "kind": "let",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 15,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
           },
@@ -218,7 +218,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 19,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
             },
@@ -311,7 +311,7 @@
           },
           "kind": "let",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 19,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
           },
@@ -320,7 +320,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 20,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
             },
@@ -460,7 +460,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 20,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
           },
@@ -468,7 +468,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 20,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
               },
@@ -494,7 +494,7 @@
             },
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 20,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
               },
@@ -520,7 +520,7 @@
             },
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 20,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-3d-life.bc"
               },

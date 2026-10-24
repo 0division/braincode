@@ -1,0 +1,32 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "alarm": true,
+      "trigger": false
+    },
+    {
+      "alarm": true,
+      "trigger": false
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "alarm": true,
+    "trigger": false
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {},
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# Draft conditional-update example.\n# Initial frame supplied by the host:\n#   :alarm = False at T=0\n#\n# If the prior tick's trigger is true, set :alarm in T+1.\n# If this conditional update does not run, the prior :alarm value is held.\n\n?(:trigger~1):\n    :alarm = True\n",
+  "source_name": "conditional-hold.bc",
+  "source_sha256": "3a5b00a358d9ed51ce9ccdceaa6b7e747f6361b7d0f2d74725f5d3f087262e9e",
+  "ticks": 1
+}

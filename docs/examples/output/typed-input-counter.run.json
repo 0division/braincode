@@ -1,0 +1,52 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "counter": 0,
+      "increment": 1
+    },
+    {
+      "counter": 1,
+      "increment": 2
+    },
+    {
+      "counter": 3,
+      "increment": 3
+    },
+    {
+      "counter": 6,
+      "increment": 4
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "counter": 0
+  },
+  "input_adapters": [],
+  "input_frames": [
+    {
+      "increment": 1
+    },
+    {
+      "increment": 2
+    },
+    {
+      "increment": 3
+    },
+    {
+      "increment": 4
+    }
+  ],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {},
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "input :increment of Int32\nstate :counter of Int32\n\n:counter = :counter~1 + :increment~1\n",
+  "source_name": "typed-input-counter.bc",
+  "source_sha256": "b3bb31cd8bb1c9707663de8533dce47c5ec45c357e50e229f6de789176a7872f",
+  "ticks": 3
+}

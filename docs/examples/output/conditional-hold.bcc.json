@@ -9,7 +9,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 9,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\conditional-hold.bc"
             },
@@ -22,7 +22,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 9,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\conditional-hold.bc"
           },

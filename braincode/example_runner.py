@@ -11,6 +11,7 @@ from typing import Any
 
 from braincode.compiler import compile_file, load_compiled, save_compiled
 from braincode.expanded import render_expanded
+from braincode.manifest import save_run_manifest
 from braincode.reporting import write_run_markdown
 from braincode.runtime import Runtime
 
@@ -83,6 +84,7 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
             ir_path = destination / f"{stem}.bcc.json" if destination is not None else None
             trace_path = destination / f"{stem}.output.json" if destination is not None else None
             markdown_path = destination / f"{stem}.run.md" if destination is not None else None
+            manifest_path = destination / f"{stem}.run.json" if destination is not None else None
 
             if destination is not None:
                 expanded_path.write_text(
@@ -126,6 +128,16 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
                     ticks=config.ticks,
                     frames=frames,
                 )
+                save_run_manifest(
+                    manifest_path,
+                    program,
+                    initial_state=config.initial_state,
+                    parameters=config.parameters,
+                    initial_history=config.initial_history,
+                    input_frames=config.inputs,
+                    ticks=config.ticks,
+                    frames=frames,
+                )
                 summary.append({
                     "source": source_path.name,
                     "input": input_path.name,
@@ -135,6 +147,7 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
                     "json_ir": ir_path.name,
                     "trace": trace_path.name,
                     "markdown": markdown_path.name,
+                    "manifest": manifest_path.name,
                 })
             else:
                 summary.append({
@@ -146,6 +159,7 @@ def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
                     "json_ir": None,
                     "trace": None,
                     "markdown": None,
+                    "manifest": None,
                 })
             if log_path is not None:
                 with log_path.open("a", encoding="utf-8") as log:
@@ -190,7 +204,7 @@ def _write_markdown_summary(
 ) -> None:
     rows = [
         f"| `{item['source']}` | `{item['input']}` | {item['ticks']} | "
-        f"`{item['trace']}` | `{item['markdown']}` |"
+        f"`{item['trace']}` | `{item['markdown']}` | `{item['manifest']}` |"
         for item in examples
     ]
     content = [
@@ -200,8 +214,8 @@ def _write_markdown_summary(
         f"- Completed: {completed_at}",
         f"- Result: passed ({len(examples)} examples)",
         "",
-        "| Example | Input | Ticks | Trace | Run report |",
-        "|---|---|---:|---|---|",
+        "| Example | Input | Ticks | Trace | Run report | Manifest |",
+        "|---|---|---:|---|---|---|",
         *rows,
         "",
         "See `run.log` for the chronological execution log and `summary.json` "

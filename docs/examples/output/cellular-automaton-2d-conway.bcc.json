@@ -65,7 +65,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 14,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
             },
@@ -175,7 +175,7 @@
           },
           "kind": "let",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 14,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
           },
@@ -184,7 +184,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 17,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
             },
@@ -259,7 +259,7 @@
           },
           "kind": "let",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 17,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
           },
@@ -268,7 +268,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 18,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
             },
@@ -356,7 +356,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 18,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
           },
@@ -364,7 +364,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 18,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
               },
@@ -390,7 +390,7 @@
             },
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 18,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-2d-conway.bc"
               },

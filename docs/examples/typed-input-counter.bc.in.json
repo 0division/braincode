@@ -1,0 +1,22 @@
+{
+  "initial_state": {
+    "counter": 0
+  },
+  "parameters": {},
+  "initial_history": [],
+  "inputs": [
+    {
+      "increment": 1
+    },
+    {
+      "increment": 2
+    },
+    {
+      "increment": 3
+    },
+    {
+      "increment": 4
+    }
+  ],
+  "ticks": 3
+}

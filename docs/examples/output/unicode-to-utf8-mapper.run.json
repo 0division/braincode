@@ -1,0 +1,41 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "unicode_in": 128512
+    },
+    {
+      "unicode_in": 128512,
+      "utf8_out_bytes": [
+        240,
+        159,
+        152,
+        128
+      ],
+      "utf8_out_char0": 240,
+      "utf8_out_char1": 159,
+      "utf8_out_char2": 152,
+      "utf8_out_char3": 128,
+      "utf8_out_length": 4,
+      "valid_unicode": true
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "unicode_in": 128512
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {},
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# Encode one Unicode scalar value as UTF-8 bytes.\n#\n# The host supplies :unicode_in as an integer code point. The four output\n# byte signals contain the encoded bytes by position, or None when that byte\n# position is unused. :utf8_out_bytes collects only the bytes for the\n# selected UTF-8 length.\n#\n# UTF-8 encoding ranges:\n#   U+0000..U+007F:       1 byte\n#   U+0080..U+07FF:       2 bytes\n#   U+0800..U+FFFF:       3 bytes, excluding surrogate code points\n#   U+10000..U+10FFFF:    4 bytes\n\n:valid_unicode = (\n    0 <= :unicode_in~1\n    and :unicode_in~1 <= 0x10FFFF\n    and (\n        :unicode_in~1 < 0xD800\n        or :unicode_in~1 > 0xDFFF\n    )\n)\n\n:utf8_out_length = (\n    1 if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F\n    else 2 if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF\n    else 3 if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF\n        and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)\n    else 4 if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF\n    else 0\n)\n\n:utf8_out_char0 = (\n    :unicode_in~1 if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F\n    else 0xC0 + :unicode_in~1 // 64\n        if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF\n    else 0xE0 + :unicode_in~1 // 4096\n        if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF\n            and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)\n    else 0xF0 + :unicode_in~1 // 262144\n        if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF\n    else None\n)\n\n:utf8_out_char1 = (\n    0x80 + :unicode_in~1 % 64\n        if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF\n    else 0x80 + (:unicode_in~1 // 64) % 64\n        if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF\n            and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)\n    else 0x80 + (:unicode_in~1 // 4096) % 64\n        if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF\n    else None\n)\n\n:utf8_out_char2 = (\n    0x80 + :unicode_in~1 % 64\n        if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF\n            and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)\n    else 0x80 + (:unicode_in~1 // 64) % 64\n        if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF\n    else None\n)\n\n:utf8_out_char3 = (\n    0x80 + :unicode_in~1 % 64\n        if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF\n    else None\n)\n\n:utf8_out_bytes = (\n    [:unicode_in~1]\n        if 0 <= :unicode_in~1 and :unicode_in~1 <= 0x7F\n    else [\n        0xC0 + :unicode_in~1 // 64,\n        0x80 + :unicode_in~1 % 64\n    ] if 0x80 <= :unicode_in~1 and :unicode_in~1 <= 0x7FF\n    else [\n        0xE0 + :unicode_in~1 // 4096,\n        0x80 + (:unicode_in~1 // 64) % 64,\n        0x80 + :unicode_in~1 % 64\n    ] if 0x800 <= :unicode_in~1 and :unicode_in~1 <= 0xFFFF\n        and (:unicode_in~1 < 0xD800 or :unicode_in~1 > 0xDFFF)\n    else [\n        0xF0 + :unicode_in~1 // 262144,\n        0x80 + (:unicode_in~1 // 4096) % 64,\n        0x80 + (:unicode_in~1 // 64) % 64,\n        0x80 + :unicode_in~1 % 64\n    ] if 0x10000 <= :unicode_in~1 and :unicode_in~1 <= 0x10FFFF\n    else []\n)\n\n# The output is an array of UTF-8 byte values, not a bit vector. For example,\n# U+1F600 produces [240, 159, 152, 128]. Invalid code points produce length\n# 0, None in all four byte slots, and an empty output byte array.\n",
+  "source_name": "unicode-to-utf8-mapper.bc",
+  "source_sha256": "c03d37315171fdd5e53c141b1d724a552d332ac6d914bdd3d892aa86762d472b",
+  "ticks": 1
+}

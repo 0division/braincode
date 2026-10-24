@@ -1,0 +1,32 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "left": 1,
+      "right": 10
+    },
+    {
+      "left": 11,
+      "right": 2
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "left": 1,
+    "right": 10
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {},
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# Scalar BrainCode draft.\n# Initial frame supplied by the host at T=0:\n#   :left = 1\n#   :right = 10\n#\n# Both rules read the same committed frame. Neither observes the other\n# rule's uncommitted result.\n\n:left = :right~1 + 1\n:right = :left~1 + 1\n",
+  "source_name": "coupled-signals.bc",
+  "source_sha256": "a5c67569ffd7467e2ed5bd8c7e1fabb7ed685faac563e10312ceaaf3b88c2b03",
+  "ticks": 1
+}

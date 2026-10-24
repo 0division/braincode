@@ -10,6 +10,7 @@ from typing import Any
 
 from braincode.compiler import CompiledProgram, compile_file, load_compiled
 from braincode.expanded import render_expanded
+from braincode.manifest import replay_run_manifest, save_run_manifest
 from braincode.reporting import write_run_markdown
 from braincode.runtime import BrainCodeRuntimeError, Runtime
 
@@ -75,12 +76,35 @@ def _parser() -> argparse.ArgumentParser:
         "--markdown-output",
         help="write a Markdown summary to this file; omitted by default",
     )
+    run_command.add_argument(
+        "--manifest-output",
+        help="write a versioned, replayable run manifest to this file",
+    )
+    run_command.add_argument("--history-window", type=int)
+    run_command.add_argument("--max-ticks", type=int)
+    run_command.add_argument("--max-population-elements", type=int)
+    run_command.add_argument("--max-frame-bytes", type=int)
+
+    replay_command = commands.add_parser(
+        "replay", help="replay a versioned BrainCode run manifest"
+    )
+    replay_command.add_argument("manifest")
+    replay_command.add_argument("-o", "--output", help="write replayed frames to JSON")
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     arguments = _parser().parse_args(argv)
     try:
+        if arguments.command == "replay":
+            frames = replay_run_manifest(arguments.manifest)
+            result = json.dumps(frames, indent=2, sort_keys=True) + "\n"
+            if arguments.output:
+                Path(arguments.output).write_text(result, encoding="utf-8")
+            else:
+                sys.stdout.write(result)
+            return 0
+
         if arguments.command == "compile":
             source_path = Path(arguments.source)
             output_path = Path(arguments.output) if arguments.output else None
@@ -117,6 +141,11 @@ def main(argv: list[str] | None = None) -> int:
             "inputs",
             "ticks",
             "md_output",
+            "manifest_output",
+            "history_window",
+            "max_ticks",
+            "max_population_elements",
+            "max_frame_bytes",
         }
         if unknown_config_keys:
             raise ValueError(
@@ -156,11 +185,33 @@ def main(argv: list[str] | None = None) -> int:
             raise ValueError("md_output must be a boolean or output path")
         if isinstance(md_output, str) and not md_output:
             raise ValueError("md_output path must not be empty")
+        manifest_output = run_config.get("manifest_output", False)
+        if not isinstance(manifest_output, (bool, str)):
+            raise ValueError("manifest_output must be a boolean or output path")
+        if isinstance(manifest_output, str) and not manifest_output:
+            raise ValueError("manifest_output path must not be empty")
+        runtime_options = {
+            option: (
+                getattr(arguments, option)
+                if getattr(arguments, option) is not None
+                else run_config.get(option)
+            )
+            for option in (
+                "history_window",
+                "max_ticks",
+                "max_population_elements",
+                "max_frame_bytes",
+            )
+        }
+        runtime_options = {
+            key: value for key, value in runtime_options.items() if value is not None
+        }
         runtime = Runtime(
             program,
             initial_state=initial_state,
             parameters=parameters,
             initial_history=initial_history,
+            **runtime_options,
         )
         frames = runtime.run(ticks, input_frames=inputs)
         result = json.dumps(frames, indent=2, sort_keys=True) + "\n"
@@ -185,6 +236,25 @@ def main(argv: list[str] | None = None) -> int:
                 inputs=inputs,
                 frames=frames,
                 ticks=ticks,
+            )
+        manifest_path = arguments.manifest_output
+        if manifest_path is None and manifest_output:
+            manifest_path = (
+                manifest_output if isinstance(manifest_output, str) else
+                str(Path(arguments.source).parent / "output" /
+                    f"{Path(arguments.source).stem}.run.json")
+            )
+        if manifest_path:
+            save_run_manifest(
+                manifest_path,
+                program,
+                initial_state=initial_state,
+                parameters=parameters,
+                initial_history=initial_history,
+                input_frames=inputs,
+                ticks=ticks,
+                runtime_options=runtime_options,
+                frames=frames,
             )
         if not arguments.output and not markdown_output:
             sys.stdout.write(result)

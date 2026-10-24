@@ -1,0 +1,111 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc",
+  "statements": [
+    {
+      "kind": "input",
+      "location": {
+        "column": 1,
+        "line": 1,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc"
+      },
+      "name": "increment",
+      "value_type": "Int32"
+    },
+    {
+      "kind": "state",
+      "location": {
+        "column": 1,
+        "line": 2,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc"
+      },
+      "name": "counter",
+      "value_type": "Int32"
+    },
+    {
+      "expression": {
+        "location": {
+          "column": 1,
+          "line": 4,
+          "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc"
+        },
+        "source": ":counter~1 + :increment~1",
+        "tree": {
+          "left": {
+            "args": [
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": "counter"
+              },
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": 1
+              },
+              {
+                "ctx": {
+                  "node": "Load"
+                },
+                "elts": [],
+                "node": "Tuple"
+              }
+            ],
+            "func": {
+              "ctx": {
+                "node": "Load"
+              },
+              "id": "__bc_history__",
+              "node": "Name"
+            },
+            "keywords": [],
+            "node": "Call"
+          },
+          "node": "BinOp",
+          "op": {
+            "node": "Add"
+          },
+          "right": {
+            "args": [
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": "increment"
+              },
+              {
+                "kind": null,
+                "node": "Constant",
+                "value": 1
+              },
+              {
+                "ctx": {
+                  "node": "Load"
+                },
+                "elts": [],
+                "node": "Tuple"
+              }
+            ],
+            "func": {
+              "ctx": {
+                "node": "Load"
+              },
+              "id": "__bc_history__",
+              "node": "Name"
+            },
+            "keywords": [],
+            "node": "Call"
+          }
+        }
+      },
+      "kind": "assignment",
+      "location": {
+        "column": 1,
+        "line": 4,
+        "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\typed-input-counter.bc"
+      },
+      "name": "counter"
+    }
+  ]
+}

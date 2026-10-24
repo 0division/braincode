@@ -1,0 +1,53 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "cells": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "cells": [
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "cells": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {},
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# Optional tiny example: Rule 110, a one-dimensional cellular automaton.\n# It is useful as a minimal test of local-neighbor updates, not as a required\n# BrainCode feature or the main massive-parallelism example.\n# The current reference compiler supports the population/indexing syntax.\n#\n# Initial frame supplied by the host at T=0:\n#   :cells = [False, False, False, True, False, False, False]\n#\n# Every next cell reads only the previous frame.\n\npopulation :cells[7] of Bool\nboundary :cells = False\n\neach :i in :cells parallel:\n    let left = :cells[:i - 1]~1\n    let center = :cells[:i]~1\n    let right = :cells[:i + 1]~1\n    :cells[:i] = (\n        (left and center and not right)\n        or (left and not center and right)\n        or (not left and center and right)\n        or (not left and center and not right)\n        or (not left and not center and right)\n    )\n\n# Rule 110 is implemented directly as its truth table: the next cell is alive\n# for neighborhoods 110, 101, 011, 010, and 001; otherwise it is dead.\n# The chosen dead-cell boundary policy supplies False for out-of-range neighbors.\n",
+  "source_name": "cellular-automaton-1d-rule110.bc",
+  "source_sha256": "2c843ea11bfe7bcb38e892742b63c690108cb5f70b2653b0bf1ad8422a9af5df",
+  "ticks": 1
+}

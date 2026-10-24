@@ -47,7 +47,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 15,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
             },
@@ -115,7 +115,7 @@
           },
           "kind": "let",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 15,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
           },
@@ -124,7 +124,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 16,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
             },
@@ -181,7 +181,7 @@
           },
           "kind": "let",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 16,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
           },
@@ -190,7 +190,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 17,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
             },
@@ -258,7 +258,7 @@
           },
           "kind": "let",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 17,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
           },
@@ -267,7 +267,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 18,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
             },
@@ -470,7 +470,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 18,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
           },
@@ -478,7 +478,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 18,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\cellular-automaton-1d-rule110.bc"
               },

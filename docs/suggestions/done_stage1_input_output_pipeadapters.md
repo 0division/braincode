@@ -1,4 +1,4 @@
-# Stage 1 suggestion: Input/output pipe adapters
+# Completed Stage 1: Input/output pipe adapters
 
 Stage 1 should define and exercise the host boundary for stream processing.
 This is Python work, not GUI or GPU implementation.
@@ -42,15 +42,17 @@ Specify ordering and error behavior before exposing side effects. The Python
 runtime should make these semantics testable; adapters that depend on GUI or
 GPU services belong to those later stages.
 
-## Example API shape
+## Implemented API
 
 ```python
 runtime = Runtime(program)
 runtime.register_input_adapter("camera", normalize_camera_frame)
-runtime.register_output_adapter("actuator", encode_actuator_command)
+runtime.register_output_adapter("logger", record_committed_frame)
 runtime.register_trigger("alarm", send_alarm)
 ```
 
-This is a design sketch, not an implemented API. Keep preprocessing and
-postprocessing in host/open code while BrainCode rules remain replayable and
-side-effect-free.
+Input adapters transform matching named values before commit. Output adapters
+observe a copied frame after commit; failures report that the state transition
+already committed. Adapter ordering and failure behavior are covered by tests
+and specified in [`../stage1-contract.md`](../stage1-contract.md). Model-level
+actions and triggers remain intentionally unimplemented.

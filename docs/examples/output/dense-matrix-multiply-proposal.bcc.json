@@ -139,7 +139,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 19,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
             },
@@ -348,7 +348,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 19,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
           },
@@ -356,7 +356,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 19,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
               },
@@ -382,7 +382,7 @@
             },
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 19,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\dense-matrix-multiply-proposal.bc"
               },

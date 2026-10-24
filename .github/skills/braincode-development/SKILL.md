@@ -41,12 +41,14 @@ Run the narrow relevant test first, then the full checks when practical:
 python -m pip install -e ".[test]"
 python -m pytest -q
 python -m unittest discover -s tests -v
-python -m braincode.example_runner --output output
+python -m braincode.example_runner --output docs/examples/output
+python -m braincode.benchmark --sizes 64 256 --ticks 3 --repeats 2
 ```
 
-After example execution, verify all 15 configured examples have traces and
-Markdown reports, and that `docs/examples/output/run.log` and
-`docs/examples/output/run-summary.md` were written. Run
+After example execution, verify all 16 configured examples have traces,
+Markdown reports, and replay manifests, and that
+`docs/examples/output/run.log` and `docs/examples/output/run-summary.md` were
+written. Run
 `git diff --check` and inspect `git status` before finishing.
 
 ## Handoff and Git

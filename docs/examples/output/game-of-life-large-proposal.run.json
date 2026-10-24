@@ -1,0 +1,80 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "cells": [
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          true,
+          true,
+          true
+        ]
+      ]
+    },
+    {
+      "cells": [
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          true,
+          false,
+          true
+        ],
+        [
+          false,
+          true,
+          true
+        ]
+      ]
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "cells": [
+      [
+        false,
+        true,
+        false
+      ],
+      [
+        false,
+        false,
+        true
+      ],
+      [
+        true,
+        true,
+        true
+      ]
+    ]
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {
+    "HEIGHT": 3,
+    "WIDTH": 3
+  },
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# The syntax is supported by the reference compiler. `parallel` currently\n# defines the data-parallel iteration domain; the Python backend is serial.\n#\n# Workload: a large two-dimensional Game of Life grid.\n# Approximate work: O(width * height) cell updates per generation.\n# A 16,384 x 16,384 grid contains over 268 million cells.\n#\n# The host supplies the initial population state at T=0.\n# `each` expresses data parallelism across cells. Every neighborhood read\n# uses the same previously committed frame.\n\npopulation :cells[WIDTH, HEIGHT] of Bool\nboundary :cells = wrap\n\neach (:x, :y) in :cells parallel:\n    :cells[:x, :y] = life_rule(\n        neighbor_count(:cells~1, :x, :y, radius=1, include_center=False),\n        :cells[:x, :y]~1\n    )\n\n# Design questions:\n# - Are neighbor_count and life_rule built-ins or host-registered pure functions?\n# - Are boundaries periodic, fixed, reflective, or explicitly supplied?\n# - How are Boolean neighbor counts represented?\n# - How does the runtime store or compress hundreds of millions of cells?\n# - Can it avoid materializing every intermediate frame?\n",
+  "source_name": "game-of-life-large-proposal.bc",
+  "source_sha256": "7d83f8c766ad9adc5b30e8205b22e2d9148b288b22135ded22db3e6d74170ebf",
+  "ticks": 1
+}

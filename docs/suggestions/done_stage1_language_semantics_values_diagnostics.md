@@ -1,4 +1,4 @@
-# Stage 1 suggestion: Language semantics, values, and diagnostics
+# Completed Stage 1: Language semantics, values, and diagnostics
 
 Stage 1 uses Python as the implementation host and reference runtime. Its
 purpose is to make BrainCode's language contract explicit and testable before
@@ -37,6 +37,7 @@ code at the runtime boundary.
 
 ## Stage 1 deliverable
 
-A versioned, documented language contract and a conformance suite that can
-serve as the reference when Stage 2 tools display programs and Stage 3
-backends execute them.
+A versioned, documented language contract and a conformance suite are
+available in [`../stage1-contract.md`](../stage1-contract.md). Declared values
+and strict declaration-mode checks are implemented. Full static inference and
+strict checking of legacy implicit-state programs remain follow-up work.

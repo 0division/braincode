@@ -1,6 +1,7 @@
 # Staged Suggestions
 
-These documents separate work by the project's three development stages:
+These documents track completed Stage 1 foundation work and planned later
+stages:
 
 1. **Stage 1 — Python foundation:** implement and validate the language,
    reference runtime, reproducibility, and contracts needed by later stages.
@@ -11,13 +12,13 @@ These documents separate work by the project's three development stages:
 3. **Stage 3 — GPU:** implement accelerated execution for useful supported
    workloads and validate it against the Python reference runtime.
 
-## Stage 1 — Python foundation
+## Stage 1 — Python foundation (completed)
 
-- [Language semantics, values, and diagnostics](./stage1_language_semantics_values_diagnostics.md)
-- [Input/output pipe adapters](./stage1_input_output_pipeadapters.md)
-- [Reproducibility, history, and resource limits](./stage1_reproducibility_history_resources.md)
-- [Parallelism readiness](./stage1_parallelism_readiness.md)
-- [Examples and AI evaluation](./stage1_examples_and_ai_evaluation.md)
+- [Language semantics, values, and diagnostics](./done_stage1_language_semantics_values_diagnostics.md)
+- [Input/output pipe adapters](./done_stage1_input_output_pipeadapters.md)
+- [Reproducibility, history, and resource limits](./done_stage1_reproducibility_history_resources.md)
+- [Parallelism readiness](./done_stage1_parallelism_readiness.md)
+- [Examples and AI evaluation](./done_stage1_examples_and_ai_evaluation.md)
 
 ## Stage 2 — GUI
 

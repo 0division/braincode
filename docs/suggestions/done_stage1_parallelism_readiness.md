@@ -1,4 +1,4 @@
-# Stage 1 suggestion: Prepare for massive parallelism
+# Completed Stage 1: Prepare for massive parallelism
 
 Massive parallelism is a BrainCode product target. Stage 1 should make that
 target concrete and prepare the Python implementation to serve as its
@@ -18,8 +18,11 @@ runtime already runs in parallel.
   explicitly qualify.
 
 The `parallel` keyword describes the intended iteration domain and synchronous
-semantics in the current language; the reference runtime executes those
-iterations serially.
+semantics; the reference runtime executes those iterations serially. The
+`ExecutionBackend` and `RuntimeSession` protocols define the extension
+boundary, and `python -m braincode.benchmark` records deterministic serial
+timing/memory baselines. No parallel hardware or GPU implementation is
+claimed.
 
 ## Later-stage handoff
 

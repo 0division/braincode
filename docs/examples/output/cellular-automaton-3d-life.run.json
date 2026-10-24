@@ -1,0 +1,189 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "cells": [
+        [
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ]
+        ],
+        [
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ]
+        ],
+        [
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ]
+        ]
+      ]
+    },
+    {
+      "cells": [
+        [
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ]
+        ],
+        [
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ]
+        ],
+        [
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ],
+          [
+            false,
+            false,
+            false
+          ]
+        ]
+      ]
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "cells": [
+      [
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false
+        ]
+      ],
+      [
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false
+        ]
+      ],
+      [
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          false,
+          false,
+          false
+        ]
+      ]
+    ]
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {
+    "DEPTH": 3,
+    "HEIGHT": 3,
+    "WIDTH": 3
+  },
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# Proposed 3D cellular automaton using a 26-cell Moore neighborhood.\n# Rule: birth with 6 live neighbors; survival with 5, 6, or 7 (B6/S567).\n# This is a concrete 3D rule choice for the example, not a claim that it is\n# the unique or canonical 3D extension of Conway's 2D Life.\n#\n# Population/indexing and neighbor_count are implemented by the v0.2\n# reference compiler; parallel execution is currently serial.\n# The host supplies the initial 3D state. Each cell at T+1 reads only the\n# committed population at T.\n\npopulation :cells[WIDTH, HEIGHT, DEPTH] of Bool\nboundary :cells = dead\n\neach (:x, :y, :z) in :cells parallel:\n    let neighbors = neighbor_count(\n        :cells~1, :x, :y, :z,\n        neighborhood=moore_3d, boundary=dead\n    )\n    let was_alive = :cells[:x, :y, :z]~1\n    :cells[:x, :y, :z] =\n        True if neighbors == 6\n        else True if (\n            was_alive\n            and (\n                neighbors == 5\n                or neighbors == 6\n                or neighbors == 7\n            )\n        )\n        else False\n\n# `let` names are local to this cell's rule evaluation, not temporal signals.\n# Work per generation is O(WIDTH * HEIGHT * DEPTH), with 26 neighbor reads\n# per cell. The frame storage grows with the volume, so full-history tracing\n# is likely unsuitable for large runs.\n",
+  "source_name": "cellular-automaton-3d-life.bc",
+  "source_sha256": "3f0d766be372a3fc743eca1ef533ca2793541a721b86acf0399720da34699c36",
+  "ticks": 1
+}

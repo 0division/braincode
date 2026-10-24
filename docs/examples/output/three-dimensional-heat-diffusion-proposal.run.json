@@ -1,0 +1,101 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "temperature": [
+        [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ]
+      ]
+    },
+    {
+      "temperature": [
+        [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0010000000474974513
+          ]
+        ],
+        [
+          [
+            0.0,
+            0.0010000000474974513
+          ],
+          [
+            0.0010000000474974513,
+            0.996999979019165
+          ]
+        ]
+      ]
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "temperature": [
+      [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ]
+    ]
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {
+    "DEPTH": 2,
+    "HEIGHT": 2,
+    "WIDTH": 2,
+    "alpha": 0.1,
+    "dt": 0.01,
+    "dx": 1.0,
+    "dy": 1.0,
+    "dz": 1.0
+  },
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# The syntax is supported by the reference compiler. The workload should\n# use small dimensions on the serial Python backend.\n#\n# Workload: explicit finite-difference heat diffusion on a 3D grid.\n# Approximate work: O(width * height * depth) updates per step.\n# A 1,024^3 Float32 grid needs about 4 GiB for one frame.\n#\n# The host supplies the initial :temperature population at T=0.\n# All six stencil reads use the same committed prior frame.\n\npopulation :temperature[WIDTH, HEIGHT, DEPTH] of Float32\nboundary :temperature = insulated\n\neach (:x, :y, :z) in :temperature parallel:\n    :temperature[:x, :y, :z] =\n        :temperature[:x, :y, :z]~1\n        + :alpha * :dt * (\n            (:temperature[:x - 1, :y, :z]~1\n             - 2 * :temperature[:x, :y, :z]~1\n             + :temperature[:x + 1, :y, :z]~1) / :dx ** 2\n          + (:temperature[:x, :y - 1, :z]~1\n             - 2 * :temperature[:x, :y, :z]~1\n             + :temperature[:x, :y + 1, :z]~1) / :dy ** 2\n          + (:temperature[:x, :y, :z - 1]~1\n             - 2 * :temperature[:x, :y, :z]~1\n             + :temperature[:x, :y, :z + 1]~1) / :dz ** 2\n        )\n\n# The runtime should validate numerical stability constraints and retain only\n# the history required by the maximum delay when full tracing is disabled.\n",
+  "source_name": "three-dimensional-heat-diffusion-proposal.bc",
+  "source_sha256": "380b96b51a2ec58860d9ea9281590dfcc0ca2fecf9926466450249ed6a31f52a",
+  "ticks": 1
+}

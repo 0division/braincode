@@ -1,0 +1,125 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "hidden": [
+        [
+          0.0,
+          0.0
+        ]
+      ],
+      "input": [
+        [
+          1.0,
+          2.0
+        ]
+      ],
+      "output": [
+        [
+          0.0
+        ]
+      ],
+      "weights_1": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "weights_2": [
+        [
+          3.0
+        ],
+        [
+          4.0
+        ]
+      ]
+    },
+    {
+      "hidden": [
+        [
+          1.0,
+          2.0
+        ]
+      ],
+      "input": [
+        [
+          1.0,
+          2.0
+        ]
+      ],
+      "output": [
+        [
+          0.0
+        ]
+      ],
+      "weights_1": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "weights_2": [
+        [
+          3.0
+        ],
+        [
+          4.0
+        ]
+      ]
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "input": [
+      [
+        1.0,
+        2.0
+      ]
+    ],
+    "weights_1": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "weights_2": [
+      [
+        3.0
+      ],
+      [
+        4.0
+      ]
+    ]
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {
+    "BATCH": 1,
+    "HIDDEN_WIDTH": 2,
+    "INPUT_WIDTH": 2,
+    "OUTPUT_WIDTH": 1
+  },
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# PROPOSAL \u2014 tensors, batches, reductions, and explicit kernel stages are not\n# yet part of the defined BrainCode grammar.\n#\n# Workload: batched dense neural-network inference.\n# Approximate work: O(batch * sum(layer_width[i] * layer_width[i+1])).\n# Matrix operations and independent samples expose substantial parallel work.\n#\n# Inputs and weights are signals recorded in each frame. Each rule computes\n# its state for T+1 using only the committed frame at T. Consequently, this\n# models one layer of temporal propagation per tick; it does not compute a\n# conventional whole-network inference pass in a single tick.\n\ntensor :input[BATCH, INPUT_WIDTH] of Float32\ntensor :weights_1[INPUT_WIDTH, HIDDEN_WIDTH] of Float32\ntensor :weights_2[HIDDEN_WIDTH, OUTPUT_WIDTH] of Float32\ntensor :hidden[BATCH, HIDDEN_WIDTH] of Float32\ntensor :output[BATCH, OUTPUT_WIDTH] of Float32\n\neach (:sample, :h) in :hidden parallel:\n    :hidden[:sample, :h] = relu(sum(\n        :input[:sample, :i]~1 * :weights_1[:i, :h]~1\n        for :i in range(:INPUT_WIDTH)\n    ))\n\neach (:sample, :o) in :output parallel:\n    :output[:sample, :o] = sum(\n        :hidden[:sample, :h]~1 * :weights_2[:h, :o]~1\n        for :h in range(:HIDDEN_WIDTH)\n    )\n\n# The output therefore reflects the preceding tick's hidden state. This\n# deliberate tick latency follows the no-same-tick-dependency rule.\n",
+  "source_name": "deep-network-inference-proposal.bc",
+  "source_sha256": "11371c6f19b293b1f6254d7920e16505eb5e71e6ab3dbdfe70dbb04fa058314d",
+  "ticks": 1
+}

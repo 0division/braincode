@@ -1,0 +1,36 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "t": 4
+    },
+    {
+      "t": 7
+    },
+    {
+      "t": 7
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [
+    {
+      "t": 4
+    }
+  ],
+  "initial_state": {
+    "t": 7
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {},
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# Scalar BrainCode draft demonstrating a Python host function in an expression.\n# `max` must be available through the runtime's approved pure-function registry.\n# At T+1, :t~1 is the committed value at T and :t~2 is the value at T-1.\n\n:t = max(:t~1, :t~2)\n",
+  "source_name": "host-function-max.bc",
+  "source_sha256": "71a0d659925f2d2c325c3f673f1a738cb3d4f6c139c25e8491ab3cf624db81fc",
+  "ticks": 1
+}

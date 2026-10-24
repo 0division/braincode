@@ -213,7 +213,8 @@ def parse_expression(expression: Expression) -> ast.Expression:
         parsed = ast.parse(_rewrite_braincode(expression.source), mode="eval")
     except (SyntaxError, ExpressionError) as error:
         raise ExpressionError(
-            f"{expression.location.source}:{expression.location.line}: "
+            f"{expression.location.source}:{expression.location.line}:"
+            f"{expression.location.column}: "
             f"invalid expression: {error}"
         ) from error
     _validate_node(parsed.body)

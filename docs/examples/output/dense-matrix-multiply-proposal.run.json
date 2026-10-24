@@ -1,0 +1,108 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "A": [
+        [
+          1.0,
+          2.0
+        ],
+        [
+          3.0,
+          4.0
+        ]
+      ],
+      "B": [
+        [
+          5.0,
+          6.0
+        ],
+        [
+          7.0,
+          8.0
+        ]
+      ],
+      "C": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "A": [
+        [
+          1.0,
+          2.0
+        ],
+        [
+          3.0,
+          4.0
+        ]
+      ],
+      "B": [
+        [
+          5.0,
+          6.0
+        ],
+        [
+          7.0,
+          8.0
+        ]
+      ],
+      "C": [
+        [
+          19.0,
+          22.0
+        ],
+        [
+          43.0,
+          50.0
+        ]
+      ]
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "A": [
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "B": [
+      [
+        5,
+        6
+      ],
+      [
+        7,
+        8
+      ]
+    ]
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {
+    "N": 2
+  },
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# The syntax is supported by the reference compiler. Use small matrices on\n# the serial Python backend; this is not a performance implementation.\n#\n# Workload: dense matrix multiplication.\n# Approximate work: O(N^3) multiply-add terms for N x N matrices.\n# Two 16,384 x 16,384 Float32 input matrices are about 2 GiB each; the output\n# is another 1 GiB. Classical multiplication requires about 4.4 trillion\n# multiply-add terms at this size.\n#\n# A and B are host-provided input signals recorded in each frame. The rule\n# computes C at T+1 exclusively from A and B in the committed frame at T.\n# Each output is reduced independently; no newly computed value is read.\n\ntensor :A[N, N] of Float32\ntensor :B[N, N] of Float32\ntensor :C[N, N] of Float32\n\neach (:i, :j) in :C parallel:\n    :C[:i, :j] = sum(\n        :A[:i, :k]~1 * :B[:k, :j]~1\n        for :k in range(:N)\n    )\n\n# This is a temporal update whose expression performs a reduction over the\n# previous frame. The reference runtime evaluates each reduction in order.\n",
+  "source_name": "dense-matrix-multiply-proposal.bc",
+  "source_sha256": "8c6913cc9a678a3da02f97d5561bd1f4fc0d216151b7ba22f9120dcb5ac8fa08",
+  "ticks": 1
+}

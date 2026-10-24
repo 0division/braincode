@@ -18,4 +18,4 @@ These documents develop the v0.1 concept and describe the evolving v0.2 implemen
 
 ## Status
 
-The compiler and serial Python reference runtime implement the subset used by the current examples. Type-system details, explicit `.bc` input declarations, actions, resource limits, replay packaging, and accelerated backends remain open implementation work. The v0.1 file remains as historical context.
+The compiler and serial Python reference runtime implement the subset used by the current examples. See the [Stage 1 contract](./stage1-contract.md) for declared-value checks, host adapters, run manifests, history/resource limits, and backend boundaries. Full static type inference, model-level actions, and accelerated backends remain future work. The v0.1 file remains as historical context.

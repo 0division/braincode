@@ -65,7 +65,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 16,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
             },
@@ -251,7 +251,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 16,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
           },
@@ -259,7 +259,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 16,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
               },
@@ -285,7 +285,7 @@
             },
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 16,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\game-of-life-large-proposal.bc"
               },

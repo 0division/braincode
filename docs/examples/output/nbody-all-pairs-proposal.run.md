@@ -92,8 +92,8 @@ each :i in :bodies parallel:
 [
   {
     "bodies": [
-      0,
-      0
+      0.0,
+      0.0
     ],
     "mass": [
       1.0,
@@ -122,8 +122,8 @@ each :i in :bodies parallel:
   },
   {
     "bodies": [
-      0,
-      0
+      0.0,
+      0.0
     ],
     "mass": [
       1.0,

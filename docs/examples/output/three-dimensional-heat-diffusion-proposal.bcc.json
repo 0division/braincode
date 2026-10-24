@@ -81,7 +81,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 15,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
             },
@@ -1245,7 +1245,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 15,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
           },
@@ -1253,7 +1253,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 15,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
               },
@@ -1279,7 +1279,7 @@
             },
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 15,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
               },
@@ -1305,7 +1305,7 @@
             },
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 15,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\three-dimensional-heat-diffusion-proposal.bc"
               },

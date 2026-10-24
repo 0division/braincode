@@ -223,7 +223,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 20,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
             },
@@ -445,7 +445,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 20,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
           },
@@ -453,7 +453,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 20,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
               },
@@ -479,7 +479,7 @@
             },
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 20,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
               },
@@ -523,7 +523,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 26,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
             },
@@ -732,7 +732,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 26,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
           },
@@ -740,7 +740,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 26,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
               },
@@ -766,7 +766,7 @@
             },
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 26,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\deep-network-inference-proposal.bc"
               },

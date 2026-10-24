@@ -1,0 +1,80 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "cells": [
+        [
+          false,
+          true,
+          false
+        ],
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          true,
+          true,
+          true
+        ]
+      ]
+    },
+    {
+      "cells": [
+        [
+          false,
+          false,
+          false
+        ],
+        [
+          true,
+          false,
+          true
+        ],
+        [
+          false,
+          true,
+          true
+        ]
+      ]
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "cells": [
+      [
+        false,
+        true,
+        false
+      ],
+      [
+        false,
+        false,
+        true
+      ],
+      [
+        true,
+        true,
+        true
+      ]
+    ]
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {
+    "HEIGHT": 3,
+    "WIDTH": 3
+  },
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# Proposed 2D cellular-automaton syntax: Conway's Game of Life (B3/S23).\n# Population/indexing and neighbor_count are implemented by the v0.2\n# reference compiler; parallel execution is currently serial.\n#\n# Initial frame is supplied by the host. Each cell in T+1 is computed only\n# from the committed grid at T. `neighbor_count` is a data-parallel stencil\n# primitive; it should be lowered by the backend, not called as a Python\n# function once per cell.\n\npopulation :cells[WIDTH, HEIGHT] of Bool\nboundary :cells = dead\n\neach (:x, :y) in :cells parallel:\n    let neighbors = neighbor_count(\n        :cells~1, :x, :y, neighborhood=moore_2d, boundary=dead\n    )\n    let was_alive = :cells[:x, :y]~1\n    :cells[:x, :y] =\n        True if neighbors == 3\n        else True if (was_alive and neighbors == 2)\n        else False\n\n# B3/S23: a dead cell is born with exactly three live neighbors; a live cell\n# survives with two or three. All other cells are dead in the next frame.\n#\n# `let` names are local to this cell's rule evaluation, not temporal signals.\n# Work per generation is O(WIDTH * HEIGHT), with eight neighbor reads per cell.\n",
+  "source_name": "cellular-automaton-2d-conway.bc",
+  "source_sha256": "56768c57195ab9583e841c9bbcfa4697c1a3c5983f80241345467761bed0aa42",
+  "ticks": 1
+}

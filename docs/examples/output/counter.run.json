@@ -1,0 +1,41 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "counter": 0
+    },
+    {
+      "counter": 1
+    },
+    {
+      "counter": 2
+    },
+    {
+      "counter": 3
+    },
+    {
+      "counter": 4
+    },
+    {
+      "counter": 5
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "counter": 0
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {},
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# Scalar BrainCode draft.\n# Initial state supplied by the host: :counter = 0 at T=0.\n# Each assignment computes the next frame from committed history.\n\n:counter = :counter~1 + 1\n",
+  "source_name": "counter.bc",
+  "source_sha256": "61d8d780e73ec1272902235e60c2580229e7bb8e9806cef76010db30e3a6a428",
+  "ticks": 5
+}

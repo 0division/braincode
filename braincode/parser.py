@@ -160,7 +160,7 @@ class _Parser:
                 raise BrainCodeSyntaxError(
                     f"{self.source_name}:{line_number}: unexpected indentation"
                 )
-            location = SourceLocation(self.source_name, line_number)
+            location = SourceLocation(self.source_name, line_number, indent + 1)
             self.index += 1
 
             declaration = _DECLARATION.fullmatch(text)
@@ -265,7 +265,15 @@ class _Parser:
         return self._block(child_indent)
 
     def _expression(self, source: str, location: SourceLocation) -> Expression:
-        expression = Expression(source.strip(), location)
+        leading_space = len(source) - len(source.lstrip())
+        expression = Expression(
+            source.strip(),
+            SourceLocation(
+                location.source,
+                location.line,
+                location.column + leading_space,
+            ),
+        )
         try:
             parse_expression(expression)
         except ExpressionError as error:
@@ -274,7 +282,7 @@ class _Parser:
 
     def _error(self, location: SourceLocation, message: str) -> None:
         raise BrainCodeSyntaxError(
-            f"{location.source}:{location.line}: {message}"
+            f"{location.source}:{location.line}:{location.column}: {message}"
         )
 
 

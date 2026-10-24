@@ -150,7 +150,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 17,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
             },
@@ -624,7 +624,7 @@
           },
           "kind": "let",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 17,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
           },
@@ -633,7 +633,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 27,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
             },
@@ -727,7 +727,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 27,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
           },
@@ -735,7 +735,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 27,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
               },
@@ -764,7 +764,7 @@
         {
           "expression": {
             "location": {
-              "column": 1,
+              "column": 5,
               "line": 28,
               "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
             },
@@ -900,7 +900,7 @@
           },
           "kind": "assignment",
           "location": {
-            "column": 1,
+            "column": 5,
             "line": 28,
             "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
           },
@@ -908,7 +908,7 @@
           "target_indices": [
             {
               "location": {
-                "column": 1,
+                "column": 5,
                 "line": 28,
                 "source": "C:\\GDrive\\Proj\\2026_braincode\\docs\\examples\\nbody-all-pairs-proposal.bc"
               },

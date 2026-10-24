@@ -1,6 +1,6 @@
 # BrainCode Examples
 
-These `.bc` files use BrainCode's own DSL syntax; they are not Python source. The v0.2 compiler and Python reference runtime can compile and run every example with appropriate host-provided initial state and parameters. The larger workloads should be run with small dimensions on the serial reference backend.
+These `.bc` files use BrainCode's own DSL syntax; they are not Python source. The compiler and Python reference runtime can compile and run every example with appropriate host-provided initial state and parameters. The larger workloads should be run with small dimensions on the serial reference backend.
 
 The scalar examples use the preferred draft notation `:signal = expression`. A transition from T to T+1 reads only committed history: `:signal~1` means the value at T. Rules cannot see one another's uncommitted results. Each example's host inputs and run settings live in a sibling `.bc.in.json` file, separate from the model source.
 
@@ -12,6 +12,7 @@ The scalar examples use the preferred draft notation `:signal = expression`. A t
 - [moving-average.bc](./moving-average.bc) — delayed reads over an input signal
 - [host-function-max.bc](./host-function-max.bc) — a Python `max` function exposed to a BrainCode expression
 - [conditional-hold.bc](./conditional-hold.bc) — a conditional state update using the default hold behavior
+- [typed-input-counter.bc](./typed-input-counter.bc) — explicitly declared `Int32` state and read-only tick input
 
 ## Cellular automata
 
@@ -51,4 +52,4 @@ The scalar syntax is `:signal = expression`; `:signal~1` reads the committed val
 
 The standard-library test suite compiles all examples and runs them at small representative dimensions. It is a correctness/conformance check, not a performance benchmark.
 
-To compile and execute every example, including both `.bcc` artifact forms, run `bash run_examples.sh` from the project root. All generated files go under `docs/examples/output/`: expanded BrainCode source, structured JSON IR, per-example execution traces and `.run.md` reports, a JSON summary, a chronological `run.log`, and a Markdown `run-summary.md`. Each per-run report contains the input data, BrainCode source, and output trace. The CLI `run` command also supports `--markdown-output PATH` or `"md_output": true` in its input configuration.
+To compile and execute every example, including both `.bcc` artifact forms, run `bash run_examples.sh` from the project root. All generated files go under `docs/examples/output/`: expanded BrainCode source, structured JSON IR, per-example execution traces, `.run.md` reports, replayable `.run.json` manifests, a JSON summary, a chronological `run.log`, and a Markdown `run-summary.md`. Each per-run report contains the input data, BrainCode source, and output trace. The CLI supports `--markdown-output PATH`, `"md_output": true`, and `"manifest_output": true` in its run configuration. Run manifests can be replayed with `python -m braincode replay path/to/run.json`.

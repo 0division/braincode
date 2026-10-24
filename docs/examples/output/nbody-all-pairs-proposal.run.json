@@ -1,0 +1,116 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-run",
+  "frames": [
+    {
+      "bodies": [
+        0.0,
+        0.0
+      ],
+      "mass": [
+        1.0,
+        1.0
+      ],
+      "position": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "velocity": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "bodies": [
+        0.0,
+        0.0
+      ],
+      "mass": [
+        1.0,
+        1.0
+      ],
+      "position": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0
+        ]
+      ],
+      "velocity": [
+        [
+          0.009998500187478127,
+          0.0
+        ],
+        [
+          -0.009998500187478127,
+          0.0
+        ]
+      ]
+    }
+  ],
+  "host_functions": [],
+  "initial_history": [],
+  "initial_state": {
+    "bodies": [
+      0,
+      0
+    ],
+    "mass": [
+      1.0,
+      1.0
+    ],
+    "position": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ]
+    ],
+    "velocity": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ]
+  },
+  "input_adapters": [],
+  "input_frames": [],
+  "ir_version": 1,
+  "language_version": "0.2",
+  "manifest_version": 1,
+  "parameters": {
+    "BODY_COUNT": 2,
+    "G": 1.0,
+    "VECTOR_DIM": 2,
+    "softening": 0.01,
+    "time_step": 0.01
+  },
+  "runtime_options": {},
+  "runtime_version": "0.2.0",
+  "source": "# The syntax is supported by the reference compiler. Use small body counts\n# on the serial Python backend; this is not a performance implementation.\n#\n# Workload: gravitational N-body simulation with all-pairs interactions.\n# Approximate work: O(body_count^2) pair interactions per tick.\n# At 100,000 bodies, this is about 10 billion interactions per tick.\n#\n# The host supplies initial positions and velocities at T=0, plus masses and\n# physical constants. Both rules compute T+1 from the committed T frame.\n\npopulation :bodies[BODY_COUNT]\npopulation :mass[BODY_COUNT] of Float64\npopulation :position[BODY_COUNT, VECTOR_DIM] of Float64\npopulation :velocity[BODY_COUNT, VECTOR_DIM] of Float64\n\neach :i in :bodies parallel:\n    let acceleration = sum(\n        :G * :mass[:j]\n        * (:position[:j]~1 - :position[:i]~1)\n        / (\n            length(:position[:j]~1 - :position[:i]~1) ** 2\n            + :softening ** 2\n        ) ** 1.5\n        for :j in range(:BODY_COUNT)\n        if :j != :i\n    )\n    :velocity[:i] = :velocity[:i]~1 + :time_step * acceleration\n    :position[:i] = :position[:i]~1 + :time_step * :velocity[:i]~1\n\n# This is a simplified explicit-Euler-style sketch, not a validated integrator.\n# Force law, units, integration accuracy, collision handling, and reduction\n# reproducibility all need precise definitions.\n# :G, :mass, :softening, :time_step, and :BODY_COUNT are immutable model\n# parameters; positions and velocities are dynamic state read from T.\n",
+  "source_name": "nbody-all-pairs-proposal.bc",
+  "source_sha256": "b5716f70bb854b769120183e5b7a2e538d4d0d74e8303b887648e57decf9c76b",
+  "ticks": 1
+}

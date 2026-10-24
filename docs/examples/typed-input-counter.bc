@@ -1,0 +1,4 @@
+input :increment of Int32
+state :counter of Int32
+
+:counter = :counter~1 + :increment~1

@@ -1,12 +1,12 @@
 # BrainCode: Language and Compilation Model
 
-> The v0.2 subset described here has a compiler and serial Python reference runtime. Future backend and tooling features remain proposals.
+> The current subset has a compiler and serial Python reference runtime. Future backend and tooling features remain proposals.
 
 ## Implemented v0.2 subset
 
 The compiler currently parses scalar rules, delayed reads, conditions, local `let`, population/tensor declarations, indexed reads and writes, `each ... parallel`, boundaries, named function calls, and single-clause generator reductions. It emits expanded BrainCode source in `.bcc` and a versioned structured JSON IR in `.bcc.json`. Both forms can be loaded by the deterministic, serial reference runtime. Every current `.bc` example is covered by a small-scale compile/run test.
 
-The implementation deliberately does not promise hardware parallelism. `parallel` defines a data-parallel iteration domain; the Python backend visits elements serially. Type checking, explicit `.bc` input/parameter declarations, actions, bounded history, and optimized backends remain future work. See the [implementation status and roadmap](./implementation-plan.md) for details.
+The implementation deliberately does not promise hardware parallelism. `parallel` defines a data-parallel iteration domain; the Python backend visits elements serially. Scalar `state` and `input` declarations support checked types; input declarations are read-only. Optional bounded history and run manifests support replay. Model-level actions, complete static type inference, and optimized backends remain future work. See the [Stage 1 contract](./stage1-contract.md) and [implementation status and roadmap](./implementation-plan.md).
 
 The frontend is intentionally lightweight: a custom indentation-aware statement parser uses regular expressions for a few statement forms and explicit delimiter scanning for multiline input. BrainCode references are rewritten into internal nodes, then the restricted Python-like expression subset is parsed and allowlisted. This is not a full Python parser for `.bc` files, and the small current grammar does not justify introducing Flex or another generated lexer. If the grammar grows substantially—or the implementation moves to C/C++—a formal lexer/parser generator can be reconsidered.
 
@@ -62,15 +62,20 @@ BrainCode owns its statement syntax and temporal references such as `:signal~1`.
 
 Host functions can be passed to the runtime explicitly. Built-in pure functions include `min`, `max`, `abs`, `sum`, and selected `math` operations; the compiler/runtime does not execute arbitrary Python source or use unrestricted `eval`.
 
-Recommended initial policy:
+Implemented policy:
 
 - allow built-in pure functions such as `min`, `max`, `abs`, and selected `math` functions;
-- allow additional host functions only when explicitly registered with type and purity metadata;
+- allow additional host functions only when explicitly registered by the host;
 - keep file access, network access, mutation, randomness, and other side effects outside state expressions;
 - express external values as tick-indexed inputs;
 - represent side effects as explicit BrainCode actions that run after a successful state commit.
 
-The current built-in registry includes `min`, `max`, `abs`, `sum`, `range`, basic conversions, and selected `math` functions. User functions are explicitly supplied to the runtime; their purity and argument types are not statically verified yet.
+The current built-in registry includes `min`, `max`, `abs`, `sum`, `range`, basic conversions, and selected `math` functions. User functions are explicitly supplied to the runtime; their purity and argument types are not statically verified. Their names can be recorded in run manifests, but callback code is not serialized.
+
+`state :counter of Int32` declares a state value required in `initial_state`.
+`input :temperature of Float32` declares a read-only host value accepted in
+initial or tick-indexed input frames. Declared values are checked at storage
+boundaries. Legacy implicit scalar values remain supported.
 
 ## Temporal assignment semantics
 
@@ -165,4 +170,10 @@ Calling host functions from expressions is useful, but unconstrained calls can u
 
 ## Remaining implementation work
 
-The first compiler settles the syntax needed by the examples but is not a complete stable language specification. Remaining work includes complete static type checking, explicit declaration syntax for host inputs and parameters, numeric overflow/precision guarantees, resource budgets, a stable host-function capability API, and optimized backends. The illustrative YAML file does not yet configure runtime behavior.
+The first compiler settles the syntax needed by the examples but is not a
+complete stable language specification. The [Stage 1 contract](./stage1-contract.md)
+specifies declared numeric behavior, input/output adapter ordering, run
+manifests and replay, optional history/resource limits, deterministic
+reductions, and the execution backend interface. Complete static type
+inference, model-level actions, and optimized backends remain future work. The
+illustrative YAML file does not yet configure runtime behavior.

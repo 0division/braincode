@@ -21,6 +21,7 @@ The earlier consolidated [BrainCode v0.2.md](./BrainCode%20v0.2.md) remains as a
 - [Project handoff](./docs/PROJECT-HANDOFF.md) — concise context and verification state for resuming work in a fresh chat
 - [Vision and scope](./docs/01-vision.md) — purpose, target applications, boundaries, and design goals
 - [Execution model](./docs/02-execution-model.md) — tick semantics, updates, conditions, and determinism
+- [Stage 1 contract](./docs/stage1-contract.md) — declared values, numeric rules, adapters, replay manifests, runtime budgets, and the backend boundary
 - [Time, history, and replay](./docs/03-time-history-replay.md) — TVB, storage, inputs, and what “time travel” means
 - [AI and discrete models](./docs/04-ai-and-discrete-models.md) — AI-assisted programming as a hypothesis and possible discrete models
 - [Further concept improvements](./docs/05-concept-improvements.md) — additional design gaps, recommendations, and priorities
@@ -51,9 +52,9 @@ To execute every checked-in example and save each compiled artifact, trace, and 
 bash run_examples.sh
 ```
 
-Each `.bc` example has a companion `.bc.in.json` file containing host-provided initial state, parameters, optional prior history, and the number of ticks to run. This keeps runtime data separate from model logic. The output folder contains an expanded `.bcc`, structured `.bcc.json`, `.output.json` execution trace, and `.run.md` report for every example, plus `summary.json`, a chronological `run.log`, and a readable `run-summary.md`. Each `.run.md` records the resolved input data, BrainCode source, and full output trace. Examples use small inputs suitable for the serial Python reference runtime.
+Each `.bc` example has a companion `.bc.in.json` file containing host-provided initial state, parameters, optional prior history, and the number of ticks to run. This keeps runtime data separate from model logic. The output folder contains an expanded `.bcc`, structured `.bcc.json`, `.output.json` execution trace, `.run.md` report, and versioned `.run.json` replay manifest for every example, plus `summary.json`, a chronological `run.log`, and a readable `run-summary.md`. Each `.run.md` records input data, BrainCode source, and output; replay manifests contain the source hash, runtime settings, input sequence, and trace. Examples use small inputs suitable for the serial Python reference runtime.
 
-For a single CLI run, `--markdown-output PATH` writes the same detailed report. A run configuration may instead set `"md_output": true` to write it to `output/<source-name>.run.md` beside the source directory, or set `"md_output"` to an explicit output path.
+For a single CLI run, `--markdown-output PATH` writes the detailed report. A run configuration may set `"md_output": true` to write it to `output/<source-name>.run.md` beside the source, or `"manifest_output": true` to save a replay manifest. Use `python -m braincode replay path/to/run.json` to replay it. CLI/API resource limits include `history_window`, `max_ticks`, `max_population_elements`, and `max_frame_bytes`.
 
 The test suite combines pytest parameterized checks with standard-library
 `unittest` cases. It covers compiler/runtime round trips, UTF-8 boundary values,
