@@ -1,0 +1,39 @@
+# Compiled BrainCode source expanded from: docs\examples\cellular-automaton-1d-rule110.bc
+# Data-parallel loops are unfolded into indexed assignments.
+population :cells[7] of Bool
+boundary :cells = False
+# instance (:i=0)
+let left_i0 = :cells[0 - 1]~1
+let center_i0 = :cells[0]~1
+let right_i0 = :cells[0 + 1]~1
+:cells[0] = ( (left_i0 and center_i0 and not right_i0) or (left_i0 and not center_i0 and right_i0) or (not left_i0 and center_i0 and right_i0) or (not left_i0 and center_i0 and not right_i0) or (not left_i0 and not center_i0 and right_i0) )
+# instance (:i=1)
+let left_i1 = :cells[1 - 1]~1
+let center_i1 = :cells[1]~1
+let right_i1 = :cells[1 + 1]~1
+:cells[1] = ( (left_i1 and center_i1 and not right_i1) or (left_i1 and not center_i1 and right_i1) or (not left_i1 and center_i1 and right_i1) or (not left_i1 and center_i1 and not right_i1) or (not left_i1 and not center_i1 and right_i1) )
+# instance (:i=2)
+let left_i2 = :cells[2 - 1]~1
+let center_i2 = :cells[2]~1
+let right_i2 = :cells[2 + 1]~1
+:cells[2] = ( (left_i2 and center_i2 and not right_i2) or (left_i2 and not center_i2 and right_i2) or (not left_i2 and center_i2 and right_i2) or (not left_i2 and center_i2 and not right_i2) or (not left_i2 and not center_i2 and right_i2) )
+# instance (:i=3)
+let left_i3 = :cells[3 - 1]~1
+let center_i3 = :cells[3]~1
+let right_i3 = :cells[3 + 1]~1
+:cells[3] = ( (left_i3 and center_i3 and not right_i3) or (left_i3 and not center_i3 and right_i3) or (not left_i3 and center_i3 and right_i3) or (not left_i3 and center_i3 and not right_i3) or (not left_i3 and not center_i3 and right_i3) )
+# instance (:i=4)
+let left_i4 = :cells[4 - 1]~1
+let center_i4 = :cells[4]~1
+let right_i4 = :cells[4 + 1]~1
+:cells[4] = ( (left_i4 and center_i4 and not right_i4) or (left_i4 and not center_i4 and right_i4) or (not left_i4 and center_i4 and right_i4) or (not left_i4 and center_i4 and not right_i4) or (not left_i4 and not center_i4 and right_i4) )
+# instance (:i=5)
+let left_i5 = :cells[5 - 1]~1
+let center_i5 = :cells[5]~1
+let right_i5 = :cells[5 + 1]~1
+:cells[5] = ( (left_i5 and center_i5 and not right_i5) or (left_i5 and not center_i5 and right_i5) or (not left_i5 and center_i5 and right_i5) or (not left_i5 and center_i5 and not right_i5) or (not left_i5 and not center_i5 and right_i5) )
+# instance (:i=6)
+let left_i6 = :cells[6 - 1]~1
+let center_i6 = :cells[6]~1
+let right_i6 = :cells[6 + 1]~1
+:cells[6] = ( (left_i6 and center_i6 and not right_i6) or (left_i6 and not center_i6 and right_i6) or (not left_i6 and center_i6 and right_i6) or (not left_i6 and center_i6 and not right_i6) or (not left_i6 and not center_i6 and right_i6) )

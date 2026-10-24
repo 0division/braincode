@@ -1,0 +1,6 @@
+# Scalar BrainCode draft.
+# :temperature is a host-provided input recorded in the TVB each tick.
+# While computing T+1, delays 1, 2, and 3 read input values at T, T-1,
+# and T-2. The host must provide enough initial input history.
+
+:average = (:temperature~1 + :temperature~2 + :temperature~3) / 3

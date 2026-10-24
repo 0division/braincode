@@ -1,0 +1,12 @@
+{
+  "initial_state": {
+    "t": 7
+  },
+  "parameters": {},
+  "initial_history": [
+    {
+      "t": 4
+    }
+  ],
+  "ticks": 1
+}

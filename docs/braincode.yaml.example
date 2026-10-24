@@ -1,0 +1,12 @@
+braincode:
+  version: 0.2
+  braincode_afferent_language: python
+  braincode_language: braincode
+  braincode_efferent_language: python
+  source_suffix: .bc
+  artifact_suffix: .bcc
+  artifact_format: braincode-ir
+  functions:
+    - max
+    - min
+    - abs

@@ -1,0 +1,15 @@
+{
+  "initial_state": {
+    "temperature": 3
+  },
+  "parameters": {},
+  "initial_history": [
+    {
+      "temperature": 1
+    },
+    {
+      "temperature": 2
+    }
+  ],
+  "ticks": 1
+}

@@ -1,0 +1,17 @@
+{
+  "initial_state": {
+    "bodies": [0, 0],
+    "mass": [1.0, 1.0],
+    "position": [[0.0, 0.0], [1.0, 0.0]],
+    "velocity": [[0.0, 0.0], [0.0, 0.0]]
+  },
+  "parameters": {
+    "BODY_COUNT": 2,
+    "VECTOR_DIM": 2,
+    "G": 1.0,
+    "softening": 0.01,
+    "time_step": 0.01
+  },
+  "initial_history": [],
+  "ticks": 1
+}

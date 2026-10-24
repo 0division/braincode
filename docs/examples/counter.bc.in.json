@@ -1,0 +1,8 @@
+{
+  "initial_state": {
+    "counter": 0
+  },
+  "parameters": {},
+  "initial_history": [],
+  "ticks": 5
+}

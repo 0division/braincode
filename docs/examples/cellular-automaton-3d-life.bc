@@ -1,0 +1,35 @@
+# Proposed 3D cellular automaton using a 26-cell Moore neighborhood.
+# Rule: birth with 6 live neighbors; survival with 5, 6, or 7 (B6/S567).
+# This is a concrete 3D rule choice for the example, not a claim that it is
+# the unique or canonical 3D extension of Conway's 2D Life.
+#
+# Population/indexing and neighbor_count are implemented by the v0.2
+# reference compiler; parallel execution is currently serial.
+# The host supplies the initial 3D state. Each cell at T+1 reads only the
+# committed population at T.
+
+population :cells[WIDTH, HEIGHT, DEPTH] of Bool
+boundary :cells = dead
+
+each (:x, :y, :z) in :cells parallel:
+    let neighbors = neighbor_count(
+        :cells~1, :x, :y, :z,
+        neighborhood=moore_3d, boundary=dead
+    )
+    let was_alive = :cells[:x, :y, :z]~1
+    :cells[:x, :y, :z] =
+        True if neighbors == 6
+        else True if (
+            was_alive
+            and (
+                neighbors == 5
+                or neighbors == 6
+                or neighbors == 7
+            )
+        )
+        else False
+
+# `let` names are local to this cell's rule evaluation, not temporal signals.
+# Work per generation is O(WIDTH * HEIGHT * DEPTH), with 26 neighbor reads
+# per cell. The frame storage grows with the volume, so full-history tracing
+# is likely unsuitable for large runs.

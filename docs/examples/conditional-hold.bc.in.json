@@ -1,0 +1,9 @@
+{
+  "initial_state": {
+    "alarm": true,
+    "trigger": false
+  },
+  "parameters": {},
+  "initial_history": [],
+  "ticks": 1
+}

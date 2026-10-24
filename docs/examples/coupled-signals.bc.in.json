@@ -1,0 +1,9 @@
+{
+  "initial_state": {
+    "left": 1,
+    "right": 10
+  },
+  "parameters": {},
+  "initial_history": [],
+  "ticks": 1
+}

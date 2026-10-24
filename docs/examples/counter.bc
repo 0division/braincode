@@ -1,0 +1,5 @@
+# Scalar BrainCode draft.
+# Initial state supplied by the host: :counter = 0 at T=0.
+# Each assignment computes the next frame from committed history.
+
+:counter = :counter~1 + 1

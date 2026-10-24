@@ -1,0 +1,517 @@
+{
+  "format": "braincode",
+  "ir_version": 1,
+  "language_version": "0.2",
+  "source_name": "docs\\examples\\cellular-automaton-1d-rule110.bc",
+  "statements": [
+    {
+      "dimensions": [
+        {
+          "location": {
+            "column": 1,
+            "line": 11,
+            "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+          },
+          "source": "7",
+          "tree": {
+            "kind": null,
+            "node": "Constant",
+            "value": 7
+          }
+        }
+      ],
+      "kind": "population",
+      "location": {
+        "column": 1,
+        "line": 11,
+        "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+      },
+      "name": "cells",
+      "value_type": "Bool"
+    },
+    {
+      "boundary": "False",
+      "kind": "boundary",
+      "location": {
+        "column": 1,
+        "line": 12,
+        "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+      },
+      "name": "cells"
+    },
+    {
+      "bindings": [
+        "i"
+      ],
+      "body": [
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 15,
+              "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+            },
+            "source": ":cells[:i - 1]~1",
+            "tree": {
+              "args": [
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": "cells"
+                },
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 1
+                },
+                {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [
+                    {
+                      "left": {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "i"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_symbol__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Sub"
+                      },
+                      "right": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      }
+                    }
+                  ],
+                  "node": "Tuple"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "__bc_history__",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "let",
+          "location": {
+            "column": 1,
+            "line": 15,
+            "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+          },
+          "name": "left"
+        },
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 16,
+              "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+            },
+            "source": ":cells[:i]~1",
+            "tree": {
+              "args": [
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": "cells"
+                },
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 1
+                },
+                {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [
+                    {
+                      "args": [
+                        {
+                          "kind": null,
+                          "node": "Constant",
+                          "value": "i"
+                        }
+                      ],
+                      "func": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "__bc_symbol__",
+                        "node": "Name"
+                      },
+                      "keywords": [],
+                      "node": "Call"
+                    }
+                  ],
+                  "node": "Tuple"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "__bc_history__",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "let",
+          "location": {
+            "column": 1,
+            "line": 16,
+            "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+          },
+          "name": "center"
+        },
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 17,
+              "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+            },
+            "source": ":cells[:i + 1]~1",
+            "tree": {
+              "args": [
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": "cells"
+                },
+                {
+                  "kind": null,
+                  "node": "Constant",
+                  "value": 1
+                },
+                {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "elts": [
+                    {
+                      "left": {
+                        "args": [
+                          {
+                            "kind": null,
+                            "node": "Constant",
+                            "value": "i"
+                          }
+                        ],
+                        "func": {
+                          "ctx": {
+                            "node": "Load"
+                          },
+                          "id": "__bc_symbol__",
+                          "node": "Name"
+                        },
+                        "keywords": [],
+                        "node": "Call"
+                      },
+                      "node": "BinOp",
+                      "op": {
+                        "node": "Add"
+                      },
+                      "right": {
+                        "kind": null,
+                        "node": "Constant",
+                        "value": 1
+                      }
+                    }
+                  ],
+                  "node": "Tuple"
+                }
+              ],
+              "func": {
+                "ctx": {
+                  "node": "Load"
+                },
+                "id": "__bc_history__",
+                "node": "Name"
+              },
+              "keywords": [],
+              "node": "Call"
+            }
+          },
+          "kind": "let",
+          "location": {
+            "column": 1,
+            "line": 17,
+            "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+          },
+          "name": "right"
+        },
+        {
+          "expression": {
+            "location": {
+              "column": 1,
+              "line": 18,
+              "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+            },
+            "source": "( (left and center and not right) or (left and not center and right) or (not left and center and right) or (not left and center and not right) or (not left and not center and right) )",
+            "tree": {
+              "node": "BoolOp",
+              "op": {
+                "node": "Or"
+              },
+              "values": [
+                {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "left",
+                      "node": "Name"
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "center",
+                      "node": "Name"
+                    },
+                    {
+                      "node": "UnaryOp",
+                      "op": {
+                        "node": "Not"
+                      },
+                      "operand": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "right",
+                        "node": "Name"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "left",
+                      "node": "Name"
+                    },
+                    {
+                      "node": "UnaryOp",
+                      "op": {
+                        "node": "Not"
+                      },
+                      "operand": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "center",
+                        "node": "Name"
+                      }
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "right",
+                      "node": "Name"
+                    }
+                  ]
+                },
+                {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "node": "UnaryOp",
+                      "op": {
+                        "node": "Not"
+                      },
+                      "operand": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "left",
+                        "node": "Name"
+                      }
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "center",
+                      "node": "Name"
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "right",
+                      "node": "Name"
+                    }
+                  ]
+                },
+                {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "node": "UnaryOp",
+                      "op": {
+                        "node": "Not"
+                      },
+                      "operand": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "left",
+                        "node": "Name"
+                      }
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "center",
+                      "node": "Name"
+                    },
+                    {
+                      "node": "UnaryOp",
+                      "op": {
+                        "node": "Not"
+                      },
+                      "operand": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "right",
+                        "node": "Name"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "node": "BoolOp",
+                  "op": {
+                    "node": "And"
+                  },
+                  "values": [
+                    {
+                      "node": "UnaryOp",
+                      "op": {
+                        "node": "Not"
+                      },
+                      "operand": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "left",
+                        "node": "Name"
+                      }
+                    },
+                    {
+                      "node": "UnaryOp",
+                      "op": {
+                        "node": "Not"
+                      },
+                      "operand": {
+                        "ctx": {
+                          "node": "Load"
+                        },
+                        "id": "center",
+                        "node": "Name"
+                      }
+                    },
+                    {
+                      "ctx": {
+                        "node": "Load"
+                      },
+                      "id": "right",
+                      "node": "Name"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "kind": "assignment",
+          "location": {
+            "column": 1,
+            "line": 18,
+            "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+          },
+          "name": "cells",
+          "target_indices": [
+            {
+              "location": {
+                "column": 1,
+                "line": 18,
+                "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+              },
+              "source": ":i",
+              "tree": {
+                "args": [
+                  {
+                    "kind": null,
+                    "node": "Constant",
+                    "value": "i"
+                  }
+                ],
+                "func": {
+                  "ctx": {
+                    "node": "Load"
+                  },
+                  "id": "__bc_symbol__",
+                  "node": "Name"
+                },
+                "keywords": [],
+                "node": "Call"
+              }
+            }
+          ]
+        }
+      ],
+      "collection": "cells",
+      "kind": "each",
+      "location": {
+        "column": 1,
+        "line": 14,
+        "source": "docs\\examples\\cellular-automaton-1d-rule110.bc"
+      }
+    }
+  ]
+}

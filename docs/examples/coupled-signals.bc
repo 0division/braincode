@@ -1,0 +1,10 @@
+# Scalar BrainCode draft.
+# Initial frame supplied by the host at T=0:
+#   :left = 1
+#   :right = 10
+#
+# Both rules read the same committed frame. Neither observes the other
+# rule's uncommitted result.
+
+:left = :right~1 + 1
+:right = :left~1 + 1

@@ -1,0 +1,12 @@
+{
+  "initial_state": {
+    "fib": 1
+  },
+  "parameters": {},
+  "initial_history": [
+    {
+      "fib": 0
+    }
+  ],
+  "ticks": 5
+}

@@ -1,0 +1,16 @@
+{
+  "initial_state": {
+    "cells": [
+      [[false, false, false], [false, false, false], [false, false, false]],
+      [[false, false, false], [false, false, false], [false, false, false]],
+      [[false, false, false], [false, false, false], [false, false, false]]
+    ]
+  },
+  "parameters": {
+    "WIDTH": 3,
+    "HEIGHT": 3,
+    "DEPTH": 3
+  },
+  "initial_history": [],
+  "ticks": 1
+}

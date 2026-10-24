@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "braincode"
+version = "0.2.0"
+description = "Compiler and deterministic reference runtime for BrainCode"
+requires-python = ">=3.11"
+
+[project.scripts]
+braincode = "braincode.cli:main"
+
+[tool.setuptools]
+packages = ["braincode"]

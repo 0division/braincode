@@ -1,0 +1,9 @@
+# Draft conditional-update example.
+# Initial frame supplied by the host:
+#   :alarm = False at T=0
+#
+# If the prior tick's trigger is true, set :alarm in T+1.
+# If this conditional update does not run, the prior :alarm value is held.
+
+?(:trigger~1):
+    :alarm = True
