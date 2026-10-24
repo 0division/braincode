@@ -1,9 +1,15 @@
 # Stage 2a suggestion: VS Code extension foundation
 
-Build the first BrainCode authoring and run experience as a VS Code extension.
-Use VS Code's existing editor, workspace, tasks, terminals, command palette,
-and output channels instead of creating a standalone GUI or custom process
-manager.
+An initial extension prototype is implemented in the
+[VS Code extension folder](../../vscode-extension/README.md). This suggestion
+describes its intended scope; manual Extension Development Host validation
+and packaging remain follow-up work.
+
+Provide BrainCode's first authoring and run experience as a VS Code extension.
+Use VS Code's existing editor, workspace, command palette, and output
+channels. A thin, argument-safe CLI launcher is acceptable when it improves
+error reporting; avoid a custom job manager, standalone GUI, or webview-heavy
+interface.
 
 ## Initial scope
 

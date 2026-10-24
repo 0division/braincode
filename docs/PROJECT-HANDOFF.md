@@ -28,6 +28,10 @@ when implementing or testing changes.
   and committed example run artifacts.
 - The five Stage 1 suggestion documents are renamed `done_stage1_...` and
   indexed as complete. Stages 2, 3, and 4 remain planned.
+- A Stage 2a VS Code extension prototype is in `vscode-extension/`. It
+  registers `.bc`, supplies basic syntax/snippets, and invokes the CLI for
+  compile, inspect, run, and replay. The extension host has not yet been
+  manually exercised or packaged for distribution.
 
 ## Verified current behavior
 
@@ -35,17 +39,19 @@ when implementing or testing changes.
   `.bcc`, `.bcc.json` IR, per-example `.run.md` reports, run manifests,
   `summary.json`, `run.log`, and `run-summary.md` are committed under
   `docs/examples/output/`.
-- `python -m pytest -q` passed: **57 tests, 94 subtests**.
-- `python -m unittest discover -s tests -v` passed: **18 tests**.
+- `python -m pytest -q` passed: **60 tests, 94 subtests**.
+- `python -m unittest discover -s tests -v` passed: **22 tests**.
+- Extension manifest/resource tests are in `tests/test_vscode_extension.py`;
+  run them with `python -m pytest -q tests/test_vscode_extension.py`.
 - The checked-in machine-specific serial reference measurements are in
   [`benchmarks/serial-baseline.json`](./benchmarks/serial-baseline.json).
   The benchmark command defaults to small workloads for a quick smoke run.
 - Example inputs are kept beside their model sources as `*.bc.in.json`; the
   CLI accepts them with `--input-file`.
 - Execution is serial, with optional bounded history. There is no GPU backend,
-  VS Code extension, standalone GUI, or interactive debugger yet. Stage 1
-  also does not provide full static inference, model-level triggers/actions,
-  or a process-wide memory quota.
+  standalone GUI, or interactive debugger yet. Stage 1 also does not provide
+  full static inference, model-level triggers/actions, or a process-wide
+  memory quota.
 
 ## Useful commands
 
@@ -69,9 +75,8 @@ python -m braincode.benchmark --sizes 32 64 --ticks 3 --repeats 2 --output docs/
 
 ## Suggested next engineering steps
 
-1. Validate the BrainCode authoring/run workflow with a VS Code extension that
-   invokes the existing CLI and presents results without duplicating language
-   semantics.
+1. Exercise the Stage 2a extension in an Extension Development Host, fix
+   workflow issues, and validate packaging before distribution.
 2. Add source-linked debugging and inspection when runtime execution details
    can support them reliably.
 3. Continue static analysis and portability work, including clearer inference

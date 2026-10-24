@@ -1,0 +1,96 @@
+{
+  "name": "braincode-language",
+  "displayName": "BrainCode",
+  "description": "Author and run BrainCode models with the BrainCode CLI.",
+  "version": "0.1.0",
+  "publisher": "0division",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:braincode",
+    "onCommand:braincode.compile",
+    "onCommand:braincode.inspect",
+    "onCommand:braincode.run",
+    "onCommand:braincode.replay"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "braincode",
+        "aliases": [
+          "BrainCode",
+          "braincode"
+        ],
+        "extensions": [
+          ".bc"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "braincode",
+        "scopeName": "source.braincode",
+        "path": "./syntaxes/braincode.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "braincode",
+        "path": "./snippets/braincode.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "braincode.compile",
+        "title": "BrainCode: Compile Current Model",
+        "category": "BrainCode"
+      },
+      {
+        "command": "braincode.inspect",
+        "title": "BrainCode: Inspect Current Model",
+        "category": "BrainCode"
+      },
+      {
+        "command": "braincode.run",
+        "title": "BrainCode: Run Current Model",
+        "category": "BrainCode"
+      },
+      {
+        "command": "braincode.replay",
+        "title": "BrainCode: Replay Run Manifest",
+        "category": "BrainCode"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "braincode.compile",
+          "when": "editorLangId == braincode",
+          "group": "navigation"
+        },
+        {
+          "command": "braincode.run",
+          "when": "editorLangId == braincode",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "BrainCode",
+      "properties": {
+        "braincode.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Python executable whose environment has the BrainCode package installed."
+        }
+      }
+    }
+  }
+}

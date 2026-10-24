@@ -21,7 +21,11 @@ Daniel Mueller / LA_N19 / https://github.com/0division
 
 **A first v0.2 compiler and Python reference runtime are implemented.** The compiler parses the current `.bc` examples and can emit both readable, expanded BrainCode (`.bcc`) and structured JSON IR (`.bcc.json`). Both artifacts can be loaded by the runtime. The runtime supports scalar history, conditional hold, populations/tensors, indexed updates, reductions, neighborhood reads, and explicitly registered host functions. All current examples are compiled and exercised at small dimensions by the test suite.
 
-This is an initial reference implementation, not a hardware-parallel compiler. It does not yet provide CUDA/GPU execution, a complete static type checker, explicit input/parameter declarations in `.bc`, side-effecting actions, or bounded-history storage. The workload examples are not intended to run at their illustrative stress-test sizes on this serial backend.
+This is an initial reference implementation, not a hardware-parallel compiler.
+It does not yet provide CUDA/GPU execution, complete static type inference,
+model-level actions, or a process-wide memory quota. Bounded history is
+available as an opt-in runtime setting. The workload examples are not intended
+to run at their illustrative stress-test sizes on this serial backend.
 
 The original idea is in [`BrainCode v0.1.md`](./BrainCode%20v0.1.md). The documents in [`docs/`](./docs/) describe the design, execution model, history, AI direction, and implementation.
 
@@ -42,6 +46,7 @@ The earlier consolidated [BrainCode v0.2.md](./BrainCode%20v0.2.md) remains as a
 - [Example configuration](./docs/braincode.yaml.example) — illustrative afferent, BrainCode, and efferent language settings
 - [Implementation status and roadmap](./docs/implementation-plan.md) — supported subset, limitations, and next milestones
 - [Long-term product roadmap](./docs/long-term-improvement-plan.md) — GPU execution, visual authoring, debugging, visualization, and productization
+- [VS Code extension prototype](./vscode-extension/README.md) — `.bc` syntax support and commands for compile, inspect, run, and replay
 
 The `.bc` examples are collected in [`docs/examples/`](./docs/examples/README.md), including 2D/3D cellular automata, a full Unicode-code-point-to-UTF-8 mapper, and compute-heavy workload sketches. BrainCode has its own syntax; its expression evaluator supports a restricted Python-like expression form and registered pure functions.
 

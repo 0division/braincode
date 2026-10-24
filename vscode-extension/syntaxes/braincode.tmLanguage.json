@@ -1,0 +1,131 @@
+{
+  "scopeName": "source.braincode",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#single-quoted-strings"
+    },
+    {
+      "include": "#declarations"
+    },
+    {
+      "include": "#signals"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#operators"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.braincode",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.braincode",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.braincode",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "single-quoted-strings": {
+      "name": "string.quoted.single.braincode",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.character.escape.braincode",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "declarations": {
+      "patterns": [
+        {
+          "name": "storage.type.braincode",
+          "match": "\\b(state|input|population|boundary)\\b"
+        },
+        {
+          "name": "keyword.control.braincode",
+          "match": "\\b(each|parallel|in|of|let|if|else|and|or|not)\\b"
+        }
+      ]
+    },
+    "signals": {
+      "patterns": [
+        {
+          "name": "variable.other.signal.braincode",
+          "match": ":[A-Za-z_][A-Za-z0-9_]*"
+        },
+        {
+          "name": "constant.numeric.history-delay.braincode",
+          "match": "~[0-9]+"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "storage.type.braincode",
+          "match": "\\b(Bool|Int32|Int64|Float32|Float64)\\b"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.braincode",
+          "match": "\\b(True|False|None)\\b"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "support.function.builtin.braincode",
+          "match": "\\b(neighbor_count|neighbors|sum|all|any|min|max|abs|round|sqrt|exp|log|sin|cos)\\b(?=\\s*\\()"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.braincode",
+          "match": "\\b[0-9]+(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\\b"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.braincode",
+          "match": "\\*\\*|//|==|!=|<=|>=|\\+|-|\\*|/|%|=|<|>|~"
+        }
+      ]
+    }
+  }
+}
