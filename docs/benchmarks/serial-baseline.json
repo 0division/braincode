@@ -1,0 +1,53 @@
+{
+  "backend": "python-serial",
+  "format": "braincode-serial-baseline",
+  "measured_at": "2026-10-24T13:07:08+00:00",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.13.7",
+  "results": [
+    {
+      "final_frame_sha256": "0fe9a5cf7d6d465b0fd8a903b7f31997ebea8056091fd1eb682385e3285e8d52",
+      "median_seconds": 0.059749500011093915,
+      "peak_traced_bytes": 288781,
+      "population_elements": 32,
+      "program_sha256": "85586b40d9fccd80d01a0a8396f278318e254bf18986213f38604181e84f075e",
+      "repeats": 2,
+      "size": 32,
+      "ticks": 3,
+      "workload": "1d-state-update"
+    },
+    {
+      "final_frame_sha256": "c857ef09fe301e7e4b4a092c8ec5aaf72c192201bba9da66c94f2194bd5974c4",
+      "median_seconds": 0.11662889999570325,
+      "peak_traced_bytes": 311893,
+      "population_elements": 64,
+      "program_sha256": "85586b40d9fccd80d01a0a8396f278318e254bf18986213f38604181e84f075e",
+      "repeats": 2,
+      "size": 64,
+      "ticks": 3,
+      "workload": "1d-state-update"
+    },
+    {
+      "final_frame_sha256": "6b7dbacfdb3a268152762d7ad4e789c439f8f06b2054490a547765827e42b6ec",
+      "median_seconds": 9.163927749963477,
+      "peak_traced_bytes": 655772,
+      "population_elements": 1024,
+      "program_sha256": "71ed5d303eaae7abdd9623c38fe671d4840581faee736da85b8f6779224bc66c",
+      "repeats": 2,
+      "size": 32,
+      "ticks": 3,
+      "workload": "2d-stencil"
+    },
+    {
+      "final_frame_sha256": "58bec8650409cec0cfff120210fa4d7763deaaa9e056ebb438010b0acd0e653f",
+      "median_seconds": 31.279429099988192,
+      "peak_traced_bytes": 1261161,
+      "population_elements": 4096,
+      "program_sha256": "71ed5d303eaae7abdd9623c38fe671d4840581faee736da85b8f6779224bc66c",
+      "repeats": 2,
+      "size": 64,
+      "ticks": 3,
+      "workload": "2d-stencil"
+    }
+  ]
+}

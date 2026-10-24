@@ -48,7 +48,6 @@ GPU services belong to those later stages.
 runtime = Runtime(program)
 runtime.register_input_adapter("camera", normalize_camera_frame)
 runtime.register_output_adapter("logger", record_committed_frame)
-runtime.register_trigger("alarm", send_alarm)
 ```
 
 Input adapters transform matching named values before commit. Output adapters

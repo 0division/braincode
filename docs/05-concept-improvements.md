@@ -1,10 +1,11 @@
 # BrainCode: Further Concept Improvements
 
 This page tracks work by the project's three development stages. Stage 1 is
-the Python foundation: its work is complete and documented, while GUI and GPU
-product features remain later-stage work. Completion does not imply full static
-type inference, model-level actions, a process-wide memory quota, or empirical
-AI evaluation; those limitations are called out in the completed documents.
+the Python foundation: its work is complete and documented, while the VS Code
+workbench and GPU execution remain later-stage product work. Completion does
+not imply full static type inference, model-level actions, a process-wide
+memory quota, or empirical AI evaluation; those limitations are called out in
+the completed documents.
 
 ## Stage 1 — Python foundation (completed)
 
@@ -14,9 +15,9 @@ AI evaluation; those limitations are called out in the completed documents.
 4. [Parallelism readiness](./suggestions/done_stage1_parallelism_readiness.md)
 5. [Examples and AI evaluation](./suggestions/done_stage1_examples_and_ai_evaluation.md)
 
-## Stage 2 — GUI
+## Stage 2 — VS Code workbench
 
-- [GUI authoring, runs, and inspection](./suggestions/stage2_gui_authoring_runs_inspection.md)
+- [VS Code authoring, runs, and inspection](./suggestions/stage2_gui_authoring_runs_inspection.md)
 
 ## Stage 3 — GPU
 

@@ -7,8 +7,9 @@ stages:
    reference runtime, reproducibility, and contracts needed by later stages.
    Stage 1 may define and test GUI/GPU-facing interfaces, but it does not
    implement the GUI or GPU backend.
-2. **Stage 2 — GUI:** build visual authoring, run management, inspection, and
-   debugging on top of the stable Python foundation.
+2. **Stage 2 — VS Code workbench:** build an extension for BrainCode authoring,
+   runs, and result inspection on top of the stable Python foundation. Reassess
+   a standalone GUI after validating the workflow with users.
 3. **Stage 3 — GPU:** implement accelerated execution for useful supported
    workloads and validate it against the Python reference runtime.
 
@@ -20,9 +21,9 @@ stages:
 - [Parallelism readiness](./done_stage1_parallelism_readiness.md)
 - [Examples and AI evaluation](./done_stage1_examples_and_ai_evaluation.md)
 
-## Stage 2 — GUI
+## Stage 2 — VS Code workbench
 
-- [GUI authoring, run workflow, and inspection](./stage2_gui_authoring_runs_inspection.md)
+- [VS Code authoring, runs, and inspection](./stage2_gui_authoring_runs_inspection.md)
 
 ## Stage 3 — GPU
 

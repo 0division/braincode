@@ -156,6 +156,39 @@ def test_input_adapter_precedes_evaluation_and_output_adapter_follows_commit() -
     ]
 
 
+def test_adapters_execute_in_registration_order() -> None:
+    program = compile_source(
+        "input :sensor of Int32\n"
+        "input :ambient of Int32\n"
+        "state :count of Int32\n"
+        ":count = :count~1 + 1\n"
+    )
+    events: list[str] = []
+    runtime = Runtime(program, initial_state={"count": 0})
+    runtime.register_input_adapter(
+        "ambient", lambda value: events.append("input-ambient") or value
+    )
+    runtime.register_input_adapter(
+        "sensor", lambda value: events.append("input-sensor") or value
+    )
+    runtime.register_output_adapter(
+        "sink-first", lambda _tick, _frame: events.append("output-first")
+    )
+    runtime.register_output_adapter(
+        "sink-second", lambda _tick, _frame: events.append("output-second")
+    )
+
+    runtime.run(0, input_frames=[{"sensor": 1, "ambient": 2}])
+    runtime.step()
+
+    assert events == [
+        "input-ambient",
+        "input-sensor",
+        "output-first",
+        "output-second",
+    ]
+
+
 def test_adapter_failures_preserve_documented_commit_boundary() -> None:
     program = compile_source(
         "input :sensor of Int32\n"

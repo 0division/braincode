@@ -1,6 +1,6 @@
 # BrainCode Project Handoff
 
-Read this first when continuing BrainCode in a fresh chat. Load the
+Read this first when continuing BrainCode work in a fresh chat. Load the
 project-specific workflow in
 [`../.github/skills/braincode-development/SKILL.md`](../.github/skills/braincode-development/SKILL.md)
 when implementing or testing changes.
@@ -9,49 +9,43 @@ when implementing or testing changes.
 
 - BrainCode is a custom temporal DSL for synchronous state models. Python is
   the compiler host and serial reference runtime, not the model source syntax.
-- The user wants to turn the v0.2 prototype into a real product over time:
-  GPU execution, GUI/IDE authoring, an interactive debugger, visualization,
-  reproducible projects/runs, and eventually packaging and extensibility.
+- The user's product direction includes GPU execution, integrated IDE
+  authoring, an interactive debugger, visualization, reproducible
+  projects/runs, and eventual packaging and extensibility. Start by validating
+  authoring and run workflows in a VS Code extension rather than a standalone
+  GUI.
 - Communicate and write project documentation in English.
-- The user's request is to make useful improvements and test them, not to stop
-  at plans. Be explicit about features that remain future work.
+- Make useful improvements and test them. Clearly distinguish shipped
+  capabilities from future work.
 
 ## Current repository state
 
 - Remote: `https://github.com/0division/braincode`
-- Branch: `v0.2`, based on `origin/main`
-- Latest commit: `b927e5f` — `Complete BrainCode v0.2 TODOs`
-- The latest feature work is **not committed**. Inspect `git status` before
-  editing or staging; preserve unrelated changes.
-- Git author identity is configured locally as `Daniel Mueller
-  <mulacke@gmail.com>`.
-- Do not push unless the user explicitly requests it.
-
-Latest uncommitted changes cover:
-
-- runtime validation in `braincode/runtime.py`;
-- CLI run-config validation in `braincode/cli.py`;
-- runtime and CLI tests in `tests/test_runtime_validation.py` and
-  `tests/test_compiler.py`;
-- pytest test extra in `pyproject.toml`;
-- execution/runtime documentation and README updates;
-- the corrected product-focused roadmap in
-  `docs/long-term-improvement-plan.md`;
-- ignores for generated pytest/package metadata.
+- Branch: `v0.2`; Stage 1 changes are pushed to `origin/v0.2`.
+- Stage 1 foundation is complete: language/value validation, host adapters,
+  reproducible manifests and replay, optional history and resource limits,
+  backend/session contracts, conformance coverage, serial benchmarks, docs,
+  and committed example run artifacts.
+- The five Stage 1 suggestion documents are renamed `done_stage1_...` and
+  indexed as complete. Stage 2 and Stage 3 remain planned.
 
 ## Verified current behavior
 
-- All 15 checked-in examples run with small inputs. Their traces, expanded
-  `.bcc`, `.bcc.json` IR, per-example `.run.md` reports, `summary.json`,
-  `run.log`, and `run-summary.md` are generated and kept under the
-  `docs/examples/output/` directory.
-- `python -m pytest -q` passed: **40 tests, 75 subtests**.
-- `python -m unittest discover -s tests -v` passed: **17 tests**.
-- Pylance workspace diagnostics were empty.
-- All example input files are kept beside their model sources as
-  `*.bc.in.json`; the CLI accepts them with `--input-file`.
-- The current runtime is serial and retains full frame history. There is no
-  GPU backend, GUI, or interactive debugger yet.
+- All 16 checked-in examples run with small inputs. Their traces, expanded
+  `.bcc`, `.bcc.json` IR, per-example `.run.md` reports, run manifests,
+  `summary.json`, `run.log`, and `run-summary.md` are committed under
+  `docs/examples/output/`.
+- `python -m pytest -q` passed: **57 tests, 94 subtests**.
+- `python -m unittest discover -s tests -v` passed: **18 tests**.
+- The checked-in machine-specific serial reference measurements are in
+  [`benchmarks/serial-baseline.json`](./benchmarks/serial-baseline.json).
+  The benchmark command defaults to small workloads for a quick smoke run.
+- Example inputs are kept beside their model sources as `*.bc.in.json`; the
+  CLI accepts them with `--input-file`.
+- Execution is serial, with optional bounded history. There is no GPU backend,
+  VS Code extension, standalone GUI, or interactive debugger yet. Stage 1
+  also does not provide full static inference, model-level triggers/actions,
+  or a process-wide memory quota.
 
 ## Useful commands
 
@@ -60,26 +54,35 @@ python -m pip install -e ".[test]"
 python -m pytest -q
 python -m unittest discover -s tests -v
 python -m braincode.example_runner --output docs/examples/output
+python -m braincode.benchmark
 ```
 
-Run every example before making wider changes and regenerate outputs again
-after behavior changes. Confirm the final `docs/examples/output/summary.json`
-lists 15 examples and check the generated log and Markdown reports.
+After changing runtime behavior, regenerate the committed example outputs and
+confirm `docs/examples/output/summary.json` lists 16 examples and the expected
+traces, reports, manifests, and compile artifacts.
+
+To reproduce the committed benchmark measurements:
+
+```powershell
+python -m braincode.benchmark --sizes 32 64 --ticks 3 --repeats 2 --output docs/benchmarks/serial-baseline.json
+```
 
 ## Suggested next engineering steps
 
-1. Review existing changes and run tests before modifying the runtime.
-2. Add input/state declarations and stronger static validation, with tests.
-3. Improve error diagnostics with source locations and precise failure causes.
-4. Define replay/run manifests and bounded history/checkpoint semantics.
-5. Add a backend interface and benchmark before attempting CPU/GPU acceleration.
-6. Prototype source-linked debugging/inspection for the serial runtime before
-   choosing a GUI framework.
-7. Update this handoff when verified test counts, branch/commit state, or
-   implemented product features change.
+1. Validate the BrainCode authoring/run workflow with a VS Code extension that
+   invokes the existing CLI and presents results without duplicating language
+   semantics.
+2. Add source-linked debugging and inspection when runtime execution details
+   can support them reliably.
+3. Continue static analysis and portability work, including clearer inference
+   diagnostics and portable host-capability/version provenance.
+4. Prototype useful GPU workloads only against the serial runtime's
+   conformance corpus; measure and document any numerical relaxation.
+5. Evaluate AI-assisted modeling against a pre-registered host-language
+   baseline and publish failures as well as successes.
 
 For the product vision and sequencing, see
 [`long-term-improvement-plan.md`](./long-term-improvement-plan.md). For
-language/runtime facts, see
-[`02-execution-model.md`](./02-execution-model.md) and
+language/runtime facts, see [`stage1-contract.md`](./stage1-contract.md),
+[`02-execution-model.md`](./02-execution-model.md), and
 [`implementation-plan.md`](./implementation-plan.md).

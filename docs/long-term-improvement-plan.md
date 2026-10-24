@@ -14,7 +14,8 @@ execution semantics, or clearly show where and why results can differ.
 
 A BrainCode user should be able to:
 
-- create and edit a model in a dedicated GUI or IDE;
+- create and edit a model in an integrated IDE, initially through a VS Code
+  extension;
 - understand its state, history, parallel domains, and data flow visually;
 - run it locally on a CPU or GPU and see progress and resource use;
 - pause, inspect, step through, and debug individual ticks and state values;
@@ -43,10 +44,12 @@ A BrainCode user should be able to:
 stencils, and other supported data-parallel models on a GPU and compare their
 results and performance with the serial reference.
 
-### 2. Visual authoring environment
+### 2. IDE authoring environment
 
-- Build a graphical model workspace with project files, examples, input
-  configurations, run settings, and generated artifacts in one place.
+- Start with a VS Code extension that uses a workspace for model files,
+  examples, input configurations, run settings, and generated artifacts.
+- Keep the compiler and runtime independent of VS Code so other clients,
+  including a future standalone GUI, can reuse them.
 - Provide BrainCode syntax highlighting, completion, formatting, diagnostics,
   navigation, and documentation hints.
 - Show model structure visually: state variables, temporal dependencies,
@@ -56,8 +59,9 @@ results and performance with the serial reference.
 - Keep the textual `.bc` language first-class: graphical views should explain
   and assist with source, not silently replace or obscure it.
 
-**Product outcome:** a new user can open an example, understand its model and
-inputs, edit it, and run it from the application.
+**Product outcome:** a new user can open an example in VS Code, understand its
+model and inputs, edit it, and run it. Reassess a standalone GUI only if user
+needs outgrow the extension workflow.
 
 ### 3. Interactive debugger and time inspector
 
@@ -107,7 +111,8 @@ state.
 
 ### 6. Distribution and extensibility
 
-- Package the compiler, runtimes, and GUI for supported desktop platforms.
+- Package the compiler, runtimes, and VS Code extension for supported
+  platforms; package a standalone GUI only if later user needs justify it.
 - Provide a documented extension interface for approved host functions,
   visualization components, and future execution backends.
 - Include an example gallery and templates organized by model type and
@@ -126,15 +131,16 @@ outside the source checkout by people who are not developing the compiler.
    versioning, run manifests, and backend interface.
 2. **First acceleration:** deliver a measured CPU or GPU prototype for a small,
    useful language subset; retain the serial runtime as the conformance oracle.
-3. **First interactive workflow:** build an editor/run experience and usable
-   debugger for the serial backend, with source-linked tick and state
-   inspection.
+3. **First interactive workflow:** build a VS Code editor/run experience for
+   the serial backend. Prototype source-linked tick and state inspection using
+   runtime capabilities; do not imply pause/step debugging until implemented.
 4. **Visual exploration:** add time-series and tensor/grid viewers driven by
    saved run data and streaming interfaces.
 5. **GPU productization:** expand GPU coverage, improve memory management,
    integrate progress and profiling, and support graceful fallback.
 6. **Release-ready application:** complete project management, replay,
-   checkpointing, packaging, documentation, and compatibility policies.
+   checkpointing, packaging, documentation, and compatibility policies for
+   the VS Code extension or a standalone application if justified.
 7. **Ecosystem growth:** add extensions, richer visual analyses, collaboration,
    and additional backends based on user needs.
 

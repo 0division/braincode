@@ -110,10 +110,11 @@ the runnable conformance corpus. `python -m pytest -q` exercises the language
 and replayed example traces. Regenerate committed artifacts with
 `python -m braincode.example_runner`.
 
-Run `python -m braincode.benchmark --sizes 64 256 1024 --ticks 10 --repeats 3`
-to record serial elapsed-time and traced-memory baselines alongside a
-deterministic final-frame hash. Measurements are machine-specific evidence,
-not performance guarantees or GPU comparisons.
+Run `python -m braincode.benchmark --sizes 32 64 --ticks 3 --repeats 2 --output docs/benchmarks/serial-baseline.json`
+to reproduce the checked-in 1D state-update and 2D stencil serial elapsed-time
+and traced-memory measurements alongside deterministic final-frame hashes.
+The defaults are smaller for a quick smoke run. Measurements are
+machine-specific evidence, not performance guarantees or GPU comparisons.
 
 AI authoring remains an unverified hypothesis. A fair evaluation should
 pre-register the same bounded modeling tasks for BrainCode and a host-language
