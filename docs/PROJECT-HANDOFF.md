@@ -11,9 +11,9 @@ when implementing or testing changes.
   the compiler host and serial reference runtime, not the model source syntax.
 - The user's product direction includes GPU execution, integrated IDE
   authoring, an interactive debugger, visualization, reproducible
-  projects/runs, and eventual packaging and extensibility. Start by validating
-  authoring and run workflows in a VS Code extension rather than a standalone
-  GUI.
+  projects/runs, a hosted cloud API, and eventual packaging and extensibility.
+  Start by validating authoring and run workflows in a VS Code extension
+  rather than a standalone GUI.
 - Communicate and write project documentation in English.
 - Make useful improvements and test them. Clearly distinguish shipped
   capabilities from future work.
@@ -27,7 +27,7 @@ when implementing or testing changes.
   backend/session contracts, conformance coverage, serial benchmarks, docs,
   and committed example run artifacts.
 - The five Stage 1 suggestion documents are renamed `done_stage1_...` and
-  indexed as complete. Stage 2 and Stage 3 remain planned.
+  indexed as complete. Stages 2, 3, and 4 remain planned.
 
 ## Verified current behavior
 
@@ -78,7 +78,10 @@ python -m braincode.benchmark --sizes 32 64 --ticks 3 --repeats 2 --output docs/
    diagnostics and portable host-capability/version provenance.
 4. Prototype useful GPU workloads only against the serial runtime's
    conformance corpus; measure and document any numerical relaxation.
-5. Evaluate AI-assisted modeling against a pre-registered host-language
+5. Specify a hosted API and isolated-worker threat/resource model before
+   implementing cloud execution; an initial CPU-backed preview need not await
+   broad GPU coverage.
+6. Evaluate AI-assisted modeling against a pre-registered host-language
    baseline and publish failures as well as successes.
 
 For the product vision and sequencing, see

@@ -12,6 +12,8 @@ stages:
    a standalone GUI after validating the workflow with users.
 3. **Stage 3 — GPU:** implement accelerated execution for useful supported
    workloads and validate it against the Python reference runtime.
+4. **Stage 4 — Cloud API:** offer BrainCode compilation and runs as a managed,
+   versioned service with explicit isolation and resource limits.
 
 ## Stage 1 — Python foundation (completed)
 
@@ -31,6 +33,10 @@ stages:
 ## Stage 3 — GPU
 
 - [GPU backend, conformance, and performance](./stage3_gpu_backend_conformance_performance.md)
+
+## Stage 4 — Cloud API
+
+- [Hosted BrainCode API](./stage4_cloud_api_service.md)
 
 The Stage 1 work deliberately prepares for later capabilities without
 presenting them as already implemented. See the

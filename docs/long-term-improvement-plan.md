@@ -17,7 +17,8 @@ A BrainCode user should be able to:
 - create and edit a model in an integrated IDE, initially through a VS Code
   extension;
 - understand its state, history, parallel domains, and data flow visually;
-- run it locally on a CPU or GPU and see progress and resource use;
+- run it locally or through a hosted API on a supported CPU or GPU backend and
+  see progress and resource use;
 - pause, inspect, step through, and debug individual ticks and state values;
 - explore time-series and spatial results without writing a separate viewer;
 - save, replay, compare, and share a complete model run.
@@ -125,6 +126,26 @@ state.
 **Product outcome:** BrainCode can be installed, extended, upgraded, and used
 outside the source checkout by people who are not developing the compiler.
 
+### 7. Hosted API service
+
+- Offer versioned compile/validation and run APIs that reuse the existing
+  compiler, run contract, and execution-backend interface.
+- Provide asynchronous run submission, status, cancellation, structured
+  diagnostics, and bounded result retrieval.
+- Begin with a capped CPU-backed preview; schedule GPU runs only for programs
+  supported by a validated and benchmarked GPU backend.
+- Isolate submitted models in workers with strict CPU, memory, duration,
+  input/output, and concurrency limits.
+- Define authentication, tenant isolation, retention/deletion, privacy,
+  observability, availability, and cost controls before opening the service
+  beyond a controlled preview.
+- Do not accept arbitrary Python host functions in the hosted service unless a
+  separately reviewed and constrained extension mechanism is designed.
+
+**Product outcome:** clients can submit a BrainCode model and inputs to a
+documented cloud API, follow a run, and retrieve versioned results and replay
+metadata with clear resource and backend guarantees.
+
 ## Suggested delivery sequence
 
 1. **Technical foundation:** stabilize the language contract, diagnostics, IR
@@ -143,6 +164,10 @@ outside the source checkout by people who are not developing the compiler.
    the VS Code extension or a standalone application if justified.
 7. **Ecosystem growth:** add extensions, richer visual analyses, collaboration,
    and additional backends based on user needs.
+8. **Hosted execution:** deploy a limited API service only after the run
+   contract, backend capabilities, worker isolation, and resource policies are
+   validated. A CPU-backed preview does not need to wait for broad GPU
+   coverage; GPU selection must remain capability-gated.
 
 These stages are directional rather than calendar commitments. A stage should
 advance only when the previous capabilities work end to end for representative
