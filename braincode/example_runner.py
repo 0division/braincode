@@ -42,16 +42,18 @@ def example_configs() -> dict[str, ExampleConfig]:
     return configs
 
 
-def run_all_examples(output_dir: str | Path) -> list[dict[str, Any]]:
-    destination = Path(output_dir)
-    destination.mkdir(parents=True, exist_ok=True)
+def run_all_examples(output_dir: str | Path | None) -> list[dict[str, Any]]:
+    destination = Path(output_dir) if output_dir is not None else None
     started_at = datetime.now(timezone.utc)
     started_text = started_at.isoformat(timespec="seconds")
-    log_path = destination / "run.log"
-    log_path.write_text(
-        f"BrainCode example run started at {started_text}\n",
-        encoding="utf-8",
-    )
+    if destination is not None:
+        destination.mkdir(parents=True, exist_ok=True)
+    log_path = destination / "run.log" if destination is not None else None
+    if log_path is not None:
+        log_path.write_text(
+            f"BrainCode example run started at {started_text}\n",
+            encoding="utf-8",
+        )
     source_files = sorted(EXAMPLES_DIR.glob("*.bc"))
     configs = example_configs()
     source_names = {path.name for path in source_files}
@@ -69,18 +71,20 @@ def run_all_examples(output_dir: str | Path) -> list[dict[str, Any]]:
             config = configs[source_path.name]
             stem = source_path.stem
             input_path = EXAMPLES_DIR / f"{source_path.name}.in.json"
-            with log_path.open("a", encoding="utf-8") as log:
-                log.write(f"RUNNING {source_path.name} using {input_path.name}\n")
+            if log_path is not None:
+                with log_path.open("a", encoding="utf-8") as log:
+                    log.write(f"RUNNING {source_path.name} using {input_path.name}\n")
             program = compile_file(source_path)
-            expanded_path = destination / f"{stem}.bcc"
-            ir_path = destination / f"{stem}.bcc.json"
-            trace_path = destination / f"{stem}.output.json"
+            expanded_path = destination / f"{stem}.bcc" if destination is not None else None
+            ir_path = destination / f"{stem}.bcc.json" if destination is not None else None
+            trace_path = destination / f"{stem}.output.json" if destination is not None else None
 
-            expanded_path.write_text(
-                render_expanded(program, parameters=config.parameters),
-                encoding="utf-8",
-            )
-            save_compiled(program, ir_path)
+            if destination is not None:
+                expanded_path.write_text(
+                    render_expanded(program, parameters=config.parameters),
+                    encoding="utf-8",
+                )
+                save_compiled(program, ir_path)
             runtime = Runtime(
                 program,
                 initial_state=config.initial_state,
@@ -88,56 +92,74 @@ def run_all_examples(output_dir: str | Path) -> list[dict[str, Any]]:
                 initial_history=config.initial_history,
             )
             frames = runtime.run(config.ticks)
-            for artifact_path in (expanded_path, ir_path):
-                artifact_program = load_compiled(artifact_path)
-                artifact_frames = Runtime(
-                    artifact_program,
-                    initial_state=config.initial_state,
-                    parameters=config.parameters,
-                    initial_history=config.initial_history,
-                ).run(config.ticks)
-                if artifact_frames != frames:
-                    raise RuntimeError(
-                        f"{artifact_path.name} produced a different trace from "
-                        f"{source_path.name}"
-                    )
-            trace_path.write_text(
-                json.dumps(frames, indent=2, sort_keys=True) + "\n",
+            if destination is not None:
+                for artifact_path in (expanded_path, ir_path):
+                    artifact_program = load_compiled(artifact_path)
+                    artifact_frames = Runtime(
+                        artifact_program,
+                        initial_state=config.initial_state,
+                        parameters=config.parameters,
+                        initial_history=config.initial_history,
+                    ).run(config.ticks)
+                    if artifact_frames != frames:
+                        raise RuntimeError(
+                            f"{artifact_path.name} produced a different trace from "
+                            f"{source_path.name}"
+                        )
+                trace_path.write_text(
+                    json.dumps(frames, indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
+                summary.append({
+                    "source": source_path.name,
+                    "input": input_path.name,
+                    "ticks": config.ticks,
+                    "frames": len(frames),
+                    "expanded_source": expanded_path.name,
+                    "json_ir": ir_path.name,
+                    "trace": trace_path.name,
+                })
+            else:
+                summary.append({
+                    "source": source_path.name,
+                    "input": input_path.name,
+                    "ticks": config.ticks,
+                    "frames": len(frames),
+                    "expanded_source": None,
+                    "json_ir": None,
+                    "trace": None,
+                })
+            if log_path is not None:
+                with log_path.open("a", encoding="utf-8") as log:
+                    log.write(f"PASS {source_path.name}: {config.ticks} ticks\n")
+            if destination is not None:
+                print(f"Ran {source_path.name} -> {trace_path.name}")
+
+        if destination is not None:
+            summary_path = destination / "summary.json"
+            summary_path.write_text(
+                json.dumps({"example_count": len(summary), "examples": summary},
+                        indent=2, sort_keys=True) + "\n",
                 encoding="utf-8",
             )
-            summary.append({
-                "source": source_path.name,
-                "input": input_path.name,
-                "ticks": config.ticks,
-                "frames": len(frames),
-                "expanded_source": expanded_path.name,
-                "json_ir": ir_path.name,
-                "trace": trace_path.name,
-            })
+            completed_text = datetime.now(timezone.utc).isoformat(timespec="seconds")
             with log_path.open("a", encoding="utf-8") as log:
-                log.write(f"PASS {source_path.name}: {config.ticks} ticks\n")
-            print(f"Ran {source_path.name} -> {trace_path.name}")
-
-        summary_path = destination / "summary.json"
-        summary_path.write_text(
-            json.dumps({"example_count": len(summary), "examples": summary},
-                       indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        completed_text = datetime.now(timezone.utc).isoformat(timespec="seconds")
-        with log_path.open("a", encoding="utf-8") as log:
-            log.write(f"Completed {len(summary)} examples at {completed_text}\n")
-        _write_markdown_summary(
-            destination / "run-summary.md",
-            started_text,
-            completed_text,
-            summary,
-        )
-        print(f"Completed {len(summary)} examples; summary: {summary_path}")
+                log.write(f"Completed {len(summary)} examples at {completed_text}\n")
+            _write_markdown_summary(
+                destination / "run-summary.md",
+                started_text,
+                completed_text,
+                summary,
+            )
+            print(f"Completed {len(summary)} examples; summary: {summary_path}")
+        else:
+            completed_text = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            print(json.dumps({"example_count": len(summary), "examples": summary}, indent=2, sort_keys=True))
+            print(f"Completed {len(summary)} examples at {completed_text}")
         succeeded = True
         return summary
     finally:
-        if not succeeded:
+        if not succeeded and log_path is not None:
             with log_path.open("a", encoding="utf-8") as log:
                 log.write("Run did not complete successfully.\n")
 
@@ -177,8 +199,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--output",
-        default=str(ROOT / "output"),
-        help="directory for expanded source, JSON IR, traces, and summary",
+        default=None,
+        help="directory for expanded source, JSON IR, traces, and summary; omit to keep runs in-memory",
     )
     arguments = parser.parse_args(argv)
     run_all_examples(arguments.output)

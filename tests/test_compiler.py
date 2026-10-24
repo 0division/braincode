@@ -48,6 +48,15 @@ class CompilerTests(unittest.TestCase):
     def test_utf8_mapper_encodes_every_length(self) -> None:
         cases = {
             0x41: ([0x41], [0x41, None, None, None]),
+            0x7F: ([0x7F], [0x7F, None, None, None]),
+            0x80: ([0xC2, 0x80], [0xC2, 0x80, None, None]),
+            0x7FF: ([0xDF, 0xBF], [0xDF, 0xBF, None, None]),
+            0x800: ([0xE0, 0xA0, 0x80], [0xE0, 0xA0, 0x80, None]),
+            0xD7FF: ([0xED, 0x9F, 0xBF], [0xED, 0x9F, 0xBF, None]),
+            0xE000: ([0xEE, 0x80, 0x80], [0xEE, 0x80, 0x80, None]),
+            0xFFFF: ([0xEF, 0xBF, 0xBF], [0xEF, 0xBF, 0xBF, None]),
+            0x10000: ([0xF0, 0x90, 0x80, 0x80], [0xF0, 0x90, 0x80, 0x80]),
+            0x10FFFF: ([0xF4, 0x8F, 0xBF, 0xBF], [0xF4, 0x8F, 0xBF, 0xBF]),
             0xE9: ([0xC3, 0xA9], [0xC3, 0xA9, None, None]),
             0x20AC: ([0xE2, 0x82, 0xAC], [0xE2, 0x82, 0xAC, None]),
             0x1F600: ([0xF0, 0x9F, 0x98, 0x80], [0xF0, 0x9F, 0x98, 0x80]),
@@ -125,6 +134,34 @@ class CompilerTests(unittest.TestCase):
             [False, False, True, False, False],
         )
 
+        life_3d = compile_file(EXAMPLES / "cellular-automaton-3d-life.bc")
+        for count, alive, expected in (
+            (4, False, False),
+            (5, True, True),
+            (6, False, True),
+            (7, True, True),
+            (8, True, False),
+        ):
+            cells = [
+                [[False for _ in range(3)] for _ in range(3)]
+                for _ in range(3)
+            ]
+            cells[1][1][1] = alive
+            neighbors = [
+                (0, 0, 0), (0, 0, 1), (0, 0, 2),
+                (0, 1, 0), (0, 1, 2), (0, 2, 0),
+                (0, 2, 1), (0, 2, 2),
+            ]
+            for x, y, z in neighbors[:count]:
+                cells[x][y][z] = True
+            result = Runtime(
+                life_3d,
+                initial_state={"cells": cells},
+                parameters={"WIDTH": 3, "HEIGHT": 3, "DEPTH": 3},
+            ).run(1)[-1]["cells"][1][1][1]
+            with self.subTest(neighbors=count, alive=alive):
+                self.assertEqual(result, expected)
+
         product = Runtime(
             compile_file(EXAMPLES / "dense-matrix-multiply-proposal.bc"),
             initial_state={"A": [[1, 2], [3, 4]], "B": [[5, 6], [7, 8]]},
@@ -146,13 +183,15 @@ class CompilerTests(unittest.TestCase):
         initial = {"cells": [False, False, False, True, False, False, False]}
         with tempfile.TemporaryDirectory() as directory:
             bcc_path = Path(directory) / "rule110.bcc"
-            json_path = Path(f"{bcc_path}.json")
+            json_path = Path(directory) / "rule110.bcc.json"
             with redirect_stdout(StringIO()):
                 result = cli_main([
                     "compile",
                     str(program_path),
                     "--output",
                     str(bcc_path),
+                    "--json-output",
+                    str(json_path),
                 ])
             self.assertEqual(result, 0)
             self.assertTrue(bcc_path.is_file())
@@ -176,6 +215,17 @@ class CompilerTests(unittest.TestCase):
         self.assertEqual(expanded_result, expected)
         self.assertEqual(json_result, expected)
 
+    def test_cli_compile_does_not_create_files_without_output_options(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            source_path = Path(directory) / "counter.bc"
+            source_path.write_text(":counter = :counter~1 + 1\n", encoding="utf-8")
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                result = cli_main(["compile", str(source_path)])
+            self.assertEqual(result, 0)
+            self.assertEqual(len(list(Path(directory).iterdir())), 1)
+            self.assertIn(":counter =", stdout.getvalue())
+
     def test_example_runner_writes_all_artifacts_to_output_directory(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             summary = run_all_examples(directory)
@@ -193,6 +243,13 @@ class CompilerTests(unittest.TestCase):
                     self.assertTrue((output / entry["trace"]).is_file())
                     self.assertTrue((EXAMPLES / entry["input"]).is_file())
 
+    def test_example_runner_runs_without_writing_files_when_output_is_omitted(self) -> None:
+        summary = run_all_examples(None)
+        self.assertEqual(len(summary), 15)
+        self.assertTrue(all(entry["expanded_source"] is None for entry in summary))
+        self.assertTrue(all(entry["json_ir"] is None for entry in summary))
+        self.assertTrue(all(entry["trace"] is None for entry in summary))
+
     def test_expanded_view_shows_scalar_utf8_mapping(self) -> None:
         listing = render_expanded(
             compile_file(EXAMPLES / "unicode-to-utf8-mapper.bc"),
@@ -203,6 +260,7 @@ class CompilerTests(unittest.TestCase):
     def test_cli_runs_example_input_file(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             output_path = Path(directory) / "counter.json"
+            summary_path = Path(directory) / "counter.md"
             result = cli_main([
                 "run",
                 str(EXAMPLES / "counter.bc"),
@@ -210,12 +268,16 @@ class CompilerTests(unittest.TestCase):
                 str(EXAMPLES / "counter.bc.in.json"),
                 "--output",
                 str(output_path),
+                "--markdown-output",
+                str(summary_path),
             ])
             self.assertEqual(result, 0)
             self.assertTrue(output_path.is_file())
+            self.assertTrue(summary_path.is_file())
             frames = json.loads(output_path.read_text(encoding="utf-8"))
             self.assertEqual(len(frames), 6)
             self.assertEqual(frames[-1]["counter"], 5)
+            self.assertIn("# BrainCode run summary", summary_path.read_text(encoding="utf-8"))
 
     def test_failed_tick_does_not_commit_partial_frame(self) -> None:
         program = compile_source(":a = 10\n:b = :missing~1\n")

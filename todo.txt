@@ -1,6 +1,0 @@
-[x] Connect this project to https://github.com/0division/braincode as origin.
-[x] Commit the project work on the new local branch `v0.2`; do not push.
-[x] Rename the ASCII-named UTF-8 mapper to `unicode-to-utf8-mapper.bc`.
-[x] Store example run inputs separately in sibling `.bc.in.json` files.
-[x] Generate a chronological execution log and Markdown run summary.
-[x] Write a phased long-term improvement plan.

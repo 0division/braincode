@@ -12,9 +12,10 @@ Implemented:
 - a versioned `.bcc.json` JSON IR with source locations and expression trees;
 - deterministic tick execution with reads from committed history, atomic frame commits, and hold-by-copy behavior for untouched state;
 - serial population/tensor execution, indexed reads/writes, boundary handling, neighbor counts, vector arithmetic, and reductions used by the examples;
+- validation for non-negative integer dimensions, integer indexing, rectangular population values, shape-preserving writes, and tick input schedules;
 - built-in pure functions and caller-provided named function registration;
-- CLI operations for compile, inspect, expanded listing, and run;
-- tests that compile every `.bc` example and execute each at small dimensions.
+- CLI operations for compile, inspect, expanded listing, and run, including JSON run configurations;
+- pytest and standard-library tests for all examples, compiler artifacts, UTF-8 boundary cases, 1D/2D/3D automata, input schedules, validation failures, and atomic ticks.
 
 The Python backend is a correctness-oriented reference implementation. The `parallel` keyword defines the iteration domain and synchronous semantics; it does not launch parallel hardware work.
 
@@ -44,7 +45,8 @@ python -m braincode compile docs/examples/counter.bc
 python -m braincode run docs/examples/unicode-to-utf8-mapper.bc --input-file docs/examples/unicode-to-utf8-mapper.bc.in.json
 python -m braincode run docs/examples/counter.bc --input-file docs/examples/counter.bc.in.json
 python -m braincode run docs/examples/counter.bc --initial-state "{\"counter\": 0}" --ticks 5
-python -m unittest discover -s tests -v
+python -m pip install -e ".[test]"
+python -m pytest -v
 ```
 
 `compile` writes sibling `.bcc` and `.bcc.json` files by default. `.bcc` remains BrainCode syntax, with every `each ... parallel` population rule unfolded into explicit indexed assignments. `.bcc.json` stores the machine-readable IR. Supply `--parameters` when symbolic population dimensions need values for expansion.

@@ -63,6 +63,12 @@ def _deep_shape(value: Any) -> tuple[int, ...]:
     return (len(value),) + child_shape
 
 
+def _require_integer(value: Any, subject: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise BrainCodeRuntimeError(f"{subject} must be an integer")
+    return value
+
+
 def _life_rule(neighbor_count: int, was_alive: bool) -> bool:
     return neighbor_count == 3 or (was_alive and neighbor_count == 2)
 
@@ -87,6 +93,20 @@ class Runtime:
         functions: Mapping[str, Callable[..., Any]] | None = None,
         initial_history: Sequence[Mapping[str, Any]] | None = None,
     ):
+        if initial_state is not None and not isinstance(initial_state, Mapping):
+            raise BrainCodeRuntimeError("initial_state must be a mapping")
+        if parameters is not None and not isinstance(parameters, Mapping):
+            raise BrainCodeRuntimeError("parameters must be a mapping")
+        if initial_history is not None and (
+            isinstance(initial_history, (str, bytes))
+            or not isinstance(initial_history, Sequence)
+        ):
+            raise BrainCodeRuntimeError("initial_history must be a sequence of frames")
+        if initial_history is not None and any(
+            not isinstance(frame, Mapping) for frame in initial_history
+        ):
+            raise BrainCodeRuntimeError("each initial history frame must be a mapping")
+
         self.program = program
         self.parameters = dict(parameters or {})
         self.functions = {
@@ -144,10 +164,35 @@ class Runtime:
     def _population_shape(
         self, declaration: Statement, frame: Mapping[str, Any]
     ) -> tuple[int, ...]:
-        return tuple(
-            int(self._eval_expression(expression, [frame], {}, frame, self.parameters))
-            for expression in declaration.dimensions
-        )
+        dimensions: list[int] = []
+        for index, expression in enumerate(declaration.dimensions):
+            value = self._eval_expression(
+                expression, [frame], {}, frame, self.parameters
+            )
+            dimension = _require_integer(
+                value,
+                f"dimension {index} of population :{declaration.name}",
+            )
+            if dimension < 0:
+                raise BrainCodeRuntimeError(
+                    f"dimension {index} of population :{declaration.name} "
+                    "must be non-negative"
+                )
+            dimensions.append(dimension)
+        return tuple(dimensions)
+
+    def _validate_population_shapes(self, frame: Mapping[str, Any]) -> None:
+        for name, expected_shape in self.population_shapes.items():
+            if name not in frame:
+                raise BrainCodeRuntimeError(
+                    f"population :{name} is missing from the state frame"
+                )
+            actual_shape = _deep_shape(frame[name])
+            if actual_shape != expected_shape:
+                raise BrainCodeRuntimeError(
+                    f"population :{name} has shape {actual_shape}; "
+                    f"declared {expected_shape}"
+                )
 
     def _read_frame_value(self, frame: Mapping[str, Any], name: str) -> Any:
         if name not in frame:
@@ -172,7 +217,7 @@ class Runtime:
         policy = boundary if boundary is not None else self.boundaries.get(name)
         normalized: list[int] = []
         for dimension, raw_index in enumerate(indices):
-            index = int(raw_index)
+            index = _require_integer(raw_index, f"index for population :{name}")
             if dimension >= len(shape):
                 raise BrainCodeRuntimeError(
                     f"too many indices for population :{name}"
@@ -278,15 +323,25 @@ class Runtime:
         dimensions = len(coordinates)
         if dimensions not in {1, 2, 3}:
             raise BrainCodeRuntimeError("neighbor_count supports 1D, 2D, or 3D")
+        coordinates = tuple(
+            _require_integer(value, "neighbor coordinate") for value in coordinates
+        )
+        radius = _require_integer(radius, "neighbor radius")
+        if radius < 0:
+            raise BrainCodeRuntimeError("neighbor radius must be non-negative")
+        if neighborhood not in {None, "moore_2d", "moore_3d"}:
+            raise BrainCodeRuntimeError(
+                f"unsupported neighborhood {neighborhood!r}"
+            )
+        if neighborhood == "moore_2d" and dimensions != 2:
+            raise BrainCodeRuntimeError("moore_2d requires two coordinates")
+        if neighborhood == "moore_3d" and dimensions != 3:
+            raise BrainCodeRuntimeError("moore_3d requires three coordinates")
         count = 0
         ranges = [range(-radius, radius + 1) for _ in range(dimensions)]
         for offset in itertools.product(*ranges):
             if not include_center and all(item == 0 for item in offset):
                 continue
-            if neighborhood == "moore_2d" and dimensions != 2:
-                raise BrainCodeRuntimeError("moore_2d requires two coordinates")
-            if neighborhood == "moore_3d" and dimensions != 3:
-                raise BrainCodeRuntimeError("moore_3d requires three coordinates")
             indices = tuple(coordinate + delta for coordinate, delta in zip(coordinates, offset))
             value = self._index_value(
                 population.name, population.values, indices, boundary
@@ -318,9 +373,34 @@ class Runtime:
         if statement.name not in frame:
             raise BrainCodeRuntimeError(f"undefined assignment target :{statement.name}")
         indices = tuple(
-            int(self._eval_expression(item, frames, locals_, frame, parameters))
+            _require_integer(
+                self._eval_expression(item, frames, locals_, frame, parameters),
+                f"assignment index for :{statement.name}",
+            )
             for item in statement.target_indices
         )
+        shape = self.population_shapes.get(statement.name)
+        if shape is not None:
+            if len(indices) > len(shape):
+                raise BrainCodeRuntimeError(
+                    f"too many assignment indices for :{statement.name}"
+                )
+            for dimension, index in enumerate(indices):
+                if index < 0 or index >= shape[dimension]:
+                    raise BrainCodeRuntimeError(
+                        f"assignment index {index} is outside population "
+                        f":{statement.name} (dimension size {shape[dimension]})"
+                    )
+        try:
+            previous_value = _nested_get(frame[statement.name], indices)
+            if _deep_shape(previous_value) != _deep_shape(value):
+                raise BrainCodeRuntimeError(
+                    f"assignment to :{statement.name}{indices} changes its shape"
+                )
+        except (IndexError, TypeError) as error:
+            raise BrainCodeRuntimeError(
+                f"invalid assignment index for :{statement.name}{indices}"
+            ) from error
         key = (statement.name, indices)
         if key in writes:
             raise BrainCodeRuntimeError(
@@ -387,6 +467,8 @@ class Runtime:
                     )
 
     def step(self, next_inputs: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        if next_inputs is not None and not isinstance(next_inputs, Mapping):
+            raise BrainCodeRuntimeError("tick inputs must be a mapping")
         current = self.frames[-1]
         next_frame = copy.deepcopy(current)
         if next_inputs:
@@ -395,6 +477,7 @@ class Runtime:
         read_frames = self.frames
         writes: set[tuple[str, tuple[int, ...]]] = set()
         try:
+            self._validate_population_shapes(next_frame)
             executable = tuple(
                 statement
                 for statement in self.program.program.statements
@@ -421,11 +504,28 @@ class Runtime:
         *,
         input_frames: Sequence[Mapping[str, Any]] | None = None,
     ) -> list[dict[str, Any]]:
+        if isinstance(ticks, bool) or not isinstance(ticks, int):
+            raise ValueError("ticks must be an integer")
         if ticks < 0:
             raise ValueError("ticks must be non-negative")
+        if input_frames is not None and (
+            isinstance(input_frames, (str, bytes))
+            or not isinstance(input_frames, Sequence)
+        ):
+            raise ValueError("input_frames must be a sequence of mappings")
         inputs = list(input_frames or [])
+        if any(not isinstance(frame, Mapping) for frame in inputs):
+            raise ValueError("each input frame must be a mapping")
+        if len(inputs) > ticks + 1:
+            raise ValueError(
+                f"received {len(inputs)} input frames for {ticks} ticks; "
+                f"at most {ticks + 1} are valid"
+            )
         if inputs:
-            self.frames[-1].update(copy.deepcopy(dict(inputs[0])))
+            initial_frame = copy.deepcopy(self.frames[-1])
+            initial_frame.update(copy.deepcopy(dict(inputs[0])))
+            self._validate_population_shapes(initial_frame)
+            self.frames[-1] = initial_frame
         for offset in range(ticks):
             next_inputs = inputs[offset + 1] if offset + 1 < len(inputs) else None
             self.step(next_inputs)

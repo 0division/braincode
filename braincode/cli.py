@@ -21,6 +21,36 @@ def _read_json(path: str | None, default: Any) -> Any:
     return json.loads(text)
 
 
+def _write_markdown_summary(
+    path: str | Path,
+    *,
+    source_name: str,
+    frames: list[dict[str, Any]],
+    ticks: int,
+    initial_state: Any = None,
+    parameters: Any = None,
+) -> None:
+    summary = [
+        "# BrainCode run summary",
+        "",
+        f"- Source: `{source_name}`",
+        f"- Ticks: {ticks}",
+    ]
+    if initial_state is not None:
+        summary.append(f"- Initial state: `{json.dumps(initial_state, sort_keys=True)}`")
+    if parameters not in (None, {}):
+        summary.append(f"- Parameters: `{json.dumps(parameters, sort_keys=True)}`")
+    summary.append("")
+    if not frames:
+        summary.append("No frames were produced.")
+    else:
+        summary.append("| Tick | Frame |")
+        summary.append("|---:|---|")
+        for index, frame in enumerate(frames):
+            summary.append(f"| {index} | `{json.dumps(frame, sort_keys=True)}` |")
+    Path(path).write_text("\n".join(summary) + "\n", encoding="utf-8")
+
+
 def _load_program(path: str) -> CompiledProgram:
     if path.lower().endswith((".bcc", ".bcc.json")):
         return load_compiled(path)
@@ -36,11 +66,12 @@ def _parser() -> argparse.ArgumentParser:
     )
     compile_command.add_argument("source")
     compile_command.add_argument(
-        "-o", "--output", help="expanded BrainCode output path (default: source.bcc)"
+        "-o", "--output",
+        help="write expanded BrainCode output to this path; omitted by default",
     )
     compile_command.add_argument(
         "--json-output",
-        help="JSON IR output path (default: append .json to the .bcc path)",
+        help="write JSON IR output to this path; omitted by default",
     )
     compile_command.add_argument(
         "--parameters", help="JSON object or file used to resolve population dimensions"
@@ -65,7 +96,14 @@ def _parser() -> argparse.ArgumentParser:
         "--initial-history",
         help="JSON array of prior state frames, oldest first",
     )
-    run_command.add_argument("-o", "--output", help="write frames to this JSON file")
+    run_command.add_argument(
+        "-o", "--output",
+        help="write frames to this JSON file; omitted by default",
+    )
+    run_command.add_argument(
+        "--markdown-output",
+        help="write a Markdown summary to this file; omitted by default",
+    )
     return parser
 
 
@@ -74,26 +112,19 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if arguments.command == "compile":
             source_path = Path(arguments.source)
-            output_path = (
-                Path(arguments.output)
-                if arguments.output
-                else source_path.with_suffix(".bcc")
-            )
-            json_path = (
-                Path(arguments.json_output)
-                if arguments.json_output
-                else Path(f"{output_path}.json")
-            )
+            output_path = Path(arguments.output) if arguments.output else None
+            json_path = Path(arguments.json_output) if arguments.json_output else None
             program = compile_file(source_path)
             parameters = _read_json(arguments.parameters, {})
-            output_path.write_text(
-                render_expanded(program, parameters=parameters),
-                encoding="utf-8",
-            )
-            program_json_path = json_path
-            program_json_path.write_text(program.to_json(), encoding="utf-8")
-            print(output_path)
-            print(program_json_path)
+            expanded = render_expanded(program, parameters=parameters)
+            if output_path is not None:
+                output_path.write_text(expanded, encoding="utf-8")
+                print(output_path)
+            else:
+                sys.stdout.write(expanded)
+            if json_path is not None:
+                json_path.write_text(program.to_json(), encoding="utf-8")
+                print(json_path)
             return 0
 
         program = _load_program(arguments.source)
@@ -134,6 +165,20 @@ def main(argv: list[str] | None = None) -> int:
             if arguments.ticks is not None
             else run_config.get("ticks", 1)
         )
+        if not isinstance(initial_state, dict):
+            raise ValueError("initial_state must be a JSON object")
+        if not isinstance(parameters, dict):
+            raise ValueError("parameters must be a JSON object")
+        if not isinstance(inputs, list):
+            raise ValueError("inputs must be a JSON array of objects")
+        if not isinstance(initial_history, list):
+            raise ValueError("initial_history must be a JSON array of objects")
+        if any(not isinstance(frame, dict) for frame in inputs):
+            raise ValueError("each item in inputs must be a JSON object")
+        if any(not isinstance(frame, dict) for frame in initial_history):
+            raise ValueError("each item in initial_history must be a JSON object")
+        if isinstance(ticks, bool) or not isinstance(ticks, int):
+            raise ValueError("ticks must be an integer")
         runtime = Runtime(
             program,
             initial_state=initial_state,
@@ -144,7 +189,16 @@ def main(argv: list[str] | None = None) -> int:
         result = json.dumps(frames, indent=2, sort_keys=True) + "\n"
         if arguments.output:
             Path(arguments.output).write_text(result, encoding="utf-8")
-        else:
+        if arguments.markdown_output:
+            _write_markdown_summary(
+                arguments.markdown_output,
+                source_name=str(Path(arguments.source)),
+                frames=frames,
+                ticks=ticks,
+                initial_state=initial_state,
+                parameters=parameters,
+            )
+        if not arguments.output and not arguments.markdown_output:
             sys.stdout.write(result)
         return 0
     except (OSError, ValueError, TypeError, BrainCodeRuntimeError) as error:

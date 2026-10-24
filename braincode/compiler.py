@@ -162,7 +162,8 @@ def load_compiled(path: str | Path) -> CompiledProgram:
     declarations = {
         item.name: item
         for item in statements
-        if item.kind in {"population", "tensor"} and item.name is not None
+        if item.kind in {"population", "tensor", "state", "input"}
+        and item.name is not None
     }
     program = Program(
         source="",

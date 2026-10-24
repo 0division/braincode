@@ -17,6 +17,15 @@ Many models represent time through mutable variables, loops, schedulers, or scat
 
 BrainCode proposes treating time indices and synchronous state transitions as part of the model itself.
 
+### Massive parallelism as a design target
+
+BrainCode also targets scalable, massive parallel execution for models with
+large independent populations or other data-parallel structure. Explicit
+history and synchronous updates are intended to make that independence visible
+to compilers and runtimes. This is a product goal, not a claim that the current
+serial reference runtime already delivers parallel execution or that every
+model can be parallelized efficiently.
+
 ## Core ideas
 
 ### Discrete time
@@ -49,7 +58,7 @@ These are hypotheses. A compelling use case should eventually be compared with e
 
 ## What BrainCode does not promise
 
-- **Not automatic massive parallelism:** Declarative update syntax may enable parallelization, but actual execution depends on the runtime, dependency graph, and operations.
+- **Massive parallelism is a target, not an automatic guarantee:** BrainCode is intended to expose large-scale data parallelism and support runtimes that exploit it. Real execution and speedup depend on the program's dependency structure, operations, workload size, hardware, and selected backend. The current Python reference runtime is serial.
 - **No inherent intelligence:** A language does not create intelligence by itself. “Discrete intelligence” may describe a research direction for discrete temporal models, but it is not yet a precise definition or a demonstrated result.
 - **Not a general-purpose replacement:** The host remains responsible for arbitrary algorithms, I/O, and integrations.
 - **No free time travel:** Historical queries are not the same as arbitrary rollback, changing the past, and recomputing. Replay requires controlled inputs and side effects.
@@ -75,4 +84,5 @@ The concept becomes more credible if a prototype can demonstrate that:
 2. past values can be queried unambiguously and as expected;
 3. errors such as missing initial history or conflicting assignments are reported clearly;
 4. a non-trivial example is compared with host-language alternatives;
-5. an AI produces correct programs for a defined task more often, or repairs them more easily, than with a fair baseline.
+5. at least one representative data-parallel workload demonstrates measured scaling or speedup on an accelerated backend, compared with the serial reference;
+6. an AI produces correct programs for a defined task more often, or repairs them more easily, than with a fair baseline.

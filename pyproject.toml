@@ -11,5 +11,8 @@ requires-python = ">=3.11"
 [project.scripts]
 braincode = "braincode.cli:main"
 
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
 [tool.setuptools]
 packages = ["braincode"]

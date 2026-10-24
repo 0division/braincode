@@ -32,6 +32,9 @@ Historical frames before the supplied run history do not exist automatically. Th
 - Missing scalar state or a requested historical frame produces a runtime error.
 - Declared populations/tensors omitted from the initial state are currently allocated with type-based zero values; callers should provide explicit initial values whenever the model depends on them.
 - The CLI accepts an initial-state JSON object. The Python API additionally accepts `initial_history` and tick-indexed `input_frames`.
+- Population dimensions must evaluate to non-negative integers. Supplied and updated population values must remain rectangular and match their declared shape.
+- Array indices must be integers. Boundary policies affect out-of-range reads; writes must remain within the declared population bounds and cannot change the population's shape.
+- For a run of `N` ticks, an input-frame sequence may contain at most `N+1` frames. Frame zero initializes the starting committed state; later frames provide inputs at each following committed tick. Every input frame must be a mapping.
 
 The type-based population initialization is a convenience of the prototype and may be tightened in a later language version.
 

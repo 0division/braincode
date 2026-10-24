@@ -13,7 +13,7 @@ class BrainCodeSyntaxError(ValueError):
 
 
 _DECLARATION = re.compile(
-    r"^(population|tensor)\s+:([A-Za-z_]\w*)\s*\[(.*)\]"
+    r"^(population|tensor|state|input)\s+:([A-Za-z_]\w*)\s*(?:\[(.*)\])?"
     r"(?:\s+of\s+([A-Za-z_]\w*))?$"
 )
 _EACH = re.compile(r"^each\s+(.+?)\s+in\s+:([A-Za-z_]\w*)\s+parallel:$")
@@ -136,7 +136,7 @@ class _Parser:
             )
         declarations: dict[str, Statement] = {}
         for statement in statements:
-            if statement.kind in {"population", "tensor"}:
+            if statement.kind in {"population", "tensor", "state", "input"}:
                 if statement.name in declarations:
                     raise BrainCodeSyntaxError(
                         f"{statement.location.source}:{statement.location.line}: "
@@ -166,10 +166,18 @@ class _Parser:
             declaration = _DECLARATION.fullmatch(text)
             if declaration:
                 kind, name, dimensions, value_type = declaration.groups()
-                dimensions_expr = tuple(
-                    self._expression(part, location)
-                    for part in split_top_level(dimensions)
-                )
+                if kind in {"state", "input"}:
+                    if dimensions is not None:
+                        raise BrainCodeSyntaxError(
+                            f"{location.source}:{location.line}: "
+                            f"{kind} declarations do not accept dimensions"
+                        )
+                    dimensions_expr = ()
+                else:
+                    dimensions_expr = tuple(
+                        self._expression(part, location)
+                        for part in split_top_level(dimensions or "")
+                    )
                 statements.append(Statement(
                     kind=kind,
                     location=location,

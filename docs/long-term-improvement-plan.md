@@ -1,109 +1,168 @@
-# BrainCode Long-Term Improvement Plan
+# BrainCode Long-Term Product Roadmap
 
-This roadmap develops BrainCode from the v0.2 reference implementation into a
-well-specified, reliable language with interchangeable execution backends. The
-serial Python runtime remains the semantic reference; optimizations must match
-its tested behavior rather than silently changing the language.
+This roadmap describes a path from the current v0.2 compiler and serial
+reference runtime to a usable BrainCode product. The long-term goal is not just
+a more complete language: it is an integrated environment where people can
+build, run, inspect, debug, visualize, and share large stateful models, with
+GPU execution for workloads that benefit from it.
 
-## Guiding principles
+The serial Python runtime remains the correctness reference. Product features
+and accelerated backends must preserve BrainCode's documented synchronous
+execution semantics, or clearly show where and why results can differ.
 
-1. Specify behavior before optimizing it.
-2. Keep model rules, host-provided input data, and compiled artifacts separate.
-3. Preserve deterministic, synchronous tick semantics across every backend.
-4. Make failures, resource limits, and execution provenance observable.
-5. Treat performance claims as measured results against reproducible baselines.
+## Product vision
 
-## Phase 1 — Stabilize the v0.2 language contract
+A BrainCode user should be able to:
 
-- Publish a compact grammar and define identifier, literal, precedence, and
-  expression-call rules.
-- Specify temporal indexing, initialization, boundary behavior, hold behavior,
-  simultaneous writes, reductions, and failure atomicity.
-- Define integer, floating-point, Boolean, null, and collection semantics.
-- Specify `.bcc` expanded-source compatibility and versioning of `.bcc.json`.
-- Improve diagnostics with source spans and actionable error messages.
+- create and edit a model in a dedicated GUI or IDE;
+- understand its state, history, parallel domains, and data flow visually;
+- run it locally on a CPU or GPU and see progress and resource use;
+- pause, inspect, step through, and debug individual ticks and state values;
+- explore time-series and spatial results without writing a separate viewer;
+- save, replay, compare, and share a complete model run.
 
-**Exit criteria:** each documented behavior has a conformance test; the same
-test vectors produce identical traces after source and compiled-artifact loads.
+## Product pillars
 
-## Phase 2 — Make programs and runs self-describing
+### 1. GPU and scalable execution
 
-- Add explicit declarations for state, inputs, parameters, and their types and
-  shapes, while retaining host configuration as a supported execution boundary.
-- Validate input keys, dimensions, historical depth, and tick-input schedules
-  before beginning execution.
-- Define a stable `.bc.in.json` schema for example and production run settings.
-- Record source and input hashes, compiler/runtime versions, parameters, and
-  execution settings in a run manifest.
-- Support replay from a saved input package without relying on ambient files or
-  mutable host callbacks.
+- Define a backend interface that lets the compiler target the serial
+  reference runtime, optimized CPU execution, and GPU devices.
+- Implement a first GPU backend for a deliberately bounded, high-value subset
+  of BrainCode, such as regular population updates and stencil computations.
+- Add device discovery, memory estimates, capability reporting, and explicit
+  CPU fallback when a program cannot run on the selected GPU.
+- Keep data resident on the device across ticks where possible; report transfer
+  and compilation costs separately from kernel execution time.
+- Support deterministic execution modes where practical and document numeric
+  precision and reduction differences when GPU execution changes operation
+  ordering.
+- Expand supported features based on real examples and measured speedups, not
+  on backend feature counts alone.
 
-**Exit criteria:** a saved run package can reproduce its trace in a clean
-environment, with missing or incompatible inputs reported before execution.
+**Product outcome:** users can run representative large cellular automata,
+stencils, and other supported data-parallel models on a GPU and compare their
+results and performance with the serial reference.
 
-## Phase 3 — Control memory and failure behavior
+### 2. Visual authoring environment
 
-- Add configurable history retention and document how temporal reads interact
-  with retained frames.
-- Introduce checkpoints and resume, including version compatibility checks.
-- Define cancellation and resource budgets for ticks, population sizes,
-  allocations, and reductions.
-- Ensure interrupted or failed ticks remain atomic and report the last
-  successfully committed tick.
-- Keep external side effects outside rules; if actions are later introduced,
-  specify transactional or idempotency guarantees first.
+- Build a graphical model workspace with project files, examples, input
+  configurations, run settings, and generated artifacts in one place.
+- Provide BrainCode syntax highlighting, completion, formatting, diagnostics,
+  navigation, and documentation hints.
+- Show model structure visually: state variables, temporal dependencies,
+  population dimensions, update rules, and host inputs.
+- Allow users to configure and launch runs without composing command-line
+  arguments by hand.
+- Keep the textual `.bc` language first-class: graphical views should explain
+  and assist with source, not silently replace or obscure it.
 
-**Exit criteria:** bounded-memory runs, checkpoint/resume, and cancellation
-preserve trace equivalence with uninterrupted serial execution.
+**Product outcome:** a new user can open an example, understand its model and
+inputs, edit it, and run it from the application.
 
-## Phase 4 — Improve the reference runtime and conformance suite
+### 3. Interactive debugger and time inspector
 
-- Add property-based tests for expression evaluation, history access, and
-  tensor indexing.
-- Build reusable fixtures covering scalar, grid, stencil, reduction, and
-  invalid-input cases.
-- Profile representative workloads before changing runtime data structures.
-- Optimize the serial runtime only when benchmarks show a measurable benefit
-  and conformance remains unchanged.
+- Add breakpoints on rules, ticks, and conditional branches.
+- Support run, pause, resume, single-step, and step-back through retained
+  history or checkpoints.
+- Inspect a signal or population element at a selected tick, including the
+  values read by a rule and the value it proposes to write.
+- Explain a result by showing the rule, historical inputs, boundary behavior,
+  and evaluation outcome that produced it.
+- Compare two ticks or runs and highlight changed state, parameters, and
+  inputs.
+- Present explicit limits when a backend cannot pause at a fine-grained
+  execution point; GPU debugging must not imply observability it cannot provide.
 
-**Exit criteria:** reproducible correctness and performance baselines run in
-continuous integration; optimization results include machine and workload
-details.
+**Product outcome:** users can diagnose an unexpected state transition without
+manually instrumenting the runtime or printing entire frames.
 
-## Phase 5 — Add parallel execution backends
+### 4. Visualization and model exploration
 
-- Establish a backend interface and keep scheduling details out of language
-  semantics.
-- Prototype an optimized CPU backend first, then evaluate GPU/CUDA or other
-  accelerators against concrete workloads.
-- Specify deterministic reduction behavior and floating-point tolerance before
-  allowing backend-specific reassociation.
-- Add differential tests that compare each backend to the serial reference.
-- Benchmark throughput, memory use, compilation overhead, and data transfer
-  cost separately.
+- Provide time-series plots for scalar signals and selected population
+  elements.
+- Add grid and tensor viewers for 1D, 2D, and 3D data, with playback across
+  ticks and controls for scale, slice, and color mapping.
+- Visualize neighborhoods, boundaries, reductions, and selected data-flow
+  relationships where these views help explain a model.
+- Let users filter, sample, and aggregate large results instead of loading
+  every value into a GUI.
+- Make visualization definitions saveable as part of a project or run.
 
-**Exit criteria:** supported programs produce documented equivalent results
-across the serial and parallel backends, with transparent fallback and
-capability reporting.
+**Product outcome:** spatial and temporal behavior is explorable interactively,
+including for runs too large to inspect as raw JSON.
 
-## Phase 6 — Evaluate usability and AI-assisted authoring
+### 5. Reproducible projects and run management
 
-- Add editor support for syntax highlighting, diagnostics, formatting, and
-  navigation only after the grammar is stable enough to support tooling.
-- Measure authoring effort and correctness on representative tasks.
-- Compare AI-assisted BrainCode workflows with equivalent host-language
-  baselines using reproducible tasks and human review.
-- Document where the temporal/data-parallel model is clearer or safer, and
-  where it adds unnecessary complexity.
+- Define a project format that groups `.bc` sources, `.bc.in.json` inputs,
+  dependencies, and visualization/debug settings.
+- Save run manifests with source and input versions, compiler and backend
+  versions, device details, parameters, and relevant execution settings.
+- Support deterministic replay when the selected program and backend permit it.
+- Provide run history, comparisons, checkpoint/resume, export, and sharing.
+- Make large-run storage configurable, with retention and resource controls.
 
-**Exit criteria:** usability claims are based on recorded task outcomes, not
-only illustrative examples.
+**Product outcome:** a project can be reopened and a past result can be
+understood, compared, or reproduced without relying on undocumented machine
+state.
 
-## Near-term priorities
+### 6. Distribution and extensibility
 
-1. Finish the language grammar and runtime validation contract.
-2. Add run manifests and deterministic replay inputs.
-3. Build conformance/property tests around the serial runtime.
-4. Establish benchmark baselines before backend optimization.
-5. Use those baselines to decide whether CPU or GPU parallelism is the next
-   implementation target.
+- Package the compiler, runtimes, and GUI for supported desktop platforms.
+- Provide a documented extension interface for approved host functions,
+  visualization components, and future execution backends.
+- Include an example gallery and templates organized by model type and
+  execution requirements.
+- Add automated compatibility checks for project, IR, and checkpoint format
+  versions.
+- Establish stable release channels and migration guidance before promising
+  long-term project-file compatibility.
+
+**Product outcome:** BrainCode can be installed, extended, upgraded, and used
+outside the source checkout by people who are not developing the compiler.
+
+## Suggested delivery sequence
+
+1. **Technical foundation:** stabilize the language contract, diagnostics, IR
+   versioning, run manifests, and backend interface.
+2. **First acceleration:** deliver a measured CPU or GPU prototype for a small,
+   useful language subset; retain the serial runtime as the conformance oracle.
+3. **First interactive workflow:** build an editor/run experience and usable
+   debugger for the serial backend, with source-linked tick and state
+   inspection.
+4. **Visual exploration:** add time-series and tensor/grid viewers driven by
+   saved run data and streaming interfaces.
+5. **GPU productization:** expand GPU coverage, improve memory management,
+   integrate progress and profiling, and support graceful fallback.
+6. **Release-ready application:** complete project management, replay,
+   checkpointing, packaging, documentation, and compatibility policies.
+7. **Ecosystem growth:** add extensions, richer visual analyses, collaboration,
+   and additional backends based on user needs.
+
+These stages are directional rather than calendar commitments. A stage should
+advance only when the previous capabilities work end to end for representative
+models and are validated with real users.
+
+## Foundational work that enables the product
+
+The following engineering work is necessary, but it is not the long-term
+product vision by itself:
+
+- finish the language and numeric semantics and maintain a conformance suite;
+- validate declared inputs, shapes, history, and resource limits;
+- establish performance and memory baselines for representative workloads;
+- make execution errors and backend capabilities visible and actionable;
+- preserve reproducibility through run manifests, versioned artifacts, and
+  replay tests.
+
+## Measures of product readiness
+
+- A first-time user can open, edit, run, and visualize an example without
+  leaving the application.
+- A user can trace an unexpected value back to its rule and historical inputs.
+- At least one representative data-parallel workload has a measured GPU
+  benefit at a documented problem size, including transfer and setup costs.
+- Unsupported GPU features fail clearly or fall back as documented.
+- Saved projects and runs reopen with enough provenance to explain their
+  results.
+- Performance, memory use, and known limitations are published for each
+  supported backend and release.
